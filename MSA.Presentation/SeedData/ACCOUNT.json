@@ -1,0 +1,24 @@
+[
+    {
+        "Username": "customer-01",
+        "Password": "1",
+        "FullName": "Customer 01",
+        "Email": "customer1@gmail.com",
+        "PhoneNumber": "000000000",
+        "Address": "ABC, ABD Street, BDG City, VN",
+        "Role": "Customer",
+        "Status": "Active",
+        "CreatedBy": "admin@chc.com"
+    },
+    {
+        "Username": "customer-01",
+        "Password": "1",
+        "FullName": "Customer 01",
+        "Email": "customer1@gmail.com",
+        "PhoneNumber": "000000000",
+        "Address": "ABC, ABD Street, BDG City, VN",
+        "Role": "Customer",
+        "Status": "Active",
+        "CreatedBy": "admin@chc.com"
+    }
+]
