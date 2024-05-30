@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSA.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240526160228_Init")]
-    partial class Init
+    [Migration("20240529145128_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,13 +38,13 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("nvarchar(500)")
                         .HasColumnName("address");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("created_by");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_on");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -87,13 +87,13 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("status");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_at");
-
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("updated_by");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_on");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -120,13 +120,13 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("content");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_at");
-
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("created_by");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created_on");
 
                     b.Property<string>("ImageUrl")
                         .IsRequired()
@@ -147,13 +147,13 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("title");
 
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_at");
-
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("updated_by");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("updated_on");
 
                     b.HasKey("Id");
 
