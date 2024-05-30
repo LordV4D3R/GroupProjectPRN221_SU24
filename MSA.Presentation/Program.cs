@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using MSA.Infrastructure;
 using MSA.Presentation.SeedData;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,12 +8,18 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 
 
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 //Seed Data
 builder.Services.SeedData().GetAwaiter().GetResult();
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

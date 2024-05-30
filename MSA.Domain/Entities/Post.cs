@@ -24,6 +24,6 @@ namespace MSA.Domain.Entities
         [Column("staff_id")]
         [ForeignKey("account")]
         public Guid StaffId { get; set; }
-        public Account Account { get; set; }
+        public virtual Account Account { get; set; }
     }
 }

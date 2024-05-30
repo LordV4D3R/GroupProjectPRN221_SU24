@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MSA.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,8 +25,8 @@ namespace MSA.Infrastructure.Migrations
                     image_url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     status = table.Column<int>(type: "int", nullable: false),
                     role = table.Column<int>(type: "int", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    created_on = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updated_on = table.Column<DateTime>(type: "datetime2", nullable: false),
                     created_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     updated_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     is_deleted = table.Column<bool>(type: "bit", nullable: false)
@@ -46,8 +46,8 @@ namespace MSA.Infrastructure.Migrations
                     image_url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     staff_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    created_on = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updated_on = table.Column<DateTime>(type: "datetime2", nullable: false),
                     created_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     updated_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     is_deleted = table.Column<bool>(type: "bit", nullable: false)
