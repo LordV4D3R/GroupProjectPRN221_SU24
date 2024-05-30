@@ -20,7 +20,7 @@ namespace MSA.Presentation.SeedData
             //Account
             if (!context.Accounts.Any())
             {
-                accounts = FileExtension<Account>.LoadJson(path, "Account.json");
+                accounts = FileExtension<Account>.LoadJson(path, "ACCOUNT.json");
                 await context.Accounts.AddRangeAsync(accounts);
                 await context.SaveChangesAsync();
             }   

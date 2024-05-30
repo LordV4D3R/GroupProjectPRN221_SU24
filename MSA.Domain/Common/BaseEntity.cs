@@ -8,10 +8,10 @@ namespace MSA.Domain.Common
         [Key]
         [Column("id")]
         public Guid Id { get; set; } = Guid.NewGuid();
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        [Column("created_on")]
+        public DateTime CreatedOn { get; set; } = DateTime.Now;
+        [Column("updated_on")]
+        public DateTime UpdatedOn { get; set; } = DateTime.Now;
         [Column("created_by")]
         public string? CreatedBy { get; set; }
         [Column("updated_by")]
