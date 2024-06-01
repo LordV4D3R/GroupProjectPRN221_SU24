@@ -14,13 +14,13 @@ namespace MSA.Domain.Entities
     {
         [Column("title")]
         [Required]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         [Column("content")]
         [Required]
-        public string Content { get; set; }
+        public string Content { get; set; } = string.Empty;
         [Column("image_url")]
         [StringLength(500)]
-        public string ImageUrl { get; set; }
+        public string ImageUrl { get; set; } = string.Empty;
         [Column("staff_id")]
         [ForeignKey("account")]
         public Guid StaffId { get; set; }
