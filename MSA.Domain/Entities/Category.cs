@@ -15,11 +15,13 @@ namespace MSA.Domain.Entities
         [Column("category_name")]
         [Required]
         public string CategoryName { get; set; } = string.Empty;
+       
         [Column("description")]
         [Required]
         public string Description { get; set; } = string.Empty;
-        [Column("product_id")]
-        [ForeignKey("product")]
+
+
+        [InverseProperty("Category")]
         public ICollection<Product> Products { get; set; }
 
     }

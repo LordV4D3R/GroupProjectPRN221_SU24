@@ -15,15 +15,19 @@ namespace MSA.Domain.Entities
         [Column("title")]
         [Required]
         public string Title { get; set; } = string.Empty;
+        
         [Column("content")]
         [Required]
         public string Content { get; set; } = string.Empty;
+        
         [Column("image_url")]
         [StringLength(500)]
         public string ImageUrl { get; set; } = string.Empty;
+        
         [Column("staff_id")]
-        [ForeignKey("account")]
+        [ForeignKey("Staff")]
         public Guid StaffId { get; set; }
-        public virtual Account Account { get; set; }
+        public virtual Account Staff { get; set; }
+
     }
 }

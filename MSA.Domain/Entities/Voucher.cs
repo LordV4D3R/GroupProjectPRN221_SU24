@@ -16,15 +16,29 @@ namespace MSA.Domain.Entities
         [Column("voucher_name")]
         [Required]
         public string VoucherName { get; set; } = string.Empty;
+        
         [Column("voucher_code")]
         [Required]
         public string VoucherCode { get; set;} = string.Empty;
+       
         [Column("valid_date")]
         public DateTime ValidDate { get; set; }
+    
         [Column("expire_date")]
         public DateTime ExpireDate { get; set; }
+    
         [Column("voucher_status")]
         [EnumDataType(typeof(VoucherStatus))]
-        public VoucherStatus Status { get; set; } 
+        public VoucherStatus Status { get; set; }
+
+        [Column("staff_id")]
+        [ForeignKey("Staff")]
+        public Guid StaffId { get; set; }
+        public virtual Account Staff { get; set; }
+
+        [Column("customer_id")]
+        [ForeignKey("Customer")]
+        public Guid CustomerId { get; set; }
+        public virtual Account Customer { get; set; }
     }
 }

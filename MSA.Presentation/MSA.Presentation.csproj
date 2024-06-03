@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MSA.Application\MSA.Application.csproj" />
     <ProjectReference Include="..\MSA.Domain\MSA.Domain.csproj" />
+    <ProjectReference Include="..\MSA.Infrastructure\MSA.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

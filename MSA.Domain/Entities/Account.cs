@@ -48,7 +48,19 @@ namespace MSA.Domain.Entities
         [Column("role")]
         [EnumDataType(typeof(RoleType))]
         public RoleType Role { get; set; } = RoleType.Customer;
-        [InverseProperty("account")]
+
+        [InverseProperty("Staff")]
         public ICollection<Post> Posts { get; set; }
+
+        [InverseProperty("Staff")]
+        public ICollection<Voucher> StaffVouchers { get; set; }
+        
+        [InverseProperty("Customer")]
+        public ICollection<Voucher> CustomerVouchers { get; set; }
+
+        [InverseProperty("Customer")]
+        public ICollection<Order> CustomerOrders { get; set; }
+
+
     }
 }
