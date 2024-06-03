@@ -13,9 +13,12 @@ namespace MSA.Domain.Entities
     public class Order : BaseEntity
     {
         [Column("total_price")]
-        public double TotalPrice {  get; set; }
-        public double VoucherId { get; set; }
+        public double TotalPrice { get; set; }
+        [Column("total_quantity")]
+        public int TotalQuantity { get; set; }
+        [Column("order_status")]
         public OrderStatus OrderStatus { get; set; }
+        [Column("OrderRefundStatus")]
         public OrderRefundStatus OrderRefundStatus { get; set; }
     }
 }
