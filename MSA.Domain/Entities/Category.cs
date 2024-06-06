@@ -22,7 +22,7 @@ namespace MSA.Domain.Entities
 
 
         [InverseProperty("Category")]
-        public ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
     }
 }

@@ -13,15 +13,15 @@ namespace MSA.Domain.Entities
     public class OrderDetail : BaseEntity
     {
         [Column("quantity")]
-        public int Quantity { get; set; }
+        public int Quantity { get; set; } = 0;
 
         [Column("price")]
-        public double Price { get; set; }
+        public double Price { get; set; } = 0;
 
         [Column("order_id")]
         [ForeignKey(nameof(Order))]
-        public Guid OrderId { get; set; }
-        public virtual Order Order { get; set; }
+        public Guid OrderId { get; set; } 
+        public virtual Order Order { get; set; } = null!;
 
     }
 }

@@ -20,12 +20,12 @@ namespace MSA.Infrastructure
 
         #region DbSet
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<Post> Posts { get; set; }
         public DbSet<Voucher> Vouchers { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categorys { get; set; }
+        public DbSet<Batch> Batchs { get; set; }
 
 
         #endregion DbSet

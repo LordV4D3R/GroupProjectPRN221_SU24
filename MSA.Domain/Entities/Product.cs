@@ -27,12 +27,10 @@ namespace MSA.Domain.Entities
         [Column("img_url")]
         public string ImageUrl { get; set; } = string.Empty;
       
-        [Column("quantity")]
+        [Column("total_quantity")]
         [Required]
-        public int Quantity { get; set; } = 0;
+        public int TotalQuantity { get; set; } = 0;
       
-        [Column("expired_on")]
-        public DateTime ExpOn { get; set; } = DateTime.Now;
       
         [Column("status")]
         [EnumDataType(typeof(ProductStatus))]
@@ -44,6 +42,10 @@ namespace MSA.Domain.Entities
         [Column("category_id")]
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+        public virtual Category Category { get; set; } = null!;
+
+        [InverseProperty("Product")]
+        public virtual ICollection<Batch> Batches { get; set; } = new List<Batch>();
+
     }
 }

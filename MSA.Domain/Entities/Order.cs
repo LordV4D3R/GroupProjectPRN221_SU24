@@ -27,6 +27,10 @@ namespace MSA.Domain.Entities
         [Column("customer_id")]
         [ForeignKey("Customer")]
         public Guid CustomerId { get; set; }
-        public virtual Account Customer { get; set; }
+        public virtual Account Customer { get; set; } = null!;
+
+        //OrderDetail
+        [InverseProperty("Order")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     }
 }

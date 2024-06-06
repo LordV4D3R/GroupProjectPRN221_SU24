@@ -50,16 +50,10 @@ namespace MSA.Domain.Entities
         public RoleType Role { get; set; } = RoleType.Customer;
 
         [InverseProperty("Staff")]
-        public ICollection<Post> Posts { get; set; }
-
-        [InverseProperty("Staff")]
-        public ICollection<Voucher> StaffVouchers { get; set; }
-        
-        [InverseProperty("Customer")]
-        public ICollection<Voucher> CustomerVouchers { get; set; }
+        public virtual ICollection<Voucher> StaffVouchers { get; set; } = new List<Voucher>();
 
         [InverseProperty("Customer")]
-        public ICollection<Order> CustomerOrders { get; set; }
+        public ICollection<Order> CustomerOrders { get; set; } = new List<Order>();
 
 
     }
