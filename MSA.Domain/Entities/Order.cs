@@ -13,9 +13,24 @@ namespace MSA.Domain.Entities
     public class Order : BaseEntity
     {
         [Column("total_price")]
-        public double TotalPrice {  get; set; }
-        public double VoucherId { get; set; }
-        public OrderStatus OrderStatus { get; set; }
-        public OrderRefundStatus OrderRefundStatus { get; set; }
+        public double TotalPrice { get; set; } = 0;
+
+        [Column("total_quantity")]
+        public int TotalQuantity { get; set; } = 0;
+
+        [Column("order_status")]
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
+
+        [Column("OrderRefundStatus")]
+        public OrderRefundStatus OrderRefundStatus { get; set; } = OrderRefundStatus.None;
+
+        [Column("customer_id")]
+        [ForeignKey("Customer")]
+        public Guid CustomerId { get; set; }
+        public virtual Account Customer { get; set; } = null!;
+
+        //OrderDetail
+        [InverseProperty("Order")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     }
 }

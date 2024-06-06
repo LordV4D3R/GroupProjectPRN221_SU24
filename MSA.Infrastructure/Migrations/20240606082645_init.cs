@@ -11,8 +11,12 @@ namespace MSA.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "msa");
+
             migrationBuilder.CreateTable(
                 name: "account",
+                schema: "msa",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -37,15 +41,17 @@ namespace MSA.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "post",
+                name: "voucher",
+                schema: "msa",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    content = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    image_url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    voucher_name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    voucher_code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    valid_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    expire_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    voucher_status = table.Column<int>(type: "int", nullable: false),
                     staff_id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AccountId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     created_on = table.Column<DateTime>(type: "datetime2", nullable: false),
                     updated_on = table.Column<DateTime>(type: "datetime2", nullable: false),
                     created_by = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -54,29 +60,33 @@ namespace MSA.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_post", x => x.id);
+                    table.PrimaryKey("PK_voucher", x => x.id);
                     table.ForeignKey(
-                        name: "FK_post_account_AccountId",
-                        column: x => x.AccountId,
+                        name: "FK_voucher_account_staff_id",
+                        column: x => x.staff_id,
+                        principalSchema: "msa",
                         principalTable: "account",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_post_AccountId",
-                table: "post",
-                column: "AccountId");
+                name: "IX_voucher_staff_id",
+                schema: "msa",
+                table: "voucher",
+                column: "staff_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "post");
+                name: "voucher",
+                schema: "msa");
 
             migrationBuilder.DropTable(
-                name: "account");
+                name: "account",
+                schema: "msa");
         }
     }
 }

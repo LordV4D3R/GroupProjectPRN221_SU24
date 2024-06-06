@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSA.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240529145128_init")]
+    [Migration("20240606082645_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -20,6 +20,7 @@ namespace MSA.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("msa")
                 .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -102,23 +103,15 @@ namespace MSA.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("account");
+                    b.ToTable("account", "msa");
                 });
 
-            modelBuilder.Entity("MSA.Domain.Entities.Post", b =>
+            modelBuilder.Entity("MSA.Domain.Entities.Voucher", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("id");
-
-                    b.Property<Guid>("AccountId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("content");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("nvarchar(max)")
@@ -128,11 +121,9 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("created_on");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
-                        .HasColumnName("image_url");
+                    b.Property<DateTime>("ExpireDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("expire_date");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit")
@@ -142,10 +133,9 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("staff_id");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("title");
+                    b.Property<int>("Status")
+                        .HasColumnType("int")
+                        .HasColumnName("voucher_status");
 
                     b.Property<string>("UpdatedBy")
                         .HasColumnType("nvarchar(max)")
@@ -155,27 +145,41 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("updated_on");
 
+                    b.Property<DateTime>("ValidDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("valid_date");
+
+                    b.Property<string>("VoucherCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("voucher_code");
+
+                    b.Property<string>("VoucherName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("voucher_name");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("StaffId");
 
-                    b.ToTable("post");
+                    b.ToTable("voucher", "msa");
                 });
 
-            modelBuilder.Entity("MSA.Domain.Entities.Post", b =>
+            modelBuilder.Entity("MSA.Domain.Entities.Voucher", b =>
                 {
-                    b.HasOne("MSA.Domain.Entities.Account", "Account")
-                        .WithMany("Posts")
-                        .HasForeignKey("AccountId")
+                    b.HasOne("MSA.Domain.Entities.Account", "Staff")
+                        .WithMany("StaffVouchers")
+                        .HasForeignKey("StaffId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Account");
+                    b.Navigation("Staff");
                 });
 
             modelBuilder.Entity("MSA.Domain.Entities.Account", b =>
                 {
-                    b.Navigation("Posts");
+                    b.Navigation("StaffVouchers");
                 });
 #pragma warning restore 612, 618
         }
