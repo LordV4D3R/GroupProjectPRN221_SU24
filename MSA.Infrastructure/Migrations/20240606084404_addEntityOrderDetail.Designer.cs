@@ -4,6 +4,7 @@ using MSA.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MSA.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240606084404_addEntityOrderDetail")]
+    partial class addEntityOrderDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,98 +106,6 @@ namespace MSA.Infrastructure.Migrations
                     b.ToTable("account", "msa");
                 });
 
-            modelBuilder.Entity("MSA.Domain.Entities.Batch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_on");
-
-                    b.Property<DateTime>("ExpOn")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("expired_on");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("is_deleted");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("product_id");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int")
-                        .HasColumnName("quantity");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int")
-                        .HasColumnName("status");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("updated_by");
-
-                    b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_on");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("batch", "msa");
-                });
-
-            modelBuilder.Entity("MSA.Domain.Entities.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("category_name");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_on");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("is_deleted");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("updated_by");
-
-                    b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_on");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("category", "msa");
-                });
-
             modelBuilder.Entity("MSA.Domain.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -268,9 +179,6 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("is_deleted");
 
-                    b.Property<Guid?>("OrderDetail")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("order_id");
@@ -293,76 +201,9 @@ namespace MSA.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderDetail");
-
                     b.HasIndex("OrderId");
 
                     b.ToTable("order_detail", "msa");
-                });
-
-            modelBuilder.Entity("MSA.Domain.Entities.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("id");
-
-                    b.Property<Guid>("CategoryId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("category_id");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("created_by");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("created_on");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("description");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("img_url");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit")
-                        .HasColumnName("is_deleted");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float")
-                        .HasColumnName("price");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("product_name");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int")
-                        .HasColumnName("status");
-
-                    b.Property<int>("TotalQuantity")
-                        .HasColumnType("int")
-                        .HasColumnName("total_quantity");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("updated_by");
-
-                    b.Property<DateTime>("UpdatedOn")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("updated_on");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("product", "msa");
                 });
 
             modelBuilder.Entity("MSA.Domain.Entities.Voucher", b =>
@@ -425,17 +266,6 @@ namespace MSA.Infrastructure.Migrations
                     b.ToTable("voucher", "msa");
                 });
 
-            modelBuilder.Entity("MSA.Domain.Entities.Batch", b =>
-                {
-                    b.HasOne("MSA.Domain.Entities.Product", "Product")
-                        .WithMany("Batches")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("MSA.Domain.Entities.Order", b =>
                 {
                     b.HasOne("MSA.Domain.Entities.Account", "Customer")
@@ -449,10 +279,6 @@ namespace MSA.Infrastructure.Migrations
 
             modelBuilder.Entity("MSA.Domain.Entities.OrderDetail", b =>
                 {
-                    b.HasOne("MSA.Domain.Entities.Product", null)
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderDetail");
-
                     b.HasOne("MSA.Domain.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
@@ -460,17 +286,6 @@ namespace MSA.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("MSA.Domain.Entities.Product", b =>
-                {
-                    b.HasOne("MSA.Domain.Entities.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("MSA.Domain.Entities.Voucher", b =>
@@ -491,20 +306,8 @@ namespace MSA.Infrastructure.Migrations
                     b.Navigation("StaffVouchers");
                 });
 
-            modelBuilder.Entity("MSA.Domain.Entities.Category", b =>
-                {
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("MSA.Domain.Entities.Order", b =>
                 {
-                    b.Navigation("OrderDetails");
-                });
-
-            modelBuilder.Entity("MSA.Domain.Entities.Product", b =>
-                {
-                    b.Navigation("Batches");
-
                     b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618

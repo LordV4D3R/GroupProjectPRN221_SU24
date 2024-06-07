@@ -16,23 +16,36 @@ namespace MSA.Domain.Entities
         [Column("product_name")]
         [Required]
         public string ProductName { get; set; } = string.Empty;
+       
         [Column("price")]
         [Required]
         public double Price { get; set; } = 0;
+       
         [Column("description")]
         public string Description { get; set; } = string.Empty;
+      
         [Column("img_url")]
         public string ImageUrl { get; set; } = string.Empty;
-        [Column("quantity")]
+      
+        [Column("total_quantity")]
         [Required]
-        public int Quantity { get; set; } = 0;
-        [Column("expired_on")]
-        public DateTime ExpOn { get; set; } = DateTime.Now;
+        public int TotalQuantity { get; set; } = 0;
+      
+      
         [Column("status")]
         [EnumDataType(typeof(ProductStatus))]
         public ProductStatus Status { get; set; } = ProductStatus.OutOfStock;
+
+        [ForeignKey("OrderDetail")]
+        public ICollection<OrderDetail> OrderDetails { get; set; }
+
         [Column("category_id")]
-        [ForeignKey("category")]
-        public virtual Category Category { get; set; }
+        [ForeignKey("Category")]
+        public Guid CategoryId { get; set; }
+        public virtual Category Category { get; set; } = null!;
+
+        [InverseProperty("Product")]
+        public virtual ICollection<Batch> Batches { get; set; } = new List<Batch>();
+
     }
 }
