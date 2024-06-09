@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MSA.Application\MSA.Application.csproj" />
     <ProjectReference Include="..\MSA.Domain\MSA.Domain.csproj" />
   </ItemGroup>
 

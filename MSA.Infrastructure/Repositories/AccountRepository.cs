@@ -1,7 +1,8 @@
 ﻿using MSA.Application.DAO;
 using MSA.Domain.Entities;
+using MSA.Infrastructure.IRepositories;
 
-namespace Repositories
+namespace MSA.Infrastructure.Repositories
 {
     public class AccountRepository : IAccountRepository
     {

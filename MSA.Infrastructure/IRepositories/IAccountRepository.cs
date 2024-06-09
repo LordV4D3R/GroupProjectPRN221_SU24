@@ -1,11 +1,9 @@
 ﻿using MSA.Domain.Entities;
 
-namespace Services
+namespace MSA.Infrastructure.IRepositories
 {
-    public interface IAccountService
+    public interface IAccountRepository
     {
-        Account? GetAccountByUsernameAndPassword(string username, string password);
-        IEnumerable<Account> SearchByName(string name);
         IEnumerable<Account> GetAll();
         Account? GetById(Guid id);
         void Add(Account account);
