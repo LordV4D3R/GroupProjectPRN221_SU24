@@ -1,8 +1,8 @@
-﻿using MSA.Domain.Entities;
-using MSA.Infrastructure.Migrations;
-using Repositories;
+﻿using MSA.Application.IServices;
+using MSA.Domain.Entities;
+using MSA.Infrastructure.IRepositories;
 
-namespace Services
+namespace MSA.Application.Services
 {
     public class AccountService : IAccountService
     {
