@@ -1,20 +1,28 @@
 [
-    {
-        "ProductName": "Premium Baby Milk",
-        "Price": "959",
-        "Description": "Best milk for 0 - 3 years old child, make your child stronger, smarter and more powerful",
-        "Quantity": "4",
-        "Status": "ComingSoon",
-        "Category": "7718489f-d872-42df-857f-06179cc71a5e"
-    },
-    {
-        "ProductName": "Best Baby Milk",
-        "Price": "499",
-        "Description": "Best milk for 0 - 3 years old child, make your child stronger, smarter and more powerful",
-        "Quantity": "3",
-        "Status": "InStock",
-        "Category": "7718489f-d872-42df-857f-06179cc71a5e"
-    }
+  {
+    "ProductName": "Premium Baby Milk",
+    "Price": "959",
+    "Description": "Best milk for 0 - 3 years old child, make your child stronger, smarter and more powerful",
+    "Quantity": "4",
+    "Status": "ComingSoon",
+    "CategoryId": "7718489f-d872-42df-857f-06179cc71a5e"
+  },
+  {
+    "ProductName": "Best Mom Milk",
+    "Price": "499",
+    "Description": "Best milk for mom",
+    "Quantity": "3",
+    "Status": "InStock",
+    "CategoryId": "d0d766c9-eefc-4507-a918-feaf7a885af9"
+  },
+  {
+    "ProductName": "Best Mom Milk 2",
+    "Price": "499",
+    "Description": "Best milk for mom",
+    "Quantity": "3",
+    "Status": "InStock",
+    "CategoryId": "85492a28-ed99-4ce6-a840-715afb513ef4"
+  }
 
 
 ]
