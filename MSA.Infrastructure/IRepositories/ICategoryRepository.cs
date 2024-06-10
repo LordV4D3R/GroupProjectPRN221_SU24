@@ -1,6 +1,6 @@
 ﻿using MSA.Domain.Entities;
 
-namespace Repositories
+namespace MSA.Infrastructure.IRepositories
 {
     public interface ICategoryRepository
     {
