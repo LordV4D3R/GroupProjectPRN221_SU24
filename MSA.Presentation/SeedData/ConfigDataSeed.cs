@@ -16,6 +16,9 @@ namespace MSA.Presentation.SeedData
             await context.Database.MigrateAsync();
 
             IList<Account> accounts = null!;
+            IList<Category> categorys = null!;
+            IList<Product> products = null!;
+
 
             //Account
             if (!context.Accounts.Any())
@@ -23,7 +26,34 @@ namespace MSA.Presentation.SeedData
                 accounts = FileExtension<Account>.LoadJson(path, "ACCOUNT.json");
                 await context.Accounts.AddRangeAsync(accounts);
                 await context.SaveChangesAsync();
-            }   
+            }
+            //Product&Category
+            if (!context.Products.Any())
+            {
+                if (!context.Categorys.Any())
+                {
+                    categorys = FileExtension<Category>.LoadJson(path, "CATEGORY.json");
+                    await context.Categorys.AddRangeAsync(categorys);
+                    await context.SaveChangesAsync();
+                }
+                products = FileExtension<Product>.LoadJson(path, "PRODUCT.json");
+                await context.Products.AddRangeAsync(products);
+                await context.SaveChangesAsync();
+            }
+            //Category
+            //if (!context.Categorys.Any())
+            //{
+            //    categorys = FileExtension<Category>.LoadJson(path, "CATEGORY.json");
+            //    await context.Categorys.AddRangeAsync(categorys);
+            //    await context.SaveChangesAsync();
+            //}
+            //Product
+            //if (!context.Products.Any())
+            //{
+            //    products = FileExtension<Product>.LoadJson(path, "PRODUCT.json");
+            //   await context.Products.AddRangeAsync(products);
+            //    await context.SaveChangesAsync();
+            //}
         }
     }
 }

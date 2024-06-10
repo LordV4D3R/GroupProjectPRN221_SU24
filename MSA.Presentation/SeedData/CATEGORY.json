@@ -1,9 +1,17 @@
 [
-    {
-        "Id": "7718489f-d872-42df-857f-06179cc71a5e",
-        "CategoryName": 1,
-        "Description": "John Doe",
-        "email": ""
-    }
-
+  {
+    "Id": "7718489f-d872-42df-857f-06179cc71a5e",
+    "CategoryName": "BabyMilk",
+    "Description": "Milk for baby"
+  },
+  {
+    "Id": "d0d766c9-eefc-4507-a918-feaf7a885af9",
+    "CategoryName": "MomMilk",
+    "Description": "Milk for mom"
+  },
+  {
+    "Id": "85492a28-ed99-4ce6-a840-715afb513ef4",
+    "CategoryName": "MomMilk2",
+    "Description": "Milk for mom"
+  }
 ]
