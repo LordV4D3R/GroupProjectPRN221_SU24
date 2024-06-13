@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MSA.Infrastructure.IRepositories
+namespace MSA.Application.IRepositories
 {
     public interface IBatchRepository
     {

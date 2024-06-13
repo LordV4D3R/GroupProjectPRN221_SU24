@@ -1,14 +1,15 @@
 ﻿using MSA.Domain.Entities;
-using MSA.Infrastructure.IRepositories;
+using MSA.Application.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MSA.Application.IServices;
 
 namespace MSA.Application.Services
 {
-    public class OrderService
+    public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
         public OrderService(IOrderRepository orderRepository)

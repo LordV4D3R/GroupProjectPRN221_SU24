@@ -1,4 +1,5 @@
-﻿using MSA.Domain.Entities;
+﻿using MSA.Application.IRepositories;
+using MSA.Domain.Entities;
 using MSA.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
@@ -10,46 +11,46 @@ namespace Services
 {
     public class VoucherService : IVoucherService
     {
-        private readonly IVoucherService _voucherService;
+        private readonly IVoucherRepository _voucherRepository;
 
-        public VoucherService(IVoucherService voucherService)
+        public VoucherService(IVoucherRepository voucherRepository)
         {
-            _voucherService = voucherService;
+            _voucherRepository = voucherRepository;
         }
 
         public void Add(Voucher voucher)
         {
-            _voucherService.Add(voucher);
+            _voucherRepository.Add(voucher);
         }
 
         public void Delete(Voucher voucher)
         {
-            _voucherService.Delete(voucher);
+            _voucherRepository.Delete(voucher);
         }
 
         public IEnumerable<Voucher> GetAll()
         {
-            return _voucherService.GetAll();
+            return _voucherRepository.GetAll();
         }
 
         public Voucher? GetById(Guid id)
         {
-            return _voucherService.GetById(id);
+            return _voucherRepository.GetById(id);
         }
 
         public void Save()
         {
-            _voucherService.Save();
+            _voucherRepository.Save();
         }
 
         public IEnumerable<Voucher> SearchByName(string name)
         {
-            return _voucherService.GetAll().Where(x => x.VoucherName!.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            return _voucherRepository.GetAll().Where(x => x.VoucherName!.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         public void Update(Voucher voucher)
         {
-            _voucherService.Update(voucher);
+            _voucherRepository.Update(voucher);
         }
     }
 }

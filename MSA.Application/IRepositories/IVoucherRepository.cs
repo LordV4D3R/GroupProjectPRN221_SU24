@@ -1,6 +1,6 @@
 ﻿using MSA.Domain.Entities;
 
-namespace MSA.Infrastructure.IRepositories
+namespace MSA.Application.IRepositories
 {
     public interface IVoucherRepository
     {
