@@ -1,6 +1,6 @@
 ﻿using MSA.Domain.Entities;
 using MSA.Infrastructure.DAOs;
-using MSA.Infrastructure.IRepositories;
+using MSA.Application.IRepositories;
 
 namespace Repositories
 {

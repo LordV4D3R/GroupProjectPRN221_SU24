@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MSA.Domain\MSA.Domain.csproj" />
-    <ProjectReference Include="..\MSA.Infrastructure\MSA.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

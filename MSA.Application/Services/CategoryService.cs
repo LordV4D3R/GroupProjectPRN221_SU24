@@ -1,4 +1,5 @@
-﻿using MSA.Domain.Entities;
+﻿using MSA.Application.IRepositories;
+using MSA.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,46 +10,46 @@ namespace Services
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryService _categoryService;
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoryService(ICategoryService categoryService)
+        public CategoryService(ICategoryRepository categoryRepository)
         {
-            _categoryService = categoryService;
+            _categoryRepository = categoryRepository;
         }
 
         public void Add(Category category)
         {
-            _categoryService.Add(category);
+            _categoryRepository.Add(category);
         }
 
         public void Delete(Category category)
         {
-            _categoryService.Delete(category);
+            _categoryRepository.Delete(category);
         }
 
         public IEnumerable<Category> GetAll()
         {
-            return _categoryService.GetAll();
+            return _categoryRepository.GetAll();
         }
 
         public Category? GetById(Guid id)
         {
-            return _categoryService.GetById(id);
+            return _categoryRepository.GetById(id);
         }
 
         public void Save()
         {
-            _categoryService.Save();
+            _categoryRepository.Save();
         }
 
         public IEnumerable<Category> SearchByName(string name)
         {
-            return _categoryService.GetAll().Where(x => x.CategoryName!.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            return _categoryRepository.GetAll().Where(x => x.CategoryName!.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
         }
 
         public void Update(Category category)
         {
-            _categoryService.Update(category);
+            _categoryRepository.Update(category);
         }
     }
 }

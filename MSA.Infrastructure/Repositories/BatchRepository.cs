@@ -1,4 +1,5 @@
-﻿using MSA.Domain.Entities;
+﻿using MSA.Application.IRepositories;
+using MSA.Domain.Entities;
 using MSA.Infrastructure.DAOs;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MSA.Infrastructure.Repositories
 {
-    public class BatchRepository
+    public class BatchRepository : IBatchRepository
     {
         public void Add(Batch batch) => BatchDAO.Instance.Add(batch);
 
