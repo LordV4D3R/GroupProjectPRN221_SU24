@@ -5,6 +5,7 @@ using MSA.Application.Services;
 using MSA.Infrastructure;
 using MSA.Infrastructure.Repositories;
 using MSA.Infrastructure.Services;
+using MSA.Presentation.Configuration;
 using MSA.Presentation.SeedData;
 using Repositories;
 using Services;
@@ -36,10 +37,8 @@ builder.Services.AddScoped<IVoucherService, VoucherService>();
 
 
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+
+builder.Services.AddDbContext();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

@@ -10,7 +10,7 @@ namespace MSA.Presentation.Configuration
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
-                options.UseSqlServer("Server=(local);Database=MSA;Trusted_Connection=True;MultipleActiveResultSets=true");
+                options.UseSqlServer("Server=(local);Database=MSA;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True;");
             });
             return services;
         }
