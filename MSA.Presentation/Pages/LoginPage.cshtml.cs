@@ -20,12 +20,12 @@ namespace MSA.Presentation.Pages
         {
             return Page();
         }
-        public async Task<IActionResult> OnPostLogin(string email, string password)
+        public async Task<IActionResult> OnPostLogin(string username, string password)
         {
             //var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Email").Value;
             //var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
-            var account = _accountService.GetAccountByUsernameAndPassword(email, password);
-            if (email == null || password == null)
+            var account = _accountService.GetAccountByUsernameAndPassword(username, password);
+            if (username == null || password == null)
             {
                 return RedirectToPage("/Error");
             }

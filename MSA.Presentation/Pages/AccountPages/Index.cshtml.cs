@@ -5,25 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.CategoryPages
+namespace MSA.Presentation.Pages.AccountPages
 {
     public class IndexModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
-
-        public IndexModel(MSA.Infrastructure.ApplicationDbContext context)
+        private readonly IAccountService _accountService;
+        public IndexModel(IAccountService accountService)
         {
-            _context = context;
+            _accountService = accountService;
         }
 
-        public IList<Category> Category { get;set; } = default!;
+        public IList<Account> Account { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Category = await _context.Categorys.ToListAsync();
+            Account = _accountService.GetAll().ToList();
         }
     }
 }

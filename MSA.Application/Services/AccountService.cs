@@ -27,7 +27,7 @@ namespace MSA.Application.Services
             try
             {
                 return _accountRepository.GetAll()
-                    .FirstOrDefault(x => x.FullName!.Equals(username) && x.Password!.Equals(password));
+                    .FirstOrDefault(x => x.Username!.Equals(username) && x.Password!.Equals(password));
             }
             catch (Exception)
             {
