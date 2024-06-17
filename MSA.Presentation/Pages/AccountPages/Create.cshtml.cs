@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MSA.Application.IServices;
+using MSA.Domain.Account;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
@@ -26,6 +27,7 @@ namespace MSA.Presentation.Pages.AccountPages
 
         [BindProperty]
         public Account Account { get; set; } = default!;
+        public CreateAccountRequest CreateAccountRequest { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
