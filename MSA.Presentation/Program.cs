@@ -38,7 +38,7 @@ builder.Services.AddScoped<IVoucherService, VoucherService>();
 
 
 
-builder.Services.AddDbContext();
+builder.Services.ConfigAddDbContext();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

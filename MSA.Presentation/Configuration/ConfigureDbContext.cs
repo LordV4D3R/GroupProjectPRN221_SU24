@@ -6,7 +6,7 @@ namespace MSA.Presentation.Configuration
 {
     public static class ConfigureDbContext
     {
-        public static IServiceCollection AddDbContext(this IServiceCollection services)
+        public static IServiceCollection ConfigAddDbContext(this IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             {
