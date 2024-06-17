@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSA.Domain", "MSA.Domain\MS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSA.Infrastructure", "MSA.Infrastructure\MSA.Infrastructure.csproj", "{FBB347EC-16BE-4B51-8B36-71B00BAF35D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSA.Presentation", "MSA.Presentation\MSA.Presentation.csproj", "{FC2C9C9F-55C2-43AE-ABF0-4230F030FD10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MSA.Presentation", "MSA.Presentation\MSA.Presentation.csproj", "{FC2C9C9F-55C2-43AE-ABF0-4230F030FD10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
