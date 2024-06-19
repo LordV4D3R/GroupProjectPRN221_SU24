@@ -28,14 +28,15 @@
 
                                 <!-- USer input -->
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example3">User Name</label>
-                                     <input asp-for="AccountLoginDto.Username"/>
+                                    <label class="form-label" for="form3Example3">UserName</label>
+                                    <input asp-for="AccountLoginDto.Username" type="text" id="form3Example3" class="form-control" />
+
                                 </div>
 
                                 <!-- Password input -->
                                 <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example4">Password</label>                                    
-                                     <input asp-for="AccountLoginDto.Password"/>
+                                    <label class="form-label" for="form3Example4">Password</label>
+                                    <input asp-for="AccountLoginDto.Password" type="password" id="form3Example4" class="form-control" />
                                 </div>
 
                                 @if (!string.IsNullOrEmpty(Model.ErrorMessage))

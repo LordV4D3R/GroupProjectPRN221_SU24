@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MSA.Application.IServices;
@@ -30,12 +30,27 @@ namespace MSA.Presentation.Pages
 
         public async Task<IActionResult> OnPost()
         {
-            //var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Email").Value;
-            //var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
+            if (!ModelState.IsValid) 
+            {
+                return Page();
+            }
+
+            var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Email").Value;
+            var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
+
+            if (AccountLoginDto.Username != adminPassword) {
+                HttpContext.Session.SetString("role", "Admin");
+                return RedirectToPage("/AccountPages/Index");
+            }
+
             var account = _accountService.GetAccountByUsernameAndPassword(AccountLoginDto);
+
+
+
             if (AccountLoginDto.Username == null || AccountLoginDto.Password == null)
             {
-                return RedirectToPage("/Error");
+                ErrorMessage = "Không được để trống Username hoặc Password";
+                return Page();
             }
             else
             {
@@ -51,13 +66,13 @@ namespace MSA.Presentation.Pages
                         case "Customer":
                             return RedirectToPage("/Index");
                         default:
-                            ErrorMessage = "Invalid username or password";
+                            ErrorMessage = "Hệ thống xảy ra lỗi, vui lòng thử lại";
                             return Page();
                     }
                 }
                 else
                 {
-                    ErrorMessage = "Invalid username or password";
+                    ErrorMessage = "Tài khoản không tồn tại hoặc sai mật khẩu";
                     return Page();
 
                 }
