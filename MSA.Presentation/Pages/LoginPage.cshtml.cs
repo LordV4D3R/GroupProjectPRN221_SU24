@@ -20,7 +20,7 @@ namespace MSA.Presentation.Pages
 
         [BindProperty]
         public AccountLoginDto AccountLoginDto { get; set; }
-        public string ErrorMessage { get; set; }
+        public string ErrorMessage { get; set; } 
 
         public async Task<IActionResult> OnGetAsync()
         {
