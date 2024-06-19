@@ -28,11 +28,23 @@ namespace MSA.Application.DAO
         }
         public void Add(T entity)
         {
-            _dbSet.Add(entity);
+            _dbSet.Add(entity);          
         }
         public void Update(T entity)
         {
-            _dbSet.Update(entity);
+                _dbSet.Update(entity);
+                _context.SaveChanges();        
+        }
+        public void Update2(T entity, T baseValue)
+        {
+            try
+            {
+                _context.Entry(baseValue).CurrentValues.SetValues(entity);
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+            }
         }
         public void Delete(T entity)
         {
@@ -40,7 +52,13 @@ namespace MSA.Application.DAO
         }
         public void Save()
         {
-            _context.SaveChanges();
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MSA.Application.IServices;
+using MSA.Domain.Account;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
@@ -43,34 +44,8 @@ namespace MSA.Presentation.Pages.AccountPages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            try
-            {
-                _accountService.Update(Account);
-                _accountService.Save();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AccountExists(Account.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            _accountService.Update2(Account);
             return RedirectToPage("./Index");
-        }
-
-        private bool AccountExists(Guid id)
-        {
-            return _accountService.GetById(id) != null;
         }
     }
 }

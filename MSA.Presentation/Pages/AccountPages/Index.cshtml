@@ -36,7 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Account[0].Role)
             </th>
-            <th>
+            <!--<th>
                 @Html.DisplayNameFor(model => model.Account[0].CreatedOn)
             </th>
             <th>
@@ -47,11 +47,10 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Account[0].UpdatedBy)
-            </th>
+            </th>-->
             <th>
                 @Html.DisplayNameFor(model => model.Account[0].IsDeleted)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -84,7 +83,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
-            <td>
+            <!--<td>
                 @Html.DisplayFor(modelItem => item.CreatedOn)
             </td>
             <td>
@@ -95,12 +94,11 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedBy)
-            </td>
+            </td>-->
             <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
-            <td>
-                <a asp-page="./Create">Create New</a> |
+            <td>               |
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>              
@@ -109,3 +107,6 @@
 }
     </tbody>
 </table>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>

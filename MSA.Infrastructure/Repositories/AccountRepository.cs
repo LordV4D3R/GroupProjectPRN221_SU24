@@ -17,5 +17,6 @@ namespace MSA.Infrastructure.Repositories
         public void Save() => AccountDAO.Instance.Save();
 
         public void Update(Account account) => AccountDAO.Instance.Update(account);
+        public void Update2(Account account) => AccountDAO.Instance.Update2(account, GetById(account.Id));
     }
 }
