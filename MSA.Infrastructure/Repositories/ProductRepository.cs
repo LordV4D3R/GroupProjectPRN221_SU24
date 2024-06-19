@@ -18,5 +18,6 @@ namespace Repositories
         public void Save() => ProductDAO.Instance.Save();
 
         public void Update(Product product) => ProductDAO.Instance.Update(product);
+        public void Update2(Product product) => ProductDAO.Instance.Update2(product, GetById(product.Id));
     }
 }

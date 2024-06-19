@@ -51,5 +51,10 @@ namespace Services
         {
             _productRepository.Update(product);
         }
+
+        public void Update2(Product product)
+        {
+            _productRepository.Update2(product);
+        }
     }
 }

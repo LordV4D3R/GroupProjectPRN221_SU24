@@ -1,6 +1,7 @@
 ﻿using MSA.Application.DAO;
 using MSA.Domain.Entities;
 using MSA.Application.IRepositories;
+using MSA.Domain.Dtos.Account;
 
 namespace MSA.Infrastructure.Repositories
 {
@@ -12,10 +13,16 @@ namespace MSA.Infrastructure.Repositories
 
         public IEnumerable<Account> GetAll() => AccountDAO.Instance.GetAll();
 
+        public IEnumerable<AccountViewModel> GetAllViewModel()
+        {
+            throw new NotImplementedException();
+        }
+
         public Account? GetById(Guid id) => AccountDAO.Instance.GetById(id);
 
         public void Save() => AccountDAO.Instance.Save();
 
         public void Update(Account account) => AccountDAO.Instance.Update(account);
+        public void Update2(Account account) => AccountDAO.Instance.Update2(account, GetById(account.Id));
     }
 }

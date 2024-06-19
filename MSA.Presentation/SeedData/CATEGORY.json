@@ -1,17 +1,17 @@
 [
   {
     "Id": "7718489f-d872-42df-857f-06179cc71a5e",
-    "CategoryName": "BabyMilk",
-    "Description": "Milk for baby"
+    "CategoryName": "Sữa cho trẻ sơ sinh",
+    "Description": "Sữa cho trẻ từ 0 - 3 tuổi"
   },
   {
     "Id": "d0d766c9-eefc-4507-a918-feaf7a885af9",
     "CategoryName": "MomMilk",
-    "Description": "Milk for mom"
+    "Description": "Sữa cho mẹ"
   },
   {
     "Id": "85492a28-ed99-4ce6-a840-715afb513ef4",
     "CategoryName": "MomMilk2",
-    "Description": "Milk for mom"
+    "Description": "Đồ chơi"
   }
 ]

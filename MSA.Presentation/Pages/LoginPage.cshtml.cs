@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MSA.Application.IServices;
+using MSA.Domain.Dtos.Account;
 
 namespace MSA.Presentation.Pages
 {
@@ -16,18 +17,40 @@ namespace MSA.Presentation.Pages
             _logger = logger;
             _accountService = accountService;
         }
+
+        [BindProperty]
+        public AccountLoginDto AccountLoginDto { get; set; }
+        public string ErrorMessage { get; set; } 
+
         public async Task<IActionResult> OnGetAsync()
         {
             return Page();
         }
-        public async Task<IActionResult> OnPostLogin(string email, string password)
+
+
+        public async Task<IActionResult> OnPost()
         {
-            //var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Email").Value;
-            //var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
-            var account = _accountService.GetAccountByUsernameAndPassword(email, password);
-            if (email == null || password == null)
+            if (!ModelState.IsValid) 
             {
-                return RedirectToPage("/Error");
+                return Page();
+            }
+
+            var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Email").Value;
+            var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
+
+            if (AccountLoginDto.Username != adminPassword) {
+                HttpContext.Session.SetString("role", "Admin");
+                return RedirectToPage("/AccountPages/Index");
+            }
+
+            var account = _accountService.GetAccountByUsernameAndPassword(AccountLoginDto);
+
+
+
+            if (AccountLoginDto.Username == null || AccountLoginDto.Password == null)
+            {
+                ErrorMessage = "Không được để trống Username hoặc Password";
+                return Page();
             }
             else
             {
@@ -43,12 +66,15 @@ namespace MSA.Presentation.Pages
                         case "Customer":
                             return RedirectToPage("/Index");
                         default:
-                            return RedirectToPage("/Error");
+                            ErrorMessage = "Hệ thống xảy ra lỗi, vui lòng thử lại";
+                            return Page();
                     }
                 }
                 else
                 {
-                    return RedirectToPage("/Error");
+                    ErrorMessage = "Tài khoản không tồn tại hoặc sai mật khẩu";
+                    return Page();
+
                 }
             }
         }
