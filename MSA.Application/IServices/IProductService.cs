@@ -14,6 +14,7 @@ namespace Services
         Product? GetById(Guid id);
         void Add(Product product);
         void Update(Product product);
+        void Update2(Product product);
         void Delete(Product product);
         void Save();
     }
