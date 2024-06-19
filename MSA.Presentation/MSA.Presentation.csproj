@@ -106,4 +106,10 @@
     <ProjectReference Include="..\MSA.Infrastructure\MSA.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\AdminPages\" />
+    <Folder Include="Pages\GuestPages\" />
+    <Folder Include="Pages\StaffPage\" />
+  </ItemGroup>
+
 </Project>

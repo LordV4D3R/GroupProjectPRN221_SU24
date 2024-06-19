@@ -1,26 +1,29 @@
 [
   {
-    "ProductName": "Premium Baby Milk",
+    "ProductName": "Sữa Aptamil Gold",
     "Price": "959",
     "Description": "Best milk for 0 - 3 years old child, make your child stronger, smarter and more powerful",
     "Quantity": "4",
     "Status": "ComingSoon",
+    "ImageUrl": "img/Milk/Sua_Aptamil_Gold.jpg",
     "CategoryId": "7718489f-d872-42df-857f-06179cc71a5e"
   },
   {
-    "ProductName": "Best Mom Milk",
+    "ProductName": "Sữa NAN Pro",
     "Price": "499",
     "Description": "Best milk for mom",
     "Quantity": "3",
     "Status": "InStock",
+    "ImageUrl": "img/Milk/Sua_NAN_Pro.png",
     "CategoryId": "d0d766c9-eefc-4507-a918-feaf7a885af9"
   },
   {
-    "ProductName": "Best Mom Milk 2",
+    "ProductName": "Sữa Oz Farm",
     "Price": "499",
     "Description": "Best milk for mom",
     "Quantity": "3",
     "Status": "InStock",
+    "ImageUrl": "img/Milk/Sua_Oz_Farm.jpg",
     "CategoryId": "85492a28-ed99-4ce6-a840-715afb513ef4"
   }
 
