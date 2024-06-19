@@ -58,5 +58,9 @@ namespace MSA.Application.Services
         {
             _accountRepository.Update(account);
         }
+        public void Update2(Account account)
+        {
+            _accountRepository.Update2(account);
+        }
     }
 }

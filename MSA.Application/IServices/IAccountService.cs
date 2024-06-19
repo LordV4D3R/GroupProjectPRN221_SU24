@@ -10,6 +10,7 @@ namespace MSA.Application.IServices
         Account? GetById(Guid id);
         void Add(Account account);
         void Update(Account account);
+        void Update2(Account account);
         void Delete(Account account);
         void Save();
     }
