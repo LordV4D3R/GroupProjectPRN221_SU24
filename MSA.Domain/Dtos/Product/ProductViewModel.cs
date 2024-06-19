@@ -17,5 +17,6 @@ namespace MSA.Domain.Dtos.Product
         public int TotalQuantity { get; set; } = 0;
         public ProductStatus Status { get; set; } = ProductStatus.ComingSoon;
 
+
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MSA.Domain.Dtos.Product;
+using MSA.Domain.Entities;
 using Services;
 
 namespace MSA.Presentation.Pages
@@ -15,26 +16,31 @@ namespace MSA.Presentation.Pages
             _logger = logger;
             _productService = productService;
         }
+
         [BindProperty]
-        public ProductViewModel ProductViewModel { get; set; }
+        public IList<ProductViewModel> ProductViewModel { get; set; } = default!;
+        public IList<Product> Product { get; set; } = default!;
 
 
         public async Task<IActionResult> OnGetAsync()
         {
+            LoadData();
             return Page();
         }
 
         private void LoadData()
         {
-            var product = _productService.GetAll;
-            ProductViewModel = new ProductViewModel
+            Product = _productService.GetAll().ToList();
+            ProductViewModel = Product.Select(product => new ProductViewModel
             {
-                ProductName = "Product 1",
-                Price = 100000,
-                Description = "Description 1",
-                ImageUrl = "https://via.placeholder.com/150",
-                TotalQuantity = 10
-            };
+                ProductName = product.ProductName,
+                Price = product.Price,
+                Description = product.Description,
+                ImageUrl = product.ImageUrl,
+                TotalQuantity = product.TotalQuantity,
+                Status = product.Status
+
+            }).ToList();
         }
     }
 }
