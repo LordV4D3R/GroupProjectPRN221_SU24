@@ -1,10 +1,11 @@
-﻿using MSA.Domain.Entities;
+﻿using MSA.Domain.Dtos.Account;
+using MSA.Domain.Entities;
 
 namespace MSA.Application.IServices
 {
     public interface IAccountService
     {
-        Account? GetAccountByUsernameAndPassword(string username, string password);
+        Account? GetAccountByUsernameAndPassword(AccountLoginDto accountLoginDto);
         IEnumerable<Account> SearchByName(string name);
         IEnumerable<Account> GetAll();
         Account? GetById(Guid id);

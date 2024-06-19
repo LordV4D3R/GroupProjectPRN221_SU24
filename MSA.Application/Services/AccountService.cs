@@ -1,6 +1,7 @@
 ﻿using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Application.IRepositories;
+using MSA.Domain.Dtos.Account;
 
 namespace MSA.Application.Services
 {
@@ -22,12 +23,12 @@ namespace MSA.Application.Services
             _accountRepository.Delete(account);
         }
 
-        public Account? GetAccountByUsernameAndPassword(string username, string password)
+        public Account? GetAccountByUsernameAndPassword(AccountLoginDto accountLoginDto)
         {
             try
             {
                 return _accountRepository.GetAll()
-                    .FirstOrDefault(x => x.Username!.Equals(username) && x.Password!.Equals(password));
+                    .FirstOrDefault(x => x.Username!.Equals(accountLoginDto.Username) && x.Password!.Equals(accountLoginDto.Password));
             }
             catch (Exception)
             {

@@ -24,19 +24,27 @@
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <div class="card">
                         <div class="card-body py-5 px-md-5">
-                            <form>
+                            <form method="post">
 
                                 <!-- USer input -->
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="form3Example3">User Name</label>
-                                     @Html.TextBox("username")
+                                     <input asp-for="AccountLoginDto.Username"/>
                                 </div>
 
                                 <!-- Password input -->
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <label class="form-label" for="form3Example4">Password</label>                                    
-                                     @Html.Password("password")
+                                     <input asp-for="AccountLoginDto.Password"/>
                                 </div>
+
+                                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                {
+                                    <div class="alert alert-danger" role="alert">
+                                        @Model.ErrorMessage
+                                    </div>
+                                }
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
                                 <!-- Submit button -->
