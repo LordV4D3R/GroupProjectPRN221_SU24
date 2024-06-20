@@ -30,16 +30,26 @@ namespace MSA.Presentation.Pages.AccountPages
 
         [BindProperty]
         public Account Account { get; set; } = default!;
+        public CreateAccountRequest request { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(CreateAccountRequest request)
         {
-            if (!ModelState.IsValid)
+            Account newAccount = new Account
             {
-                return Page();
-            }
-            _accountService.Add(Account);
+                Username = request.Username,              
+                Password = request.Password,
+                FullName = request.FullName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Address = request.Address,
+                ImageUrl = request.ImageUrl,
+                Role = request.Role,
+                Status = AccountStatus.Active,
+            };
+            _accountService.Add(newAccount);
             _accountService.Save();
+
             return RedirectToPage("./Index");
         }
     }

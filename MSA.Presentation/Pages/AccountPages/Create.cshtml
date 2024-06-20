@@ -15,49 +15,49 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Account.Username" class="control-label"></label>
-                <input asp-for="Account.Username" class="form-control" />
-                <span asp-validation-for="Account.Username" class="text-danger"></span>
+                <label asp-for="request.Username" class="control-label"></label>
+                <input asp-for="request.Username" class="form-control" />
+                <span asp-validation-for="request.Username" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Account.Password" class="control-label"></label>
-                <input asp-for="Account.Password" class="form-control" />
-                <span asp-validation-for="Account.Password" class="text-danger"></span>
+                <label asp-for="request.Password" class="control-label"></label>
+                <input asp-for="request.Password" class="form-control" />
+                <span asp-validation-for="request.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Account.FullName" class="control-label"></label>
-                <input asp-for="Account.FullName" class="form-control" />
-                <span asp-validation-for="Account.FullName" class="text-danger"></span>
+                <label asp-for="request.FullName" class="control-label"></label>
+                <input asp-for="request.FullName" class="form-control" />
+                <span asp-validation-for="request.FullName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Account.Email" class="control-label"></label>
-                <input asp-for="Account.Email" class="form-control" />
-                <span asp-validation-for="Account.Email" class="text-danger"></span>
+                <label asp-for="request.Email" class="control-label"></label>
+                <input asp-for="request.Email" class="form-control" />
+                <span asp-validation-for="request.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Account.PhoneNumber" class="control-label"></label>
-                <input asp-for="Account.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Account.PhoneNumber" class="text-danger"></span>
+                <label asp-for="request.PhoneNumber" class="control-label"></label>
+                <input asp-for="request.PhoneNumber" class="form-control" />
+                <span asp-validation-for="request.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Account.Address" class="control-label"></label>
-                <input asp-for="Account.Address" class="form-control" />
-                <span asp-validation-for="Account.Address" class="text-danger"></span>
+                <label asp-for="request.Address" class="control-label"></label>
+                <input asp-for="request.Address" class="form-control" />
+                <span asp-validation-for="request.Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Account.ImageUrl" class="control-label"></label>
-                <input asp-for="Account.ImageUrl" class="form-control" />
-                <span asp-validation-for="Account.ImageUrl" class="text-danger"></span>
+                <label asp-for="request.ImageUrl" class="control-label"></label>
+                <input asp-for="request.ImageUrl" class="form-control" />
+                <span asp-validation-for="request.ImageUrl" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label asp-for="Account.Status" class="control-label"></label>
                 <select asp-for="Account.Status" class="form-control" asp-items="Html.GetEnumSelectList<AccountStatus>()"></select>
                 <span asp-validation-for="Account.Status" class="text-danger"></span>
-            </div>
+            </div>-->
             <div class="form-group">
-                <label asp-for="Account.Role" class="control-label"></label>
-                <select asp-for="Account.Role" class="form-control" asp-items="Html.GetEnumSelectList<RoleType>()"></select>
-                <span asp-validation-for="Account.Role" class="text-danger"></span>
+                <label asp-for="request.Role" class="control-label"></label>
+                <select asp-for="request.Role" class="form-control" asp-items="Html.GetEnumSelectList<RoleType>()"></select>
+                <span asp-validation-for="request.Role" class="text-danger"></span>
             </div>
             <!--<div class="form-group">
                 <label asp-for="Account.CreatedOn" class="control-label"></label>
