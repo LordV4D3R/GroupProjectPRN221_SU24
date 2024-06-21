@@ -8,14 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
 namespace MSA.Presentation.Pages.CategoryPages
 {
     public class EditModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly ICategoryService _context;
 
-        public EditModel(MSA.Infrastructure.ApplicationDbContext context)
+        public EditModel(ICategoryService context)
         {
             _context = context;
         }
@@ -30,7 +31,7 @@ namespace MSA.Presentation.Pages.CategoryPages
                 return NotFound();
             }
 
-            var category =  await _context.Categorys.FirstOrDefaultAsync(m => m.Id == id);
+            var category =  _context.GetById(id);
             if (category == null)
             {
                 return NotFound();
@@ -46,32 +47,10 @@ namespace MSA.Presentation.Pages.CategoryPages
             if (!ModelState.IsValid)
             {
                 return Page();
-            }
-
-            _context.Attach(Category).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(Category.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            }            
+            _context.Update(Category);
+            _context.Save();
             return RedirectToPage("./Index");
-        }
-
-        private bool CategoryExists(Guid id)
-        {
-            return _context.Categorys.Any(e => e.Id == id);
         }
     }
 }

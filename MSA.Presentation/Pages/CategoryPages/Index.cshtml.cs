@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
 namespace MSA.Presentation.Pages.CategoryPages
 {
     public class IndexModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly ICategoryService _context;
 
-        public IndexModel(MSA.Infrastructure.ApplicationDbContext context)
+        public IndexModel(ICategoryService context)
         {
             _context = context;
         }
@@ -23,7 +24,7 @@ namespace MSA.Presentation.Pages.CategoryPages
 
         public async Task OnGetAsync()
         {
-            Category = await _context.Categorys.ToListAsync();
+            Category = _context.GetAll().ToList();
         }
     }
 }
