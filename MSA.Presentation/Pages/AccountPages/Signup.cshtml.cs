@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,10 +14,10 @@ using MSA.Infrastructure;
 
 namespace MSA.Presentation.Pages.AccountPages
 {
-    public class CreateModel : PageModel
+    public class SignupModel : PageModel
     {
         private readonly IAccountService _accountService;
-        public CreateModel(IAccountService accountService)
+        public SignupModel(IAccountService accountService)
         {
             _accountService = accountService;
         }
@@ -30,27 +29,27 @@ namespace MSA.Presentation.Pages.AccountPages
 
         [BindProperty]
         public Account Account { get; set; } = default!;
-        public CreateAccountRequest request { get; set; } = default!;
+        public SignUpViewModel request { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync(CreateAccountRequest request)
+        public async Task<IActionResult> OnPostAsync(SignUpViewModel request)
         {
             Account newAccount = new Account
             {
-                Username = request.Username,              
+                Username = request.Username,
                 Password = request.Password,
                 FullName = request.FullName,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
                 ImageUrl = request.ImageUrl,
-                Role = request.Role,
+                Role = RoleType.Customer,
                 Status = AccountStatus.Active,
             };
             _accountService.Add(newAccount);
             _accountService.Save();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Index");
         }
     }
 }
