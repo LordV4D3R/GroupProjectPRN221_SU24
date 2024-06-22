@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
 namespace MSA.Presentation.Pages.CategoryPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly ICategoryService _context;
 
-        public DeleteModel(MSA.Infrastructure.ApplicationDbContext context)
+        public DeleteModel(ICategoryService context)
         {
             _context = context;
         }
@@ -29,7 +30,7 @@ namespace MSA.Presentation.Pages.CategoryPages
                 return NotFound();
             }
 
-            var category = await _context.Categorys.FirstOrDefaultAsync(m => m.Id == id);
+            var category = _context.GetById(id);
 
             if (category == null)
             {
@@ -49,12 +50,12 @@ namespace MSA.Presentation.Pages.CategoryPages
                 return NotFound();
             }
 
-            var category = await _context.Categorys.FindAsync(id);
+            var category = _context.GetById(id);
             if (category != null)
             {
                 Category = category;
-                _context.Categorys.Remove(Category);
-                await _context.SaveChangesAsync();
+                _context.Delete(Category);
+                _context.Save();
             }
 
             return RedirectToPage("./Index");

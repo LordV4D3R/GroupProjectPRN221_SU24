@@ -109,6 +109,7 @@
   <ItemGroup>
     <Folder Include="Pages\AdminPages\" />
     <Folder Include="Pages\GuestPages\" />
+    <Folder Include="Pages\VoucherPages\" />
     <Folder Include="Pages\StaffPage\" />
   </ItemGroup>
 

@@ -7,14 +7,15 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
 namespace MSA.Presentation.Pages.CategoryPages
 {
     public class CreateModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly ICategoryService _context;
 
-        public CreateModel(MSA.Infrastructure.ApplicationDbContext context)
+        public CreateModel(ICategoryService context)
         {
             _context = context;
         }
@@ -35,9 +36,8 @@ namespace MSA.Presentation.Pages.CategoryPages
                 return Page();
             }
 
-            _context.Categorys.Add(Category);
-            await _context.SaveChangesAsync();
-
+            _context.Add(Category);
+            _context.Save();
             return RedirectToPage("./Index");
         }
     }
