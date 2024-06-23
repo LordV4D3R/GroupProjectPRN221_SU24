@@ -18,28 +18,78 @@ namespace MSA.Presentation.SeedData
             IList<Account> accounts = null!;
             IList<Category> categorys = null!;
             IList<Product> products = null!;
+            IList<Order> orders = null!;
+            IList<OrderDetail> orderDetails = null!;
+
 
 
             //Account
-            if (!context.Accounts.Any())
+            //if (!context.Accounts.Any())
+            //{
+            //    accounts = FileExtension<Account>.LoadJson(path, "ACCOUNT.json");
+            //    await context.Accounts.AddRangeAsync(accounts);
+            //    await context.SaveChangesAsync();
+            //}
+
+
+
+
+
+            //OrderDetail
+            if (!context.OrderDetails.Any())
             {
-                accounts = FileExtension<Account>.LoadJson(path, "ACCOUNT.json");
-                await context.Accounts.AddRangeAsync(accounts);
-                await context.SaveChangesAsync();
-            }
-            //Product&Category
-            if (!context.Products.Any())
-            {
-                if (!context.Categorys.Any())
+                //Order
+                if (!context.Orders.Any())
                 {
-                    categorys = FileExtension<Category>.LoadJson(path, "CATEGORY.json");
-                    await context.Categorys.AddRangeAsync(categorys);
+                    //Account
+                    if (!context.Accounts.Any())
+                    {
+                        accounts = FileExtension<Account>.LoadJson(path, "ACCOUNT.json");
+                        await context.Accounts.AddRangeAsync(accounts);
+                        await context.SaveChangesAsync();
+                    }
+                    orders = FileExtension<Order>.LoadJson(path, "ORDER.json");
+                    await context.Orders.AddRangeAsync(orders);
                     await context.SaveChangesAsync();
                 }
-                products = FileExtension<Product>.LoadJson(path, "PRODUCT.json");
-                await context.Products.AddRangeAsync(products);
+                //Product
+                if (!context.Products.Any())
+                {
+                    //Category
+                    if (!context.Categorys.Any())
+                    {
+                        categorys = FileExtension<Category>.LoadJson(path, "CATEGORY.json");
+                        await context.Categorys.AddRangeAsync(categorys);
+                        await context.SaveChangesAsync();
+                    }
+                    products = FileExtension<Product>.LoadJson(path, "PRODUCT.json");
+                    await context.Products.AddRangeAsync(products);
+                    await context.SaveChangesAsync();
+                }
+                orderDetails = FileExtension<OrderDetail>.LoadJson(path, "ORDERDETAIL.json");
+                await context.OrderDetails.AddRangeAsync(orderDetails);
                 await context.SaveChangesAsync();
+
             }
+
+
+
+
+            //Category&Product
+            //if (!context.Products.Any())
+            //{
+            //    if (!context.Categorys.Any())
+            //    {
+            //        categorys = FileExtension<Category>.LoadJson(path, "CATEGORY.json");
+            //        await context.Categorys.AddRangeAsync(categorys);
+            //        await context.SaveChangesAsync();
+            //    }
+            //    products = FileExtension<Product>.LoadJson(path, "PRODUCT.json");
+            //    await context.Products.AddRangeAsync(products);
+            //    await context.SaveChangesAsync();
+            //}
+
+
             //Category
             //if (!context.Categorys.Any())
             //{
