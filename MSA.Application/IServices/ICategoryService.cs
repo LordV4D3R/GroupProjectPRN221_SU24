@@ -11,7 +11,7 @@ namespace Services
     {
         IEnumerable<Category> SearchByName(string name);
         IEnumerable<Category> GetAll();
-        Category? GetById(Guid? id);
+        Category? GetById(Guid id);
         void Add(Category category);
         void Update(Category category);
         void Delete(Category category);
