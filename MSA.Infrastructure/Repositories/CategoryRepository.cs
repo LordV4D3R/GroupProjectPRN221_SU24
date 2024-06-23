@@ -12,7 +12,7 @@ namespace Repositories
 
         public IEnumerable<Category> GetAll() => CategoryDAO.Instance.GetAll();
 
-        public Category GetById(Guid id) => CategoryDAO.Instance.GetById(id);
+        public Category? GetById(Guid id) => CategoryDAO.Instance.GetById(id);
 
         public void Save() => CategoryDAO.Instance.Save();
 
