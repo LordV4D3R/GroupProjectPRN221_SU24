@@ -23,10 +23,5 @@ namespace MSA.Domain.Entities
         public Guid OrderId { get; set; } 
         public virtual Order Order { get; set; } = null!;
 
-        [Column("product_id")]
-        [ForeignKey(nameof(Product))]
-        public Guid ProductId { get; set; }
-        public virtual Product Product { get; set; } = null!;
-
     }
 }

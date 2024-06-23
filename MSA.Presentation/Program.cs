@@ -5,7 +5,6 @@ using MSA.Application.Services;
 using MSA.Infrastructure;
 using MSA.Infrastructure.Repositories;
 using MSA.Infrastructure.Services;
-using MSA.Presentation;
 using MSA.Presentation.Configuration;
 using MSA.Presentation.SeedData;
 using Repositories;
@@ -41,8 +40,6 @@ builder.Services.AddSession(option =>
     option.IdleTimeout = TimeSpan.FromMinutes(30);
 });
 
-// Add Configuration
-builder.Configuration.SettingsBinding();
 
 builder.Services.ConfigAddDbContext();
 
