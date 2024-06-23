@@ -18,7 +18,7 @@ namespace MSA.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("msa")
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -268,6 +268,9 @@ namespace MSA.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasColumnName("is_deleted");
 
+                    b.Property<Guid?>("OrderDetail")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("order_id");
@@ -275,10 +278,6 @@ namespace MSA.Infrastructure.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float")
                         .HasColumnName("price");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int")
@@ -294,9 +293,9 @@ namespace MSA.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderDetail");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("order_detail", "msa");
                 });
@@ -450,21 +449,17 @@ namespace MSA.Infrastructure.Migrations
 
             modelBuilder.Entity("MSA.Domain.Entities.OrderDetail", b =>
                 {
+                    b.HasOne("MSA.Domain.Entities.Product", null)
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderDetail");
+
                     b.HasOne("MSA.Domain.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MSA.Domain.Entities.Product", "Product")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Order");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("MSA.Domain.Entities.Product", b =>

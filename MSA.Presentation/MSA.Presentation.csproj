@@ -9,13 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\AdminPages\**" />
-    <Content Remove="Pages\AdminPages\**" />
-    <EmbeddedResource Remove="Pages\AdminPages\**" />
-    <None Remove="Pages\AdminPages\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="wwwroot\css\bootstrap.min.css" />
   </ItemGroup>
 
@@ -114,6 +107,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Pages\AdminPages\" />
+    <Folder Include="Pages\GuestPages\" />
     <Folder Include="Pages\VoucherPages\" />
     <Folder Include="Pages\StaffPage\" />
   </ItemGroup>

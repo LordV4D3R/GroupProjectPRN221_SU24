@@ -34,7 +34,8 @@ namespace MSA.Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(local);Database=MSADb;uid=sa;pwd=12345;Trusted_Connection=True;TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer(GetConnectionString());
+
             }
         }
 

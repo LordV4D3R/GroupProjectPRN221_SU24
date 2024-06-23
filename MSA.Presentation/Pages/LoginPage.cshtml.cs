@@ -28,19 +28,19 @@ namespace MSA.Presentation.Pages
         }
 
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPost()
         {
             if (!ModelState.IsValid) 
             {
                 return Page();
             }
 
-            var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Username").Value;
+            var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Email").Value;
             var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
 
-            if (AccountLoginDto.Username == adminUsername || AccountLoginDto.Password == adminPassword) {
+            if (AccountLoginDto.Username != adminPassword) {
                 HttpContext.Session.SetString("role", "Admin");
-                return RedirectToPage("/Admin/AccountPages/Index");
+                return RedirectToPage("/AccountPages/Index");
             }
 
             var account = _accountService.GetAccountByUsernameAndPassword(AccountLoginDto);
@@ -59,6 +59,8 @@ namespace MSA.Presentation.Pages
                     HttpContext.Session.SetString("role", account.Role.ToString());
                     switch (account.Role.ToString())
                     {
+                        case "Admin":
+                            return RedirectToPage("/Index");
                         case "Staff":
                             return RedirectToPage("/Index");
                         case "Customer":
