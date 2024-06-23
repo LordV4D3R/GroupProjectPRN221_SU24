@@ -1,5 +1,6 @@
 [
   {
+    "Id": "237ca50f-1b74-410c-b8de-78238b6c337f",
     "ProductName": "Sữa Similac",
     "Price": "959",
     "Description": "Best milk for 0 - 3 years old child, make your child stronger, smarter and more powerful",
@@ -9,6 +10,7 @@
     "CategoryId": "7718489f-d872-42df-857f-06179cc71a5e"
   },
   {
+    "Id": "6f9beb18-6fb5-458c-8706-598950b04261",
     "ProductName": "Sữa Similac NewBorn",
     "Price": "499",
     "Description": "Best milk for mom",
@@ -18,6 +20,7 @@
     "CategoryId": "d0d766c9-eefc-4507-a918-feaf7a885af9"
   },
   {
+    "Id": "bd13b064-5b53-4d3a-ab8f-665198421a82",
     "ProductName": "Sữa Vinamilk Colos Gold",
     "Price": "499",
     "Description": "Best milk for mom",

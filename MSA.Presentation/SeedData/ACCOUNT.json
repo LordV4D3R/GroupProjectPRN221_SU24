@@ -1,24 +1,26 @@
 [
-    {
-        "Username": "customer-01",
-        "Password": "1",
-        "FullName": "Customer 01",
-        "Email": "customer1@gmail.com",
-        "PhoneNumber": "000000000",
-        "Address": "ABC, ABD Street, BDG City, VN",
-        "Role": "Customer",
-        "Status": "Active",
-        "CreatedBy": "admin@chc.com"
-    },
-    {
-        "Username": "customer-01",
-        "Password": "1",
-        "FullName": "Customer 01",
-        "Email": "customer1@gmail.com",
-        "PhoneNumber": "000000000",
-        "Address": "ABC, ABD Street, BDG City, VN",
-        "Role": "Customer",
-        "Status": "Active",
-        "CreatedBy": "admin@chc.com"
-    }
+  {
+    "Id": "6bc5b196-8471-446c-9b9a-d9321add043a",
+    "Username": "customer-01",
+    "Password": "1",
+    "FullName": "Customer 01",
+    "Email": "customer1@gmail.com",
+    "PhoneNumber": "000000000",
+    "Address": "ABC, ABD Street, BDG City, VN",
+    "Role": "Customer",
+    "Status": "Active",
+    "CreatedBy": "admin@chc.com"
+  },
+  {
+    "Id": "a3e2cca1-0a56-46ca-95c7-91e60943517d",
+    "Username": "customer-01",
+    "Password": "1",
+    "FullName": "Customer 01",
+    "Email": "customer1@gmail.com",
+    "PhoneNumber": "000000000",
+    "Address": "ABC, ABD Street, BDG City, VN",
+    "Role": "Customer",
+    "Status": "Active",
+    "CreatedBy": "admin@chc.com"
+  }
 ]

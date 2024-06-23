@@ -1,0 +1,16 @@
+[
+  {
+    "Id": "bdbc4ae5-d87e-468e-b34d-5f87db4beb7c",
+    "TotalPrice": "11859",
+    "TotalQuantity": "21",
+    "OrderStatus": "1",
+    "CustomerId": "a3e2cca1-0a56-46ca-95c7-91e60943517d"
+  },
+  {
+    "Id": "fd62e304-4278-47b3-9ff5-2ddd1dc16b13",
+    "TotalPrice": "4374",
+    "TotalQuantity": "6",
+    "OrderStatus": "1",
+    "CustomerId": "6bc5b196-8471-446c-9b9a-d9321add043a"
+  }
+]
