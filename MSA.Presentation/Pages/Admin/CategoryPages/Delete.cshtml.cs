@@ -11,18 +11,19 @@ using Services;
 
 namespace MSA.Presentation.Pages.CategoryPages
 {
-    public class DetailsModel : PageModel
+    public class DeleteModel : PageModel
     {
         private readonly ICategoryService _context;
 
-        public DetailsModel(ICategoryService context)
+        public DeleteModel(ICategoryService context)
         {
             _context = context;
         }
 
+        [BindProperty]
         public Category Category { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
             {
@@ -30,6 +31,7 @@ namespace MSA.Presentation.Pages.CategoryPages
             }
 
             var category = _context.GetById(id);
+
             if (category == null)
             {
                 return NotFound();
@@ -39,6 +41,24 @@ namespace MSA.Presentation.Pages.CategoryPages
                 Category = category;
             }
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync(Guid id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var category = _context.GetById(id);
+            if (category != null)
+            {
+                Category = category;
+                _context.Delete(Category);
+                _context.Save();
+            }
+
+            return RedirectToPage("./Index");
         }
     }
 }
