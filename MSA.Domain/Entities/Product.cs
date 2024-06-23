@@ -36,8 +36,8 @@ namespace MSA.Domain.Entities
         [EnumDataType(typeof(ProductStatus))]
         public ProductStatus Status { get; set; } = ProductStatus.OutOfStock;
 
-        [ForeignKey("OrderDetail")]
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        [InverseProperty("Product")]
+        public ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
         [Column("category_id")]
         [ForeignKey("Category")]

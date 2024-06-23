@@ -32,7 +32,7 @@ namespace Services
             return _categoryRepository.GetAll();
         }
 
-        public Category? GetById(Guid? id)
+        public Category? GetById(Guid id)
         {
             return _categoryRepository.GetById(id);
         }
