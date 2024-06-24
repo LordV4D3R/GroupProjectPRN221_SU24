@@ -11,7 +11,7 @@ namespace MSA.Infrastructure.Services
     {
         IEnumerable<Voucher> SearchByName(string name);
         IEnumerable<Voucher> GetAll();
-        Voucher? GetById(Guid id);
+        Voucher? GetById(Guid? id);
         void Add(Voucher voucher);
         void Update(Voucher voucher);
         void Delete(Voucher voucher);

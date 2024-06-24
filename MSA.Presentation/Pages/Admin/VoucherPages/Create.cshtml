@@ -1,0 +1,83 @@
+﻿@page
+@model MSA.Presentation.Pages.VoucherPages.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Voucher</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Voucher.VoucherName" class="control-label"></label>
+                <input asp-for="Voucher.VoucherName" class="form-control" />
+                <span asp-validation-for="Voucher.VoucherName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.VoucherCode" class="control-label"></label>
+                <input asp-for="Voucher.VoucherCode" class="form-control" />
+                <span asp-validation-for="Voucher.VoucherCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.ValidDate" class="control-label"></label>
+                <input asp-for="Voucher.ValidDate" class="form-control" />
+                <span asp-validation-for="Voucher.ValidDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.ExpireDate" class="control-label"></label>
+                <input asp-for="Voucher.ExpireDate" class="form-control" />
+                <span asp-validation-for="Voucher.ExpireDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.Status" class="control-label"></label>
+                <select asp-for="Voucher.Status" class="form-control"></select>
+                <span asp-validation-for="Voucher.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.StaffId" class="control-label"></label>
+                <select asp-for="Voucher.StaffId" class ="form-control" asp-items="ViewBag.StaffId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.CreatedOn" class="control-label"></label>
+                <input asp-for="Voucher.CreatedOn" class="form-control" />
+                <span asp-validation-for="Voucher.CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.UpdatedOn" class="control-label"></label>
+                <input asp-for="Voucher.UpdatedOn" class="form-control" />
+                <span asp-validation-for="Voucher.UpdatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.CreatedBy" class="control-label"></label>
+                <input asp-for="Voucher.CreatedBy" class="form-control" />
+                <span asp-validation-for="Voucher.CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Voucher.UpdatedBy" class="control-label"></label>
+                <input asp-for="Voucher.UpdatedBy" class="form-control" />
+                <span asp-validation-for="Voucher.UpdatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Voucher.IsDeleted" /> @Html.DisplayNameFor(model => model.Voucher.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

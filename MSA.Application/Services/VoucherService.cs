@@ -33,7 +33,7 @@ namespace Services
             return _voucherRepository.GetAll();
         }
 
-        public Voucher? GetById(Guid id)
+        public Voucher? GetById(Guid? id)
         {
             return _voucherRepository.GetById(id);
         }
