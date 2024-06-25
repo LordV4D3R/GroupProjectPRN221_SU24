@@ -24,7 +24,7 @@ namespace MSA.Presentation.Pages.VoucherPages
         [BindProperty]
         public Voucher Voucher { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
             {
