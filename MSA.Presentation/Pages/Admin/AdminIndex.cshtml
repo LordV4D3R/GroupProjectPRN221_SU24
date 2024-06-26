@@ -1,0 +1,27 @@
+﻿@page
+@model MSA.Presentation.Pages.Admin.AdminIndexModel
+@{
+    ViewData["Title"] = "Admin Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/admin.css" />
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+        <div class="button-container">
+            <button onclick="window.location.href='@Url.Page("/AccountPages/Index")'">Go to Account</button>
+            <button onclick="window.location.href='@Url.Page("/OrderPages/Index")'">Go to Order</button>
+            <button onclick="window.location.href='@Url.Page("/ProductPages/Index")'">Go to Product</button>
+            <button onclick="window.location.href='@Url.Page("/CategoryPages/Index")'">Go to Category</button>
+            <button onclick="window.location.href='@Url.Page("/VoucherPages/Index")'">Go to Category</button>
+            <!-- Add more buttons as needed -->
+        </div>
+    </div>
+</body>
+</html>

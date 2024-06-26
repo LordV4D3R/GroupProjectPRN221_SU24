@@ -1,0 +1,96 @@
+﻿@page
+@model MSA.Presentation.Pages.VoucherPages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].VoucherName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].VoucherCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].ValidDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].ExpireDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].Staff)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].UpdatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Voucher[0].IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Voucher) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VoucherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VoucherCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValidDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpireDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Staff.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

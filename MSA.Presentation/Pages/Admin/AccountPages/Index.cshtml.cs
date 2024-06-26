@@ -18,12 +18,21 @@ namespace MSA.Presentation.Pages.AccountPages
         {
             _accountService = accountService;
         }
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
 
         public IList<Account> Account { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            Account = _accountService.GetAll().ToList();
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                Account = _accountService.SearchByName(SearchString).ToList();
+            }
+            else
+            {
+                Account = _accountService.GetAll().ToList();
+            }
         }
     }
 }
