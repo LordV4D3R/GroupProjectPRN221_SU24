@@ -29,6 +29,24 @@
     "ImageUrl": "img/Milk/Sua_Vinamilk_Colos_Gold.webp",
     "CategoryId": "85492a28-ed99-4ce6-a840-715afb513ef4"
   }
-
-
+  /*
+  {
+    "Id": "sd12b058-8bs4-45ws-abs8-955427421b82",
+    "ProductName": "Sữa bột Grow Plus",
+    "Price": "499",
+    "Description": "Best milk for kids",
+    "Status": "InStock",
+    "ImageUrl": "img/Milk/sua-bot-tre-em-2.jpg",
+    "CategoryId": "7718489f-d872-42df-857f-06179cc71a5e"
+  },
+  {
+    "Id": "mb24a049-48sl-sb24-brk2-897125658l97",
+    "ProductName": "Sữa bột Famil",
+    "Price": "499",
+    "Description": "Best milk for kids",
+    "Status": "InStock",
+    "ImageUrl": "img/Milk/sua-famil.png",
+    "CategoryId": "7718489f-d872-42df-857f-06179cc71a5e"
+  }
+  */
 ]
