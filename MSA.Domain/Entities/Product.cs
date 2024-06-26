@@ -24,14 +24,9 @@ namespace MSA.Domain.Entities
         [Column("description")]
         public string Description { get; set; } = string.Empty;
       
-        [Column("img_url")]
+        [Column("img_url")]        
         public string ImageUrl { get; set; } = string.Empty;
-      
-        [Column("total_quantity")]
-        [Required]
-        public int TotalQuantity { get; set; } = 0;
-      
-      
+            
         [Column("status")]
         [EnumDataType(typeof(ProductStatus))]
         public ProductStatus Status { get; set; } = ProductStatus.OutOfStock;

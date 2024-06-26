@@ -20,6 +20,8 @@ namespace MSA.Presentation.SeedData
             IList<Product> products = null!;
             IList<Order> orders = null!;
             IList<OrderDetail> orderDetails = null!;
+            IList<Batch> batchs = null!;
+
 
 
 
@@ -52,18 +54,26 @@ namespace MSA.Presentation.SeedData
                     await context.Orders.AddRangeAsync(orders);
                     await context.SaveChangesAsync();
                 }
-                //Product
-                if (!context.Products.Any())
+                //Batch
+                if (!context.Batchs.Any())
                 {
-                    //Category
-                    if (!context.Categorys.Any())
+                    //Product
+                    if (!context.Products.Any())
                     {
-                        categorys = FileExtension<Category>.LoadJson(path, "CATEGORY.json");
-                        await context.Categorys.AddRangeAsync(categorys);
+                        //Category
+                        if (!context.Categorys.Any())
+                        {
+                            categorys = FileExtension<Category>.LoadJson(path, "CATEGORY.json");
+                            await context.Categorys.AddRangeAsync(categorys);
+                            await context.SaveChangesAsync();
+                        }
+                        products = FileExtension<Product>.LoadJson(path, "PRODUCT.json");
+                        await context.Products.AddRangeAsync(products);
                         await context.SaveChangesAsync();
                     }
-                    products = FileExtension<Product>.LoadJson(path, "PRODUCT.json");
-                    await context.Products.AddRangeAsync(products);
+
+                    batchs = FileExtension<Batch>.LoadJson(path, "BATCH.json");
+                    await context.Batchs.AddRangeAsync(batchs);
                     await context.SaveChangesAsync();
                 }
                 orderDetails = FileExtension<OrderDetail>.LoadJson(path, "ORDERDETAIL.json");

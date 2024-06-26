@@ -22,9 +22,18 @@ namespace MSA.Presentation.Pages.CategoryPages
 
         public IList<Category> Category { get;set; } = default!;
 
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         public async Task OnGetAsync()
         {
-            Category = _context.GetAll().ToList();
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                Category = _context.SearchByName(SearchString).ToList();
+            }
+            else
+            {
+                Category = _context.GetAll().ToList();
+            }
         }
     }
 }
