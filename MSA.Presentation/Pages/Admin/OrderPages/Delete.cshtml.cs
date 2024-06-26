@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
@@ -12,9 +13,9 @@ namespace MSA.Presentation.Pages.OrderPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly IOrderService _context;
 
-        public DeleteModel(MSA.Infrastructure.ApplicationDbContext context)
+        public DeleteModel(IOrderService context)
         {
             _context = context;
         }
@@ -22,14 +23,14 @@ namespace MSA.Presentation.Pages.OrderPages
         [BindProperty]
         public Order Order { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            var order = _context.GetById(id);
 
             if (order == null)
             {
@@ -42,19 +43,19 @@ namespace MSA.Presentation.Pages.OrderPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
+            var order = _context.GetById(id);
             if (order != null)
             {
                 Order = order;
-                _context.Orders.Remove(Order);
-                await _context.SaveChangesAsync();
+                _context.Delete(Order);
+                _context.Save();
             }
 
             return RedirectToPage("./Index");

@@ -23,19 +23,26 @@ namespace MSA.Presentation.Pages.ProductPages
             _productService = productService;
             _categoryService = categoryService;
         }
-
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         public IList<Product> Product { get;set; } = default!;
         public List<string> CategoryName { get; set; } = new List<string>();
 
         public async Task OnGetAsync()
         {
-            Product = _productService.GetAll().ToList();
-            foreach (var product in Product)
+            if (!string.IsNullOrEmpty(SearchString))
             {
-                var category = _categoryService.GetById(product.CategoryId);
-                CategoryName.Add(category?.CategoryName ?? "Unknown");
+                Product = _productService.SearchByName(SearchString).ToList();
             }
-
+            else
+            {
+                Product = _productService.GetAll().ToList();
+                foreach (var product in Product)
+                {
+                    var category = _categoryService.GetById(product.CategoryId);
+                    CategoryName.Add(category?.CategoryName ?? "Unknown");
+                }
+            }
         }
     }
 }

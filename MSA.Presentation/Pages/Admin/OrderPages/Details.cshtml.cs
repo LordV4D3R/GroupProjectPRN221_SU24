@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
@@ -12,23 +13,24 @@ namespace MSA.Presentation.Pages.OrderPages
 {
     public class DetailsModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly IOrderService _context;
+        private readonly IAccountService _accountService;
 
-        public DetailsModel(MSA.Infrastructure.ApplicationDbContext context)
+        public DetailsModel(IOrderService context)
         {
             _context = context;
         }
 
         public Order Order { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public string customerName { get; set; } = string.Empty;
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            var order = _context.GetById(id);
             if (order == null)
             {
                 return NotFound();
@@ -36,6 +38,8 @@ namespace MSA.Presentation.Pages.OrderPages
             else
             {
                 Order = order;
+                var custoomer = _accountService.GetById(order.CustomerId);
+                customerName = custoomer?.Username ?? "Unknown";
             }
             return Page();
         }
