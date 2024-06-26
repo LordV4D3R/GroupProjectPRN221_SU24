@@ -37,7 +37,6 @@ namespace MSA.Presentation.Pages.GuestPages
                 Price = product.Price,
                 Description = product.Description,
                 ImageUrl = product.ImageUrl,
-                TotalQuantity = product.TotalQuantity,
                 Status = product.Status
 
             }).ToList();
