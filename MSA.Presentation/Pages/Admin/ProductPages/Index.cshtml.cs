@@ -33,6 +33,11 @@ namespace MSA.Presentation.Pages.ProductPages
             if (!string.IsNullOrEmpty(SearchString))
             {
                 Product = _productService.SearchByName(SearchString).ToList();
+                foreach (var product in Product)
+                {
+                    var category = _categoryService.GetById(product.CategoryId);
+                    CategoryName.Add(category?.CategoryName ?? "Unknown");
+                }
             }
             else
             {
