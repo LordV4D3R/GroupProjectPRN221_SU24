@@ -13,25 +13,20 @@ namespace MSA.Presentation.Pages.OrderPages
 {
     public class IndexModel : PageModel
     {
-        private readonly IOrderService _context;
+        private readonly IOrderService _orderService;
         private readonly IAccountService _accountService;
-        public IndexModel(IOrderService context, IAccountService accountService)
+        public IndexModel(IOrderService orderService, IAccountService accountService)
         {
             _context = context;
-            _accountService = accountService;
         }
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
         public IList<Order> Order { get;set; } = default!;
-        public List<string> customerName { get; set; } = new List<string>();
+
         public async Task OnGetAsync()
         {
-            Order =  _context.GetAll().ToList();
-            foreach (var order in Order)
-            {
-                var customer = _accountService.GetById(order.CustomerId);
-                customerName.Add(customer?.Username ?? "Unknown");
-            }
+            Order = await _context.Orders
+                .Include(o => o.Customer).ToListAsync();
         }
     }
 }

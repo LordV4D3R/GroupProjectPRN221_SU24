@@ -22,5 +22,6 @@ namespace MSA.Infrastructure.Repositories
         public void Save() => OrderDAO.Instance.Save();
 
         public void Update(Order order) => OrderDAO.Instance.Update(order);
+        public void Update2(Order order) => OrderDAO.Instance.Update2(order, GetById(order.Id));
     }
 }

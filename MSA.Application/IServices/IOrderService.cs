@@ -9,6 +9,7 @@ namespace MSA.Application.IServices
         IEnumerable<Order> GetAll();
         Order? GetById(Guid id);
         void Update(Order order);
+        void Update2(Order order);
         void Save();
     }
 }

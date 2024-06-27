@@ -1,4 +1,5 @@
 ﻿@page
+@using MSA.Domain.Enums
 @model MSA.Presentation.Pages.OrderPages.EditModel
 
 @{
@@ -25,12 +26,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Order.OrderStatus" class="control-label"></label>
-                <select asp-for="Order.OrderStatus" class="form-control"></select>
+                <select asp-for="Order.OrderStatus" class="form-control" asp-items="Html.GetEnumSelectList<OrderStatus>()"></select>
                 <span asp-validation-for="Order.OrderStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Order.OrderRefundStatus" class="control-label"></label>
-                <select asp-for="Order.OrderRefundStatus" class="form-control"></select>
+                <select asp-for="Order.OrderRefundStatus" class="form-control" asp-items="Html.GetEnumSelectList<OrderRefundStatus>()"></select>
                 <span asp-validation-for="Order.OrderRefundStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,16 +49,6 @@
                 <label asp-for="Order.UpdatedOn" class="control-label"></label>
                 <input asp-for="Order.UpdatedOn" class="form-control" />
                 <span asp-validation-for="Order.UpdatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Order.CreatedBy" class="control-label"></label>
-                <input asp-for="Order.CreatedBy" class="form-control" />
-                <span asp-validation-for="Order.CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Order.UpdatedBy" class="control-label"></label>
-                <input asp-for="Order.UpdatedBy" class="form-control" />
-                <span asp-validation-for="Order.UpdatedBy" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">

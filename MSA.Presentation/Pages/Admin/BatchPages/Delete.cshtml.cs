@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MSA.Application.IServices;
-using MSA.Application.Services;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.OrderPages
+namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class DeleteModel : PageModel
     {
@@ -18,46 +16,44 @@ namespace MSA.Presentation.Pages.OrderPages
 
         public DeleteModel(MSA.Infrastructure.ApplicationDbContext context)
         {
-            _orderService = orderService;
-            _accountService = accountService;
+            _context = context;
         }
 
         [BindProperty]
-        public Order Order { get; set; } = default!;
-        public string AccountName { get; set; } = string.Empty;
+        public Batch Batch { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            var batch = await _context.Batchs.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (order == null)
+            if (batch == null)
             {
                 return NotFound();
             }
             else
             {
-                Order = order;
+                Batch = batch;
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid id)
+        public async Task<IActionResult> OnPostAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
-            if (order != null)
+            var batch = await _context.Batchs.FindAsync(id);
+            if (batch != null)
             {
-                Order = order;
-                _context.Orders.Remove(Order);
+                Batch = batch;
+                _context.Batchs.Remove(Batch);
                 await _context.SaveChangesAsync();
             }
 

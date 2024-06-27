@@ -6,39 +6,37 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.OrderPages
+namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class EditModel : PageModel
     {
-        private readonly IOrderService _orderService;
-        private readonly IAccountService _accountService;
-        public EditModel(IOrderService orderService, IAccountService accountService) 
-        { 
-            _orderService = orderService;
-            _accountService = accountService;
+        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+
+        public EditModel(MSA.Infrastructure.ApplicationDbContext context)
+        {
+            _context = context;
         }
 
         [BindProperty]
-        public Order Order { get; set; } = default!;
+        public Batch Batch { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order =  await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
+            var batch =  await _context.Batchs.FirstOrDefaultAsync(m => m.Id == id);
+            if (batch == null)
             {
                 return NotFound();
             }
-            Order = order;
-           ViewData["CustomerId"] = new SelectList(_context.Accounts, "Id", "Address");
+            Batch = batch;
+           ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description");
             return Page();
         }
 
@@ -51,7 +49,7 @@ namespace MSA.Presentation.Pages.OrderPages
                 return Page();
             }
 
-            _context.Attach(Order).State = EntityState.Modified;
+            _context.Attach(Batch).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +57,7 @@ namespace MSA.Presentation.Pages.OrderPages
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OrderExists(Order.Id))
+                if (!BatchExists(Batch.Id))
                 {
                     return NotFound();
                 }
@@ -72,9 +70,9 @@ namespace MSA.Presentation.Pages.OrderPages
             return RedirectToPage("./Index");
         }
 
-        private bool OrderExists(Guid id)
+        private bool BatchExists(Guid id)
         {
-            return _context.Orders.Any(e => e.Id == id);
+            return _context.Batchs.Any(e => e.Id == id);
         }
     }
 }

@@ -5,12 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MSA.Application.IServices;
-using MSA.Application.Services;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.OrderPages
+namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class DetailsModel : PageModel
     {
@@ -18,11 +16,10 @@ namespace MSA.Presentation.Pages.OrderPages
 
         public DetailsModel(MSA.Infrastructure.ApplicationDbContext context)
         {
-            _orderService = orderService;
-            _accountService = accountService;
+            _context = context;
         }
 
-        public Order Order { get; set; } = default!;
+        public Batch Batch { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
@@ -31,14 +28,14 @@ namespace MSA.Presentation.Pages.OrderPages
                 return NotFound();
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
+            var batch = await _context.Batchs.FirstOrDefaultAsync(m => m.Id == id);
+            if (batch == null)
             {
                 return NotFound();
             }
             else
             {
-                Order = order;
+                Batch = batch;
             }
             return Page();
         }
