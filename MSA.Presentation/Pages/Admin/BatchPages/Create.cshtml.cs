@@ -5,23 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
 namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class CreateModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly IProductService _productService;
+        private readonly IBatchService _batchService;
 
-        public CreateModel(MSA.Infrastructure.ApplicationDbContext context)
+        public CreateModel(IProductService productService, IBatchService batchService)
         {
-            _context = context;
+            _productService = productService;
+            _batchService = batchService;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description");
+        ViewData["ProductId"] = new SelectList(_productService.GetAll(), "Id", "ProductName");
             return Page();
         }
 
@@ -31,13 +35,8 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Batchs.Add(Batch);
-            await _context.SaveChangesAsync();
+            _batchService.Add(Batch);
+            _batchService.Save();
 
             return RedirectToPage("./Index");
         }

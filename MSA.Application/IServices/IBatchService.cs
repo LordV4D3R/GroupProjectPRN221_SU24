@@ -12,6 +12,7 @@ namespace MSA.Application.IServices
         void Add(Batch batch);
         void Delete(Batch batch);
         void Update(Batch batch);
+        void Update2(Batch batch);
         void Save();
         IEnumerable<Batch> GetAll();
         IEnumerable<Batch> GetAllByProductId(Guid id);
