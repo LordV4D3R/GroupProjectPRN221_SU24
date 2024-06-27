@@ -42,6 +42,11 @@ namespace MSA.Application.Services
             _orderRepository.Update(order);
         }
 
+        public void Update2(Order order)
+        {
+            _orderRepository.Update(order);
+        }
+
         public void Save()
         {
             _orderRepository.Save();

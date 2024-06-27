@@ -1,0 +1,73 @@
+﻿@page
+@model MSA.Presentation.Pages.Admin.BatchPages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Batch</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Batch.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Batch.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Batch.ExpOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Batch.ExpOn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Batch.Status)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Batch.Status)
+        </dd>
+        <dt class="col-sm-2">
+            Product
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ProductName
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Batch.CreatedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Batch.CreatedOn)
+        </dd>
+        <!--<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Batch.UpdatedOn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Batch.UpdatedOn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Batch.CreatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Batch.CreatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Batch.UpdatedBy)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Batch.UpdatedBy)
+        </dd>-->
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Batch.IsDeleted)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Batch.IsDeleted)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Batch.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -6,25 +6,25 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MSA.Application.IServices;
-using MSA.Application.Services;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
-namespace MSA.Presentation.Pages.OrderPages
+namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly IOrderService _orderService;
-        private readonly IAccountService _accountService;
-        public DeleteModel(IOrderService orderService, IAccountService accountService)
+        private readonly IProductService _productService;
+        private readonly IBatchService _batchService;
+
+        public DeleteModel(IProductService productService, IBatchService batchService)
         {
-            _orderService = orderService;
-            _accountService = accountService;
+            _productService = productService;
+            _batchService = batchService;
         }
 
         [BindProperty]
-        public Order Order { get; set; } = default!;
-        public string AccountName { get; set; } = string.Empty;
+        public Batch Batch { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
@@ -33,16 +33,15 @@ namespace MSA.Presentation.Pages.OrderPages
                 return NotFound();
             }
 
-            var order = _orderService.GetById(id);
+            var batch = _batchService.GetById(id);
 
-            if (order == null)
+            if (batch == null)
             {
                 return NotFound();
             }
             else
             {
-                Order = order;
-
+                Batch = batch;
             }
             return Page();
         }
@@ -54,12 +53,12 @@ namespace MSA.Presentation.Pages.OrderPages
                 return NotFound();
             }
 
-            var order = _orderService.GetById(id);
-            if (order != null)
+            var batch = _batchService.GetById(id);
+            if (batch != null)
             {
-                Order = order;
-                _orderService.Delete(Order);
-                _orderService.Save();
+                Batch = batch;
+                _batchService.Delete(batch);
+                _batchService.Save();
             }
 
             return RedirectToPage("./Index");

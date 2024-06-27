@@ -15,5 +15,6 @@ namespace MSA.Application.IRepositories
         Order? GetById(Guid id);
         void Save();
         void Update(Order order);
+        void Update2(Order order);
     }
 }

@@ -37,10 +37,10 @@
             @Html.DisplayFor(model => model.Order.OrderRefundStatus)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.Customer)
+            Customer
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.Customer.Address)
+            @Model.AccountName
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Order.CreatedOn)
@@ -53,18 +53,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Order.UpdatedOn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.CreatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.CreatedBy)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Order.UpdatedBy)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Order.UpdatedBy)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Order.IsDeleted)

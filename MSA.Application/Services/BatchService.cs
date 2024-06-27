@@ -32,6 +32,11 @@ namespace MSA.Application.Services
             _batchRepository.Update(batch);
         }
 
+        public void Update2(Batch batch)
+        {
+            _batchRepository.Update2(batch);
+        }
+
         public void Save()
         {
             _batchRepository.Save();
@@ -40,6 +45,11 @@ namespace MSA.Application.Services
         public IEnumerable<Batch> GetAll()
         {
             return _batchRepository.GetAll();
+        }
+
+        public IEnumerable<Batch> GetAllByProductId(Guid id)
+        {
+            return _batchRepository.GetAllByProductId(id);
         }
 
         public Batch? GetById(Guid id)

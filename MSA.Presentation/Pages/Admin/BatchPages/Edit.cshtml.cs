@@ -9,21 +9,23 @@ using Microsoft.EntityFrameworkCore;
 using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
-namespace MSA.Presentation.Pages.OrderPages
+namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class EditModel : PageModel
     {
-        private readonly IOrderService _orderService;
-        private readonly IAccountService _accountService;
-        public EditModel(IOrderService orderService, IAccountService accountService) 
-        { 
-            _orderService = orderService;
-            _accountService = accountService;
+        private readonly IProductService _productService;
+        private readonly IBatchService _batchService;
+
+        public EditModel(IProductService productService, IBatchService batchService)
+        {
+            _productService = productService;
+            _batchService = batchService;
         }
 
         [BindProperty]
-        public Order Order { get; set; } = default!;
+        public Batch Batch { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
@@ -32,13 +34,13 @@ namespace MSA.Presentation.Pages.OrderPages
                 return NotFound();
             }
 
-            var order =  _orderService.GetById(id);
-            if (order == null)
+            var batch =  _batchService.GetById(id);
+            if (batch == null)
             {
                 return NotFound();
             }
-            Order = order;
-           ViewData["CustomerId"] = new SelectList(_accountService.GetAll(), "Id", "Address");
+            Batch = batch;
+           ViewData["ProductId"] = new SelectList(_productService.GetAll(), "Id", "ProductName");
             return Page();
         }
 
@@ -46,17 +48,8 @@ namespace MSA.Presentation.Pages.OrderPages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }            
-            _orderService.Update(Order);
+            _batchService.Update2(Batch);
             return RedirectToPage("./Index");
         }
-
-        /*private bool OrderExists(Guid id)
-        {
-            return _context.Orders.Any(e => e.Id == id);
-        }*/
     }
 }
