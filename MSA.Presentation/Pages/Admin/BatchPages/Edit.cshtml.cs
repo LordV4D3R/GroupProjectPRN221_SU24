@@ -6,37 +6,41 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
 namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class EditModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly IProductService _productService;
+        private readonly IBatchService _batchService;
 
-        public EditModel(MSA.Infrastructure.ApplicationDbContext context)
+        public EditModel(IProductService productService, IBatchService batchService)
         {
-            _context = context;
+            _productService = productService;
+            _batchService = batchService;
         }
 
         [BindProperty]
         public Batch Batch { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var batch =  await _context.Batchs.FirstOrDefaultAsync(m => m.Id == id);
+            var batch =  _batchService.GetById(id);
             if (batch == null)
             {
                 return NotFound();
             }
             Batch = batch;
-           ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description");
+           ViewData["ProductId"] = new SelectList(_productService.GetAll(), "Id", "ProductName");
             return Page();
         }
 
@@ -44,35 +48,8 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Batch).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BatchExists(Batch.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            _batchService.Update2(Batch);
             return RedirectToPage("./Index");
-        }
-
-        private bool BatchExists(Guid id)
-        {
-            return _context.Batchs.Any(e => e.Id == id);
         }
     }
 }
