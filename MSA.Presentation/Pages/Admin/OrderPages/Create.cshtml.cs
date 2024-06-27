@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.Admin.OrderPages
+namespace MSA.Presentation.Pages.OrderPages
 {
     public class CreateModel : PageModel
     {

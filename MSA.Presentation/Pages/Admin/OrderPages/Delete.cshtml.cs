@@ -5,31 +5,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using MSA.Application.IServices;
+using MSA.Application.Services;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.Admin.OrderPages
+namespace MSA.Presentation.Pages.OrderPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
-
-        public DeleteModel(MSA.Infrastructure.ApplicationDbContext context)
+        private readonly IOrderService _orderService;
+        private readonly IAccountService _accountService;
+        public DeleteModel(IOrderService orderService, IAccountService accountService)
         {
-            _context = context;
+            _orderService = orderService;
+            _accountService = accountService;
         }
 
         [BindProperty]
         public Order Order { get; set; } = default!;
+        public string AccountName { get; set; } = string.Empty;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            var order = _orderService.GetById(id);
 
             if (order == null)
             {
@@ -42,19 +46,21 @@ namespace MSA.Presentation.Pages.Admin.OrderPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
+            var order = _orderService.GetById(id);
             if (order != null)
             {
                 Order = order;
-                _context.Orders.Remove(Order);
-                await _context.SaveChangesAsync();
+                var name = _accountService.GetById(order.CustomerId);
+                AccountName = name?.FullName ?? "Unknown";
+                _orderService.Delete(order);
+                _orderService.Save();
             }
 
             return RedirectToPage("./Index");

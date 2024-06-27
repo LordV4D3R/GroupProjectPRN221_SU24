@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
@@ -13,30 +14,31 @@ namespace MSA.Presentation.Pages.OrderPages
 {
     public class EditModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
-
-        public EditModel(MSA.Infrastructure.ApplicationDbContext context)
-        {
-            _context = context;
+        private readonly IOrderService _orderService;
+        private readonly IAccountService _accountService;
+        public EditModel(IOrderService orderService, IAccountService accountService) 
+        { 
+            _orderService = orderService;
+            _accountService = accountService;
         }
 
         [BindProperty]
         public Order Order { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order =  await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            var order =  _orderService.GetById(id);
             if (order == null)
             {
                 return NotFound();
             }
             Order = order;
-           ViewData["CustomerId"] = new SelectList(_context.Accounts, "Id", "Address");
+            ViewData["CustomerId"] = new SelectList(_accountService.GetAll(), "Id", "FullName");
             return Page();
         }
 
@@ -44,35 +46,8 @@ namespace MSA.Presentation.Pages.OrderPages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Order).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrderExists(Order.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+                _orderService.Update2(Order);          
             return RedirectToPage("./Index");
-        }
-
-        private bool OrderExists(Guid id)
-        {
-            return _context.Orders.Any(e => e.Id == id);
         }
     }
 }
