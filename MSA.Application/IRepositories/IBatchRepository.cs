@@ -16,5 +16,6 @@ namespace MSA.Application.IRepositories
         Batch? GetById(Guid id);
         void Save();
         void Update(Batch batch);
+        void Update2(Batch batch);
     }
 }

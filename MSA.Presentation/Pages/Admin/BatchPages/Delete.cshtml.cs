@@ -5,31 +5,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
+using Services;
 
 namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
+        private readonly IProductService _productService;
+        private readonly IBatchService _batchService;
 
-        public DeleteModel(MSA.Infrastructure.ApplicationDbContext context)
+        public DeleteModel(IProductService productService, IBatchService batchService)
         {
-            _context = context;
+            _productService = productService;
+            _batchService = batchService;
         }
 
         [BindProperty]
         public Batch Batch { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var batch = await _context.Batchs.FirstOrDefaultAsync(m => m.Id == id);
+            var batch = _batchService.GetById(id);
 
             if (batch == null)
             {
@@ -42,19 +46,19 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(Guid? id)
+        public async Task<IActionResult> OnPostAsync(Guid id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var batch = await _context.Batchs.FindAsync(id);
+            var batch = _batchService.GetById(id);
             if (batch != null)
             {
                 Batch = batch;
-                _context.Batchs.Remove(Batch);
-                await _context.SaveChangesAsync();
+                _batchService.Delete(batch);
+                _batchService.Save();
             }
 
             return RedirectToPage("./Index");

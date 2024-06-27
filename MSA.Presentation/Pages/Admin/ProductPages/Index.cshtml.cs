@@ -52,7 +52,6 @@ namespace MSA.Presentation.Pages.ProductPages
                 var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity).ToString();
                 Quantity.Add(quantity ?? "Unknown");
             }
-
         }
     }
 }

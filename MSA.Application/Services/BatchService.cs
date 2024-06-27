@@ -32,6 +32,11 @@ namespace MSA.Application.Services
             _batchRepository.Update(batch);
         }
 
+        public void Update2(Batch batch)
+        {
+            _batchRepository.Update2(batch);
+        }
+
         public void Save()
         {
             _batchRepository.Save();
