@@ -1,5 +1,5 @@
 ﻿@page
-@model MSA.Presentation.Pages.Admin.OrderPages.IndexModel
+@model MSA.Presentation.Pages.Admin.BatchPages.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,55 +14,49 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].TotalPrice)
+                @Html.DisplayNameFor(model => model.Batch[0].Quantity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].TotalQuantity)
+                @Html.DisplayNameFor(model => model.Batch[0].ExpOn)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderStatus)
+                @Html.DisplayNameFor(model => model.Batch[0].Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderRefundStatus)
+                @Html.DisplayNameFor(model => model.Batch[0].Product)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].Customer)
+                @Html.DisplayNameFor(model => model.Batch[0].CreatedOn)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].CreatedOn)
+                @Html.DisplayNameFor(model => model.Batch[0].UpdatedOn)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].UpdatedOn)
+                @Html.DisplayNameFor(model => model.Batch[0].CreatedBy)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].CreatedBy)
+                @Html.DisplayNameFor(model => model.Batch[0].UpdatedBy)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].UpdatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].IsDeleted)
+                @Html.DisplayNameFor(model => model.Batch[0].IsDeleted)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Order) {
+@foreach (var item in Model.Batch) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
+                @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalQuantity)
+                @Html.DisplayFor(modelItem => item.ExpOn)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderStatus)
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderRefundStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Customer.Address)
+                @Html.DisplayFor(modelItem => item.Product.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedOn)

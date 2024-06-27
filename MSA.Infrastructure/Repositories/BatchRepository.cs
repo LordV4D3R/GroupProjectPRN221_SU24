@@ -17,6 +17,8 @@ namespace MSA.Infrastructure.Repositories
 
         public IEnumerable<Batch> GetAll() => BatchDAO.Instance.GetAll();
 
+        public IEnumerable<Batch> GetAllByProductId(Guid id) => BatchDAO.Instance.GetAll().Where(b => b.ProductId == id);
+
         public Batch? GetById(Guid id) => BatchDAO.Instance.GetById(id);
 
         public void Save() => BatchDAO.Instance.Save();

@@ -14,6 +14,7 @@ namespace MSA.Application.IServices
         void Update(Batch batch);
         void Save();
         IEnumerable<Batch> GetAll();
+        IEnumerable<Batch> GetAllByProductId(Guid id);
         Batch? GetById(Guid id);
     }
 }
