@@ -38,7 +38,7 @@ namespace MSA.Presentation.Pages.OrderPages
                 return NotFound();
             }
             Order = order;
-            ViewData["CustomerId"] = new SelectList(_accountService.GetAll(), "Id", "FullName");
+           ViewData["CustomerId"] = new SelectList(_accountService.GetAll(), "Id", "Address");
             return Page();
         }
 
@@ -46,8 +46,17 @@ namespace MSA.Presentation.Pages.OrderPages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-                _orderService.Update2(Order);          
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }            
+            _orderService.Update(Order);
             return RedirectToPage("./Index");
         }
+
+        /*private bool OrderExists(Guid id)
+        {
+            return _context.Orders.Any(e => e.Id == id);
+        }*/
     }
 }

@@ -7,13 +7,6 @@
 
 <h1>Index</h1>
 
-<form method="get">
-    <div class="form-group">
-        <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search by name...">
-        <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-</form>
-
 <table class="table">
     <thead>
         <tr>
@@ -115,6 +108,12 @@
 }
     </tbody>
 </table>
+<form method="get">
+    <div class="form-group">
+        <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search by name...">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create" class="btn btn-success">Create New</a>
 </p>

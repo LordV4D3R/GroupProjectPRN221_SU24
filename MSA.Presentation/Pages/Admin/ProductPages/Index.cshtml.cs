@@ -25,13 +25,25 @@ namespace MSA.Presentation.Pages.ProductPages
             _categoryService = categoryService;
             _batchService = batchService;
         }
-
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         public IList<Product> Product { get;set; } = default!;
         public List<string> CategoryName { get; set; } = new List<string>();
         public List<string> Quantity { get; set; } = new List<string>();
 
         public async Task OnGetAsync()
         {
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                Product = _productService.SearchByName(SearchString).ToList();
+                foreach (var product in Product)
+                {
+                    var category = _categoryService.GetById(product.CategoryId);
+                    CategoryName.Add(category?.CategoryName ?? "Unknown");
+                    var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity).ToString();
+                    Quantity.Add(quantity ?? "Unknown");
+                }
+            }
             Product = _productService.GetAll().ToList();
             foreach (var product in Product)
             {

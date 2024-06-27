@@ -20,17 +20,17 @@ namespace MSA.Presentation.Pages.OrderPages
             _orderService = orderService;
             _accountService = accountService;
         }
-
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         public IList<Order> Order { get;set; } = default!;
         public List<string> AccountName { get; set; } = new List<string>();
-
         public async Task OnGetAsync()
         {
             Order = _orderService.GetAll().ToList();
-            foreach (var order in Order)
+            foreach(var order in Order)
             {
-                var name = _accountService.GetById(order.CustomerId);
-                AccountName.Add(name?.FullName ?? "Unknown");
+                var customer = _accountService.GetById(order.CustomerId);
+                AccountName.Add(customer?.Username ?? "Unknown");
             }
         }
     }
