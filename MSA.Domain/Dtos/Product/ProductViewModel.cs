@@ -10,6 +10,7 @@ namespace MSA.Domain.Dtos.Product
 {
     public class ProductViewModel : BaseEntity
     {
+        public Guid ProductId { get; set; } = Guid.Empty;
         public string ProductName { get; set; } = string.Empty;
         public double Price { get; set; } = 0;
         public string Description { get; set; } = string.Empty;

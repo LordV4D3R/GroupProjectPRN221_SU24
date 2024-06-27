@@ -32,7 +32,7 @@ namespace Services
             return _productRepository.GetAll();
         }
 
-        public Product? GetById(Guid id)
+        public Product GetById(Guid id)
         {
             return _productRepository.GetById(id);
         }

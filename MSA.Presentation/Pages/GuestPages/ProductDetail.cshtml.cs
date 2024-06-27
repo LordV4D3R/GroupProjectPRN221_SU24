@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis;
+using MSA.Domain.Dtos.Product;
 using MSA.Domain.Entities;
 using Services;
 
@@ -16,17 +18,26 @@ namespace MSA.Presentation.Pages.GuestPages
             _categoryService = categoryService;
         }
 
-        public IList<Product> Product { get; set; } = default!;
+        public Product Product { get; set; } = default!;
+        public ProductViewModel ProductViewModel { get; set; } = default!;
+
         public List<string> CategoryName { get; set; } = new List<string>();
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            Product = _productService.GetAll().ToList();
-            foreach (var product in Product)
+            Product = _productService.GetById(id);
+            ProductViewModel = new ProductViewModel
             {
-                var category = _categoryService.GetById(product.CategoryId);
-                CategoryName.Add(category?.CategoryName ?? "Unknown");
-            }
+                ProductId = Product.Id,
+                ProductName = Product.ProductName,
+                Price = Product.Price,
+                Description = Product.Description,
+                ImageUrl = Product.ImageUrl,
+                Status = Product.Status
+                };
+
+            return Page();
+
 
         }
     }

@@ -11,7 +11,7 @@ namespace Services
     {
         IEnumerable<Product> SearchByName(string name);
         IEnumerable<Product> GetAll();
-        Product? GetById(Guid id);
+        Product GetById(Guid id);
         void Add(Product product);
         void Update(Product product);
         void Update2(Product product);

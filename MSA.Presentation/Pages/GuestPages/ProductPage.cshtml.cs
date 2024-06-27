@@ -33,6 +33,7 @@ namespace MSA.Presentation.Pages.GuestPages
             Product = _productService.GetAll().ToList();
             ProductViewModel = Product.Select(product => new ProductViewModel
             {
+                ProductId = product.Id,
                 ProductName = product.ProductName,
                 Price = product.Price,
                 Description = product.Description,
