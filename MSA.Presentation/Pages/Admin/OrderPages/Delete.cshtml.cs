@@ -42,6 +42,7 @@ namespace MSA.Presentation.Pages.OrderPages
             else
             {
                 Order = order;
+
             }
             return Page();
         }
@@ -57,9 +58,7 @@ namespace MSA.Presentation.Pages.OrderPages
             if (order != null)
             {
                 Order = order;
-                var name = _accountService.GetById(order.CustomerId);
-                AccountName = name?.FullName ?? "Unknown";
-                _orderService.Delete(order);
+                _orderService.Delete(Order);
                 _orderService.Save();
             }
 

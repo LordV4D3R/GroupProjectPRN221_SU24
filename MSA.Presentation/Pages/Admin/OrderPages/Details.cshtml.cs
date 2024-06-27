@@ -16,6 +16,7 @@ namespace MSA.Presentation.Pages.OrderPages
     {
         private readonly IOrderService _orderService;
         private readonly IAccountService _accountService;
+
         public DetailsModel(IOrderService orderService, IAccountService accountService)
         {
             _orderService = orderService;
@@ -24,7 +25,6 @@ namespace MSA.Presentation.Pages.OrderPages
 
         public Order Order { get; set; } = default!;
         public string AccountName { get; set; } = string.Empty;
-
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null)
@@ -40,8 +40,8 @@ namespace MSA.Presentation.Pages.OrderPages
             else
             {
                 Order = order;
-                var name = _accountService.GetById(order.CustomerId);
-                AccountName = name?.FullName ?? "Unknown";
+                var customer = _accountService.GetById(Order.CustomerId);
+                AccountName = customer?.Username ?? "Unknown";
             }
             return Page();
         }
