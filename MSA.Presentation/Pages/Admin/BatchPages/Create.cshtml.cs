@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.Admin.OrderPages
+namespace MSA.Presentation.Pages.Admin.BatchPages
 {
     public class CreateModel : PageModel
     {
@@ -21,12 +21,12 @@ namespace MSA.Presentation.Pages.Admin.OrderPages
 
         public IActionResult OnGet()
         {
-        ViewData["CustomerId"] = new SelectList(_context.Accounts, "Id", "Address");
+        ViewData["ProductId"] = new SelectList(_context.Products, "Id", "Description");
             return Page();
         }
 
         [BindProperty]
-        public Order Order { get; set; } = default!;
+        public Batch Batch { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -36,7 +36,7 @@ namespace MSA.Presentation.Pages.Admin.OrderPages
                 return Page();
             }
 
-            _context.Orders.Add(Order);
+            _context.Batchs.Add(Batch);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

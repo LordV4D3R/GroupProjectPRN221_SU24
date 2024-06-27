@@ -12,6 +12,7 @@ namespace MSA.Application.IRepositories
         void Add(Batch batch);
         void Delete(Batch batch);
         IEnumerable<Batch> GetAll();
+        IEnumerable<Batch> GetAllByProductId(Guid id);
         Batch? GetById(Guid id);
         void Save();
         void Update(Batch batch);

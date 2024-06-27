@@ -42,6 +42,11 @@ namespace MSA.Application.Services
             return _batchRepository.GetAll();
         }
 
+        public IEnumerable<Batch> GetAllByProductId(Guid id)
+        {
+            return _batchRepository.GetAllByProductId(id);
+        }
+
         public Batch? GetById(Guid id)
         {
             return _batchRepository.GetById(id);
