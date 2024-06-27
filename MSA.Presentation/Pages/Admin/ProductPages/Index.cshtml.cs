@@ -33,6 +33,17 @@ namespace MSA.Presentation.Pages.ProductPages
 
         public async Task OnGetAsync()
         {
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                Product = _productService.SearchByName(SearchString).ToList();
+                foreach (var product in Product)
+                {
+                    var category = _categoryService.GetById(product.CategoryId);
+                    CategoryName.Add(category?.CategoryName ?? "Unknown");
+                    var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity).ToString();
+                    Quantity.Add(quantity ?? "Unknown");
+                }
+            }
             Product = _productService.GetAll().ToList();
             foreach (var product in Product)
             {
