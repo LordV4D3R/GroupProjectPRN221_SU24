@@ -32,13 +32,13 @@ namespace MSA.Presentation.Pages.OrderPages
                 return NotFound();
             }
 
-            var order =  await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            var order =  _orderService.GetById(id);
             if (order == null)
             {
                 return NotFound();
             }
             Order = order;
-           ViewData["CustomerId"] = new SelectList(_context.Accounts, "Id", "Address");
+           ViewData["CustomerId"] = new SelectList(_accountService.GetAll(), "Id", "Address");
             return Page();
         }
 
@@ -49,32 +49,14 @@ namespace MSA.Presentation.Pages.OrderPages
             if (!ModelState.IsValid)
             {
                 return Page();
-            }
-
-            _context.Attach(Order).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrderExists(Order.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            }            
+            _orderService.Update(Order);
             return RedirectToPage("./Index");
         }
 
-        private bool OrderExists(Guid id)
+        /*private bool OrderExists(Guid id)
         {
             return _context.Orders.Any(e => e.Id == id);
-        }
+        }*/
     }
 }

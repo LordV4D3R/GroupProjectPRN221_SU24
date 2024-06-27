@@ -17,16 +17,21 @@ namespace MSA.Presentation.Pages.OrderPages
         private readonly IAccountService _accountService;
         public IndexModel(IOrderService orderService, IAccountService accountService)
         {
-            _context = context;
+            _orderService = orderService;
+            _accountService = accountService;
         }
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
         public IList<Order> Order { get;set; } = default!;
-
+        public List<string> AccountName { get; set; } = new List<string>();
         public async Task OnGetAsync()
         {
-            Order = await _context.Orders
-                .Include(o => o.Customer).ToListAsync();
+            Order = _orderService.GetAll().ToList();
+            foreach(var order in Order)
+            {
+                var customer = _accountService.GetById(order.CustomerId);
+                AccountName.Add(customer?.Username ?? "Unknown");
+            }
         }
     }
 }

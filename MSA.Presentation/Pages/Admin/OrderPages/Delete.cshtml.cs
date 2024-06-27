@@ -14,9 +14,9 @@ namespace MSA.Presentation.Pages.OrderPages
 {
     public class DeleteModel : PageModel
     {
-        private readonly MSA.Infrastructure.ApplicationDbContext _context;
-
-        public DeleteModel(MSA.Infrastructure.ApplicationDbContext context)
+        private readonly IOrderService _orderService;
+        private readonly IAccountService _accountService;
+        public DeleteModel(IOrderService orderService, IAccountService accountService)
         {
             _orderService = orderService;
             _accountService = accountService;
@@ -33,7 +33,7 @@ namespace MSA.Presentation.Pages.OrderPages
                 return NotFound();
             }
 
-            var order = await _context.Orders.FirstOrDefaultAsync(m => m.Id == id);
+            var order = _orderService.GetById(id);
 
             if (order == null)
             {
@@ -42,6 +42,7 @@ namespace MSA.Presentation.Pages.OrderPages
             else
             {
                 Order = order;
+
             }
             return Page();
         }
@@ -53,12 +54,12 @@ namespace MSA.Presentation.Pages.OrderPages
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
+            var order = _orderService.GetById(id);
             if (order != null)
             {
                 Order = order;
-                _context.Orders.Remove(Order);
-                await _context.SaveChangesAsync();
+                _orderService.Delete(Order);
+                _orderService.Save();
             }
 
             return RedirectToPage("./Index");
