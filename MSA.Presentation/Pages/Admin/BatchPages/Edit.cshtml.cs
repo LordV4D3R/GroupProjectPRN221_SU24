@@ -49,7 +49,7 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
         public async Task<IActionResult> OnPostAsync()
         {
             _batchService.Update2(Batch);
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Batch.ProductId });
         }
     }
 }

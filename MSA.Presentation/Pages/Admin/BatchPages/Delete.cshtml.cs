@@ -61,7 +61,7 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
                 _batchService.Save();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Index", new { id = Batch.ProductId });
         }
     }
 }

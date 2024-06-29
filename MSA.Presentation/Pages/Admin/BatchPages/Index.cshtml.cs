@@ -25,14 +25,16 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
 
         public IList<Batch> Batch { get;set; } = default!;
         public List<string> ProductName { get; set; } = new List<string>();
+        public Guid ProductId { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(Guid id)
         {
-            Batch = _batchService.GetAll().ToList();
+            Batch = _batchService.GetAll().Where(x => x.ProductId == id).ToList();
             foreach (var batch in Batch)
             {
                 var product = _productService.GetById(batch.ProductId);
                 ProductName.Add(product?.ProductName ?? "Unknown");
+                ProductId = product.Id;
             }
         }
     }
