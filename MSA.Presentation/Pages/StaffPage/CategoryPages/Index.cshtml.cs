@@ -13,11 +13,11 @@ namespace MSA.Presentation.Pages.CategoryPages
 {
     public class IndexModel : PageModel
     {
-        private readonly ICategoryService _context;
+        private readonly ICategoryService _categoryService;
 
-        public IndexModel(ICategoryService context)
+        public IndexModel(ICategoryService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
         }
 
         public IList<Category> Category { get;set; } = default!;
@@ -35,11 +35,11 @@ namespace MSA.Presentation.Pages.CategoryPages
             {  
                 if (!string.IsNullOrEmpty(SearchString))
                 {
-                    Category = _context.SearchByName(SearchString).ToList();
+                    Category = _categoryService.SearchByName(SearchString).ToList();
                 }
                 else
                 {
-                    Category = _context.GetAll().Where(c => c.IsDeleted == false).ToList();
+                    Category = _categoryService.GetAll().Where(c => c.IsDeleted == false).ToList();
                 }
                 return Page();
             }

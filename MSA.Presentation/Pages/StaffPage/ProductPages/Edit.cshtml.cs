@@ -51,14 +51,16 @@ namespace MSA.Presentation.Pages.ProductPages
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
-        {     
-                _productService.Update2(Product);
-            return RedirectToPage("./Index");
-        }
-
-        private bool ProductExists(Guid id)
         {
-            return _productService.GetById(id) == null!;
+            var existingProduct = _productService.GetAll().FirstOrDefault(p => p.ProductName == Product.ProductName);
+
+            if (existingProduct != null)
+            {
+                ModelState.AddModelError("Product.ProductName", "Product name already exists.");
+                return Page();
+            }
+            _productService.Update2(Product);
+            return RedirectToPage("./Index");
         }
     }
 }

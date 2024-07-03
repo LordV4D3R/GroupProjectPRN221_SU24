@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 using Services;
@@ -43,6 +44,13 @@ namespace MSA.Presentation.Pages.ProductPages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
+            var existingProduct = _productService.GetAll().FirstOrDefault(p => p.ProductName == Product.ProductName);
+
+            if (existingProduct != null)
+            {
+                ModelState.AddModelError("Product.ProductName", "Product name already exists.");
+                return Page();
+            }
             _productService.Add(Product);
             _productService.Save();
             return RedirectToPage("./Index");

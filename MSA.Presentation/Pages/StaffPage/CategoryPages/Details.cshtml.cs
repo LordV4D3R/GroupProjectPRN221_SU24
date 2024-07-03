@@ -13,11 +13,11 @@ namespace MSA.Presentation.Pages.CategoryPages
 {
     public class DetailsModel : PageModel
     {
-        private readonly ICategoryService _context;
+        private readonly ICategoryService _categoryService;
 
-        public DetailsModel(ICategoryService context)
+        public DetailsModel(ICategoryService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
         }
 
         public Category Category { get; set; } = default!;
@@ -35,7 +35,7 @@ namespace MSA.Presentation.Pages.CategoryPages
                 return NotFound();
             }
 
-            var category = _context.GetById(id);
+            var category = _categoryService.GetById(id);
             if (category == null)
             {
                 return NotFound();

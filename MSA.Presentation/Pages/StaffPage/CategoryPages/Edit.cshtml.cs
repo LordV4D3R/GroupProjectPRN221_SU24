@@ -14,11 +14,11 @@ namespace MSA.Presentation.Pages.CategoryPages
 {
     public class EditModel : PageModel
     {
-        private readonly ICategoryService _context;
+        private readonly ICategoryService _categoryService;
 
-        public EditModel(ICategoryService context)
+        public EditModel(ICategoryService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
         }
 
         [BindProperty]
@@ -37,7 +37,7 @@ namespace MSA.Presentation.Pages.CategoryPages
                 return NotFound();
             }
 
-            var category =  _context.GetById(id);
+            var category = _categoryService.GetById(id);
             if (category == null)
             {
                 return NotFound();
@@ -49,9 +49,16 @@ namespace MSA.Presentation.Pages.CategoryPages
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
-        {        
-            _context.Update2(Category);
-            _context.Save();
+        {
+            var existingCategory = _categoryService.GetAll().FirstOrDefault(p => p.CategoryName == Category.CategoryName);
+
+            if (existingCategory != null)
+            {
+                ModelState.AddModelError("Category.CategoryName", "Category name already exists.");
+                return Page();
+            }
+            _categoryService.Update2(Category);
+            _categoryService.Save();
             return RedirectToPage("./Index");
         }
     }
