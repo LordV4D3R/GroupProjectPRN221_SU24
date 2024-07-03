@@ -8,6 +8,7 @@ namespace MSA.Application.IRepositories
         Category? GetById(Guid id);
         void Add(Category category);
         void Update(Category category);
+        void Update2(Category category);
         void Delete(Category category);
         void Save();
     }

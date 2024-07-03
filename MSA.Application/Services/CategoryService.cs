@@ -51,5 +51,10 @@ namespace Services
         {
             _categoryRepository.Update(category);
         }
+
+        public void Update2(Category category)
+        {
+            _categoryRepository.Update2(category);
+        }
     }
 }
