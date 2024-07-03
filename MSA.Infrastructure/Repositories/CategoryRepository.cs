@@ -17,5 +17,6 @@ namespace Repositories
         public void Save() => CategoryDAO.Instance.Save();
 
         public void Update(Category category) => CategoryDAO.Instance.Update(category);
+        public void Update2(Category category) => CategoryDAO.Instance.Update2(category, GetById(category.Id));
     }
 }

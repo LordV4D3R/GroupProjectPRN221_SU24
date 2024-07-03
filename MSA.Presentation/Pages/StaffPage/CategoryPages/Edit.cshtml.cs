@@ -49,12 +49,8 @@ namespace MSA.Presentation.Pages.CategoryPages
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }            
-            _context.Update(Category);
+        {        
+            _context.Update2(Category);
             _context.Save();
             return RedirectToPage("./Index");
         }
