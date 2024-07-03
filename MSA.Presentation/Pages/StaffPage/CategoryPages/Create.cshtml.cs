@@ -13,11 +13,11 @@ namespace MSA.Presentation.Pages.CategoryPages
 {
     public class CreateModel : PageModel
     {
-        private readonly ICategoryService _context;
+        private readonly ICategoryService _categoryService;
 
-        public CreateModel(ICategoryService context)
+        public CreateModel(ICategoryService categoryService)
         {
-            _context = context;
+            _categoryService = categoryService;
         }
 
         public IActionResult OnGet()
@@ -39,13 +39,16 @@ namespace MSA.Presentation.Pages.CategoryPages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return Page();
-            //}
+            var existingCategory = _categoryService.GetAll().FirstOrDefault(p => p.CategoryName == Category.CategoryName);
 
-            _context.Add(Category);
-            _context.Save();
+            if (existingCategory != null)
+            {
+                ModelState.AddModelError("Category.CategoryName", "Category name already exists.");
+                return Page();
+            }
+
+            _categoryService.Add(Category);
+            _categoryService.Save();
             return RedirectToPage("./Index");
         }
     }
