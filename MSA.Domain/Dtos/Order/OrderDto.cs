@@ -1,10 +1,7 @@
 ﻿using MSA.Domain.Common;
 using MSA.Domain.Dtos.Account;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MSA.Domain.Dtos.OrderDetail;
+
 
 namespace MSA.Domain.Dtos.Order
 {
@@ -12,8 +9,8 @@ namespace MSA.Domain.Dtos.Order
 	{
 		public double TotalPrice { get; set; } = 0;
 		public int TotalQuantity { get; set; } = 0;
-		public virtual ICollection<AccountDto> AccountDetails { get; set; } = new List<AccountDto>;
-		public virtual ICollection<OrderDto> Orders { get; set; } = new List<OrderDto>;
+		public virtual AccountViewModel Account { get; set; } = null;
+		public virtual ICollection<OrderDetailDto> OrderDetails { get; set; } = new List<OrderDetailDto>();
 
 	}
 }
