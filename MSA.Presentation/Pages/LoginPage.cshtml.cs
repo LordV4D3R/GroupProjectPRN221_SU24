@@ -38,7 +38,7 @@ namespace MSA.Presentation.Pages
             var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Username").Value;
             var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
 
-            if (AccountLoginDto.Username == adminUsername || AccountLoginDto.Password == adminPassword) {
+            if (AccountLoginDto.Username == adminUsername && AccountLoginDto.Password == adminPassword) {
                 HttpContext.Session.SetString("role", "Admin");
                 return RedirectToPage("/Admin/AccountPages/Index");
             }
@@ -57,10 +57,11 @@ namespace MSA.Presentation.Pages
                 if (account != null)
                 {
                     HttpContext.Session.SetString("role", account.Role.ToString());
+                    HttpContext.Session.SetString("fullname", account.FullName);
                     switch (account.Role.ToString())
                     {
                         case "Staff":
-                            return RedirectToPage("/Index");
+                            return RedirectToPage("StaffPage/Index");
                         case "Customer":
                             return RedirectToPage("/Index");
                         default:

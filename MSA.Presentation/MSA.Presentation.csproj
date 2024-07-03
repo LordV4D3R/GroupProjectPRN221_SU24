@@ -114,8 +114,4 @@
     <ProjectReference Include="..\MSA.Infrastructure\MSA.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\StaffPage\" />
-  </ItemGroup>
-
 </Project>

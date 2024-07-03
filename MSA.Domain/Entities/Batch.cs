@@ -14,12 +14,11 @@ namespace MSA.Domain.Entities
     public class Batch : BaseEntity
     {
         [Column("quantity")]
-        [Required]
         public int Quantity { get; set; } = 0;
 
         [Column("expired_on")]
-        [Required]
-        public DateTime ExpOn { get; set; } = DateTime.Now;
+        [DataType(DataType.Date)]
+        public DateTime ExpOn { get; set; }
 
         [Column("status")]
         [EnumDataType(typeof(BatchStatus))]

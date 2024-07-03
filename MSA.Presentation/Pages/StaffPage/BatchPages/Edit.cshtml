@@ -1,0 +1,76 @@
+﻿@page
+@using MSA.Domain.Enums
+@model MSA.Presentation.Pages.Admin.BatchPages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Batch</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Batch.Quantity" class="control-label"></label>
+                <input asp-for="Batch.Quantity" class="form-control" />
+                <span asp-validation-for="Batch.Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Batch.ExpOn" class="control-label"></label>
+                <input asp-for="Batch.ExpOn" class="form-control" />
+                <span asp-validation-for="Batch.ExpOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Batch.Status" class="control-label"></label>
+                <select asp-for="Batch.Status" class="form-control" asp-items="Html.GetEnumSelectList<BatchStatus>()"></select>
+                <span asp-validation-for="Batch.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Batch.ProductId" class="control-label"></label>
+                <select asp-for="Batch.ProductId" class="form-control" asp-items="ViewBag.ProductName"></select>
+                <span asp-validation-for="Batch.ProductId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Batch.Id" />
+            <!--<div class="form-group">
+                <label asp-for="Batch.CreatedOn" class="control-label"></label>
+                <input asp-for="Batch.CreatedOn" class="form-control" />
+                <span asp-validation-for="Batch.CreatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Batch.UpdatedOn" class="control-label"></label>
+                <input asp-for="Batch.UpdatedOn" class="form-control" />
+                <span asp-validation-for="Batch.UpdatedOn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Batch.CreatedBy" class="control-label"></label>
+                <input asp-for="Batch.CreatedBy" class="form-control" />
+                <span asp-validation-for="Batch.CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Batch.UpdatedBy" class="control-label"></label>
+                <input asp-for="Batch.UpdatedBy" class="form-control" />
+                <span asp-validation-for="Batch.UpdatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Batch.IsDeleted" /> @Html.DisplayNameFor(model => model.Batch.IsDeleted)
+                </label>
+            </div>-->
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index" asp-route-id="@Model.Batch.ProductId">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -17,7 +17,6 @@ namespace MSA.Domain.Entities
         public string CategoryName { get; set; } = string.Empty;
        
         [Column("description")]
-        [Required]
         public string Description { get; set; } = string.Empty;
 
 

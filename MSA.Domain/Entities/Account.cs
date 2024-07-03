@@ -26,11 +26,13 @@ namespace MSA.Domain.Entities
 
         [Column("email")]
         [Required]
+        [EmailAddress]
         [StringLength(255)]
         public string Email { get; set; } = string.Empty;
 
         [Column("phone_number")]
         [StringLength(20)]
+        [Phone]
         public string PhoneNumber { get; set; } = string.Empty;
 
         [Column("address")]
