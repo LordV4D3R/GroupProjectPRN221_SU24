@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MSA.Domain.Enums;
 
 namespace MSA.Application.Services
 {
@@ -49,7 +50,7 @@ namespace MSA.Application.Services
 
         public IEnumerable<Batch> GetAllByProductId(Guid id)
         {
-            return _batchRepository.GetAllByProductId(id);
+            return _batchRepository.GetAll().Where(b => b.ProductId == id && b.Status == BatchStatus.Active && b.ExpOn >= DateTime.Now && b.IsDeleted == false);
         }
 
         public Batch? GetById(Guid id)

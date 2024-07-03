@@ -15,10 +15,12 @@ namespace MSA.Domain.Entities
     {
         [Column("product_name")]
         [Required]
+        [MinLength(1), MaxLength(50)]    
         public string ProductName { get; set; } = string.Empty;
        
         [Column("price")]
         [Required]
+        [Range(1, double.MaxValue, ErrorMessage = "Price must be greater than 0")]
         public double Price { get; set; } = 0;
        
         [Column("description")]
