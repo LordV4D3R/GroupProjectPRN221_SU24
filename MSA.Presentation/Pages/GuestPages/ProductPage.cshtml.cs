@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MSA.Application.IRepositories;
+using MSA.Application.IServices;
 using MSA.Domain.Dtos.Product;
 using MSA.Domain.Entities;
 using Services;
@@ -11,7 +13,8 @@ namespace MSA.Presentation.Pages.GuestPages
         private readonly ILogger<IndexModel> _logger;
         private readonly IProductService _productService;
 
-        public ProductPageModel(ILogger<IndexModel> logger, IProductService productService)
+        public ProductPageModel(ILogger<IndexModel> logger,
+            IProductService productService)
         {
             _logger = logger;
             _productService = productService;
@@ -39,7 +42,6 @@ namespace MSA.Presentation.Pages.GuestPages
                 Description = product.Description,
                 ImageUrl = product.ImageUrl,
                 Status = product.Status
-
             }).ToList();
         }
     }

@@ -25,13 +25,13 @@ namespace MSA.Presentation.Pages.GuestPages
             _accountService = accountService;
             _httpContextAccessor = httpContextAccessor;
         }
-		public async Task<IActionResult> OnGetAsync()
+		public async Task<IActionResult> OnGetAsync(Guid id)
 		{
 			AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
 			if (current == null || current.Role == RoleType.Staff)
 			{
 				_httpContextAccessor.HttpContext.Session.Clear();
-				return Redirect("/Login");
+				return Redirect("/LoginPage");
 			}
 
 			ViewData["CustomerId"] = new SelectList( _accountService.GetAll(), "Id", "Address");
@@ -40,6 +40,8 @@ namespace MSA.Presentation.Pages.GuestPages
 
         [BindProperty]
         public Order Order { get; set; } = default!;
+
+
 
 
     }

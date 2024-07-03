@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "/GuestPages/ProductPage"
 @model MSA.Presentation.Pages.GuestPages.ProductPageModel
 @{
 }
@@ -42,7 +42,7 @@
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <h2>Our Latest Products</h2>
-                        <span>Check out all of our products.</span>
+                        <span>Cửa hàng</span>
                     </div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
                                 <div class="hover-content">
                                     <ul>
                                         <li><a href="@Url.Page("ProductDetail", new { id = product.ProductId })"><i class="fa fa-eye"></i></a></li>
-                                        <li><a href="single-product.html"><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="@Url.Page("Cart", new { id = product.ProductId })"><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <img src="/@product.ImageUrl" alt="">
