@@ -1,4 +1,5 @@
 ﻿@page
+@using MSA.Domain.Enums
 @model MSA.Presentation.Pages.OrderPages.IndexModel
 
 @{
@@ -13,35 +14,32 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].TotalPrice)
+                @Html.DisplayNameFor(model => model.ListOrder[0].TotalPrice)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].TotalQuantity)
+                @Html.DisplayNameFor(model => model.ListOrder[0].TotalQuantity)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderStatus)
+                @Html.DisplayNameFor(model => model.ListOrder[0].OrderStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].OrderRefundStatus)
+                @Html.DisplayNameFor(model => model.ListOrder[0].OrderRefundStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].Customer)
+                @Html.DisplayNameFor(model => model.ListOrder[0].Customer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].CreatedOn)
+                @Html.DisplayNameFor(model => model.ListOrder[0].CreatedOn)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Order[0].UpdatedOn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Order[0].IsDeleted)
+                @Html.DisplayNameFor(model => model.ListOrder[0].UpdatedOn)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Order) {
-            var index = Model.Order.IndexOf(item);
+@foreach (var item in Model.ListOrder) {
+            var index = Model.ListOrder.IndexOf(item);
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.TotalPrice)
@@ -65,18 +63,17 @@
                 @Html.DisplayFor(modelItem => item.UpdatedOn)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    @if (item.OrderStatus == OrderStatus.Pending || item.OrderStatus == OrderStatus.Processing)
+                    {
+                        <a asp-page="/StaffPage/OrderPages/ChangStatus" asp-route-id="@item.Id">Change Status</a> 
+                        <a asp-page = "/StaffPage/OrderPages/Cancel"  asp-route-id = "@item.Id" > Cancel Order </a>
+                    }
+                    <a asp-page="/StaffPage/OrderPages/Delete" asp-route-id="@item.Id"> Delete </a>
             </td>
         </tr>
 }
     </tbody>
 </table>
 <p>
-    <a asp-page="Create" class="btn btn-success">Create New</a> |
     <a asp-page="/StaffPage/Index" class="btn btn-success">Return To Home Page</a>
 </p>

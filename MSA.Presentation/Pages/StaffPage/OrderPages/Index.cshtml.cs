@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MSA.Application.IServices;
+using MSA.Application.Services;
 using MSA.Domain.Entities;
+using MSA.Domain.Enums;
 using MSA.Infrastructure;
 
 namespace MSA.Presentation.Pages.OrderPages
@@ -21,16 +23,26 @@ namespace MSA.Presentation.Pages.OrderPages
             _accountService = accountService;
         }
         [BindProperty(SupportsGet = true)]
-        public string SearchString { get; set; }
-        public IList<Order> Order { get;set; } = default!;
+
+        public IList<Order> ListOrder { get;set; } = default!;
         public List<string> AccountName { get; set; } = new List<string>();
-        public async Task OnGetAsync()
+
+        public async Task<IActionResult> OnGetAsync()
         {
-            Order = _orderService.GetAll().Where(o => o.IsDeleted == false).ToList();
-            foreach(var order in Order)
+            var role = HttpContext.Session.GetString("role");
+            if (role != "Staff" || role == null)
             {
-                var customer = _accountService.GetById(order.CustomerId);
-                AccountName.Add(customer?.Username ?? "Unknown");
+                return RedirectToPage("/AccessDenied");
+            }
+            else
+            {
+                ListOrder = _orderService.GetAll().Where(o => o.IsDeleted == false).ToList();
+                foreach (var order in ListOrder)
+                {
+                    var customer = _accountService.GetById(order.CustomerId);
+                    AccountName.Add(customer?.Username ?? "Unknown");
+                }
+                return Page();
             }
         }
     }
