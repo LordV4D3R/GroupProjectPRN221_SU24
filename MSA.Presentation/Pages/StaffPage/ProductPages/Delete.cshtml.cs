@@ -31,6 +31,12 @@ namespace MSA.Presentation.Pages.StaffPage.ProductPages
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
+            var role = HttpContext.Session.GetString("role");
+            if (role != "Staff" || role == null)
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+            else
             if (id == null)
             {
                 return NotFound();
@@ -53,12 +59,6 @@ namespace MSA.Presentation.Pages.StaffPage.ProductPages
 
         public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            var role = HttpContext.Session.GetString("role");
-            if (role != "Staff" || role == null)
-            {
-                return RedirectToPage("/AccessDenied");
-            }
-            else
             if (id == null)
             {
                 return NotFound();
