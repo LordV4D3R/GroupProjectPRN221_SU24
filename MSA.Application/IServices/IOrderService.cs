@@ -11,5 +11,7 @@ namespace MSA.Application.IServices
         void Update(Order order);
         void Update2(Order order);
         void Save();
+        Order GetOrderInCartStatus();
+        Order? GetOrderInCartStatusByAccountId(Guid id);
     }
 }

@@ -15,5 +15,6 @@ namespace MSA.Domain.Dtos.Product
         public string ImageUrl { get; set; } = string.Empty;
         public int TotalQuantity { get; set; } = 0;
         public ProductStatus Status { get; set; } = ProductStatus.ComingSoon;
+        public virtual ICollection<ProductDto> Products { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MSA.Domain.Common;
+using MSA.Domain.Dtos.Order;
 using MSA.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,7 @@ namespace MSA.Domain.Dtos.Account
         public string ImageUrl { get; set; } = string.Empty;
         public RoleType Role { get; set; } = RoleType.Customer;
         public AccountStatus Status { get; set; } = AccountStatus.Active;
+        public ICollection<OrderDto> Orders { get; set; } = new List<OrderDto>();
+
     }
 }

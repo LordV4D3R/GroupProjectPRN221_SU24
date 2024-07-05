@@ -1,0 +1,58 @@
+﻿@page
+@model MSA.Presentation.Pages.GuestPages.CartModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Products Area Starts ***** -->
+    <section class="section" id="products">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2>Giỏ hàng</h2>
+                        @* <span>Cửa hàng</span> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                @foreach (var orderDetail in Model.OrderDetailViewModels)
+                {
+                    <div class="col-lg-4">
+                        <div class="item">
+                            <div class="down-content">
+                                <h4>@orderDetail.Product.ProductName</h4>
+                                <span>Tổng giá: $ @orderDetail.Price</span>
+                                <span>Số lượng:  @orderDetail.Quantity</span>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </section>
+    <!-- ***** Products Area Ends ***** -->
+
+</body>
+
+</html>

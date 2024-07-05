@@ -1,230 +1,259 @@
-﻿<!DOCTYPE html>
+﻿@using MSA.Domain.Dtos.Session
+@using Microsoft.AspNetCore.Http
+@using System.Text.Json
+@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MSA.Presentation</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/MSA.Presentation.styles.css" asp-append-version="true" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - MSA.Presentation</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/MSA.Presentation.styles.css" asp-append-version="true" />
 
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Hexashop Ecommerce HTML CSS Template</title>
+	<title>Hexashop Ecommerce HTML CSS Template</title>
 
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+	<!-- Additional CSS Files -->
+	<link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
 
-    <link rel="stylesheet" type="text/css" href="~/css/font-awesome.css">
+	<link rel="stylesheet" type="text/css" href="~/css/font-awesome.css">
 
-    <link rel="stylesheet" href="~/css/templatemo-hexashop.css">
+	<link rel="stylesheet" href="~/css/templatemo-hexashop.css">
 
-    <link rel="stylesheet" href="~/css/owl-carousel.css">
+	<link rel="stylesheet" href="~/css/owl-carousel.css">
 
-    <link rel="stylesheet" href="~/css/lightbox.css">
-    <!--
+	<link rel="stylesheet" href="~/css/lightbox.css">
+	<!--
 
-    TemplateMo 571 Hexashop
+	TemplateMo 571 Hexashop
 
-    https://templatemo.com/tm-571-hexashop
+	https://templatemo.com/tm-571-hexashop
 
-    -->
+	-->
 </head>
 <body>
-@*     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">MSA.Presentation</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header> *@
+	@*     <header>
+	<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+	<div class="container">
+	<a class="navbar-brand" asp-area="" asp-page="/Index">MSA.Presentation</a>
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+	aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+	<ul class="navbar-nav flex-grow-1">
+	<li class="nav-item">
+	<a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+	</li>
+	<li class="nav-item">
+	<a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+	</li>
+	</ul>
+	</div>
+	</div>
+	</nav>
+	</header> *@
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="assets/images/logo.png">
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="/Index" class="active">Home</a></li>
-                            @* <li class="scroll-to-section"><a href="#men">Men's</a></li>
-                            <li class="scroll-to-section"><a href="#women">Women's</a></li>
-                            <li class="scroll-to-section"><a href="#kids">Kid's</a></li> *@
-                            <li><a href="~/GuestPages/ProductPage">Cửa hàng</a></li>
-                            <li class="submenu">
-                                <a href="javascript:;">Pages</a>
-                                <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="products.html">Products</a></li>
-                                    <li><a href="single-product.html">Single Product</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                </ul>
-                            </li>
-                            <li class="submenu">
-                                <a href="javascript:;">Features</a>
-                                <ul>
-                                    <li><a href="#">Features Page 1</a></li>
-                                    <li><a href="#">Features Page 2</a></li>
-                                    <li><a href="#">Features Page 3</a></li>
-                                    <li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>
-                                </ul>
-                            </li>
-                            @* <li class="scroll-to-section"><a href="#explore">Explore</a></li> *@
-                            <li><a href="~/LoginPage">Login</a></li>
-                        </ul>
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
+	<!-- ***** Header Area Start ***** -->
+	<header class="header-area header-sticky">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<nav class="main-nav">
+						<!-- ***** Logo Start ***** -->
+						<a href="index.html" class="logo">
+							<img src="/images/logo.png">
+						</a>
+						<!-- ***** Logo End ***** -->
+						<!-- ***** Menu Start ***** -->
+						<ul class="nav">
+							<li class="scroll-to-section"><a href="/Index" class="active">Home</a></li>
+							@* <li class="scroll-to-section"><a href="#men">Men's</a></li>
+							<li class="scroll-to-section"><a href="#women">Women's</a></li>
+							<li class="scroll-to-section"><a href="#kids">Kid's</a></li> *@
+							<li><a href="~/GuestPages/ProductPage">Cửa hàng</a></li>
+							<li class="submenu">
+								<a href="javascript:;">Pages</a>
+								<ul>
+									<li><a href="#">About Us</a></li>
+									<li><a href="products.html">Products</a></li>
+									<li><a href="single-product.html">Single Product</a></li>
+									<li><a href="contact.html">Contact Us</a></li>
+								</ul>
+							</li>
+							@*                             <li class="submenu">
+							<a href="javascript:;">Features</a>
+							<ul>
+							<li><a href="#">Features Page 1</a></li>
+							<li><a href="#">Features Page 2</a></li>
+							<li><a href="#">Features Page 3</a></li>
+							<li><a rel="nofollow" href="https://templatemo.com/page/4" target="_blank">Template Page 4</a></li>
+							</ul>
+							</li> *@
+							@* <li class="scroll-to-section"><a href="#explore">Explore</a></li> *@
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+							@{
+								var userJSON = HttpContextAccessor.HttpContext!.Session.GetString("CurrentUser");
+								var user = userJSON == null ? default(AccountSession)  : JsonSerializer.Deserialize<AccountSession>(userJSON);
+							}
+							@if (user == null)
+							{
+								<li><a href="~/LoginPage">Đăng nhập</a></li>
+							}
+							else
+							{
+								<li class="submenu">
+									<a href="javascript:;">@user.DisplayName</a>
+									<ul>
+										<li><a href="~/GuestPages/Cart">GIỏ hàng</a></li>
+										<li><a href="#">Thông tin tài khoản</a></li>
+										<li><a href="#">Đăng Xuất</a></li>
+									</ul>
+								</li>
+							}
 
-@*     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - MSA.Presentation - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer> *@
-    <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="first-item">
-                        <div class="logo">
-                            <img src="assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
-                        </div>
-                        <ul>
-                            <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
-                            <li><a href="#">hexashop@company.com</a></li>
-                            <li><a href="#">010-020-0340</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Shopping &amp; Categories</h4>
-                    <ul>
-                        <li><a href="#">Men’s Shopping</a></li>
-                        <li><a href="#">Women’s Shopping</a></li>
-                        <li><a href="#">Kid's Shopping</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Useful Links</h4>
-                    <ul>
-                        <li><a href="#">Homepage</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3">
-                    <h4>Help &amp; Information</h4>
-                    <ul>
-                        <li><a href="#">Help</a></li>
-                        <li><a href="#">FAQ's</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Tracking ID</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-12">
-                    <div class="under-footer">
-                        <p>
-                            Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved.
 
-                            <br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
-                        </p>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+							@* <li><a href="~/LoginPage">Đăng nhập</a></li>
+							<li><a href="~/GuestPages/ProductPage">Giỏ hàng</a></li> *@
 
-    <!-- jQuery -->
-    <script src="~/js/jquery-2.1.0.min.js"></script>
+						</ul>
+						<a class='menu-trigger'>
+							<span>Menu</span>
+						</a>
+						<!-- ***** Menu End ***** -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- ***** Header Area End ***** -->
 
-    <!-- Bootstrap -->
-    <script src="~/js/popper.js"></script>
-    <script src="~/js/bootstrap.min.js"></script>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
 
-    <!-- Plugins -->
-    <script src="~/js/owl-carousel.js"></script>
-    <script src="~/js/accordions.js"></script>
-    <script src="~/js/datepicker.js"></script>
-    <script src="~/js/scrollreveal.min.js"></script>
-    <script src="~/js/waypoints.min.js"></script>
-    <script src="~/js/jquery.counterup.min.js"></script>
-    <script src="~/js/imgfix.min.js"></script>
-    <script src="~/js/slick.js"></script>
-    <script src="~/js/lightbox.js"></script>
-    <script src="~/js/isotope.js"></script>
+	@*     <footer class="border-top footer text-muted">
+	<div class="container">
+	&copy; 2024 - MSA.Presentation - <a asp-area="" asp-page="/Privacy">Privacy</a>
+	</div>
+	</footer> *@
+	<!-- ***** Footer Start ***** -->
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="first-item">
+						<div class="logo">
+							<img src="assets/images/white-logo.png" alt="hexashop ecommerce templatemo">
+						</div>
+						<ul>
+							<li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+							<li><a href="#">hexashop@company.com</a></li>
+							<li><a href="#">010-020-0340</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<h4>Shopping &amp; Categories</h4>
+					<ul>
+						<li><a href="#">Men’s Shopping</a></li>
+						<li><a href="#">Women’s Shopping</a></li>
+						<li><a href="#">Kid's Shopping</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-3">
+					<h4>Useful Links</h4>
+					<ul>
+						<li><a href="#">Homepage</a></li>
+						<li><a href="#">About Us</a></li>
+						<li><a href="#">Help</a></li>
+						<li><a href="#">Contact Us</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-3">
+					<h4>Help &amp; Information</h4>
+					<ul>
+						<li><a href="#">Help</a></li>
+						<li><a href="#">FAQ's</a></li>
+						<li><a href="#">Shipping</a></li>
+						<li><a href="#">Tracking ID</a></li>
+					</ul>
+				</div>
+				<div class="col-lg-12">
+					<div class="under-footer">
+						<p>
+							Copyright © 2022 HexaShop Co., Ltd. All Rights Reserved.
 
-    <!-- Global Init -->
-    <script src="~/js/custom.js"></script>
+							<br>Design: <a href="https://templatemo.com" target="_parent" title="free css templates">TemplateMo</a>
+						</p>
+						<ul>
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+							<li><a href="#"><i class="fa fa-behance"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 
-    <script>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
 
-        $(function () {
-            var selectedClass = "";
-            $("p").click(function () {
-                selectedClass = $(this).attr("data-rel");
-                $("#portfolio").fadeTo(50, 0.1);
-                $("#portfolio div").not("." + selectedClass).fadeOut();
-                setTimeout(function () {
-                    $("." + selectedClass).fadeIn();
-                    $("#portfolio").fadeTo(50, 1);
-                }, 500);
+	<!-- jQuery -->
+	<script src="~/js/jquery-2.1.0.min.js"></script>
 
-            });
-        });
+	<!-- Bootstrap -->
+	<script src="~/js/popper.js"></script>
+	<script src="~/js/bootstrap.min.js"></script>
 
-    </script>
+	<!-- Plugins -->
+	<script src="~/js/owl-carousel.js"></script>
+	<script src="~/js/accordions.js"></script>
+	<script src="~/js/datepicker.js"></script>
+	<script src="~/js/scrollreveal.min.js"></script>
+	<script src="~/js/waypoints.min.js"></script>
+	<script src="~/js/jquery.counterup.min.js"></script>
+	<script src="~/js/imgfix.min.js"></script>
+	<script src="~/js/slick.js"></script>
+	<script src="~/js/lightbox.js"></script>
+	<script src="~/js/isotope.js"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+	<!-- Global Init -->
+	<script src="~/js/custom.js"></script>
+
+	<script>
+
+		$(function () {
+			var selectedClass = "";
+			$("p").click(function () {
+				selectedClass = $(this).attr("data-rel");
+				$("#portfolio").fadeTo(50, 0.1);
+				$("#portfolio div").not("." + selectedClass).fadeOut();
+				setTimeout(function () {
+					$("." + selectedClass).fadeIn();
+					$("#portfolio").fadeTo(50, 1);
+				}, 500);
+
+			});
+		});
+
+	</script>
+
+	@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
