@@ -15,5 +15,6 @@ namespace MSA.Application.IServices
         IEnumerable<OrderDetail> GetAll();
         OrderDetail? GetById(Guid id);
         void Save();
+        IEnumerable<OrderDetail> GetAllOrderDetailOrderId(Guid orderId);
     }
 }

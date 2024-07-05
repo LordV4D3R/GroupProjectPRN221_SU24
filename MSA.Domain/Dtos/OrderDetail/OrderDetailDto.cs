@@ -9,8 +9,7 @@ namespace MSA.Domain.Dtos.OrderDetail
     {
         public int Quantity { get; set; } = 0;
         public double Price { get; set; } = 0;
-        public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
-        public virtual OrderViewModel Orders { get; set; } = null;
+        public virtual OrderDto Orders { get; set; } = null;
         public virtual ProductDto Products { get; set; } = null;
         
     }

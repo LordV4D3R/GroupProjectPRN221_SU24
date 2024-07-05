@@ -46,5 +46,10 @@ namespace MSA.Application.Services
         {
             _orderDetailRepository.Save();
         }
+
+        public IEnumerable<OrderDetail> GetAllOrderDetailOrderId(Guid orderId)
+        {
+            return _orderDetailRepository.GetAll().Where(x => x.OrderId == orderId);
+        }
     }
 }

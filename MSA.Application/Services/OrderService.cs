@@ -51,5 +51,14 @@ namespace MSA.Application.Services
         {
             _orderRepository.Save();
         }
+        public Order GetOrderInCartStatus()
+        {
+            return _orderRepository.GetAll().FirstOrDefault(x => x.OrderStatus == Domain.Enums.OrderStatus.InCart);
+        }
+
+        public Order? GetOrderInCartStatusByAccountId(Guid id)
+        {
+            return _orderRepository.GetAll().FirstOrDefault(x => x.OrderStatus == Domain.Enums.OrderStatus.InCart && x.CustomerId == id);
+        }
     }
 }

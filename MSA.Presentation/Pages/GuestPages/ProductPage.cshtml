@@ -1,4 +1,4 @@
-﻿@page "/GuestPages/ProductPage"
+﻿@page
 @model MSA.Presentation.Pages.GuestPages.ProductPageModel
 @{
 }
@@ -57,7 +57,14 @@
                                 <div class="hover-content">
                                     <ul>
                                         <li><a href="@Url.Page("ProductDetail", new { id = product.ProductId })"><i class="fa fa-eye"></i></a></li>
-                                        <li><a href="@Url.Page("Cart", new { id = product.ProductId })"><i class="fa fa-shopping-cart"></i></a></li>
+                                        @if (HttpContext.Session.GetString("CurrentUser") == null)
+                                        {
+                                            <li><a href="/LoginPage"><i class="fa fa-shopping-cart"></i></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="?handler=cart&id=@product.ProductId"><i class="fa fa-shopping-cart"></i></a></li>
+                                        }
                                     </ul>
                                 </div>
                                 <img src="/@product.ImageUrl" alt="">
