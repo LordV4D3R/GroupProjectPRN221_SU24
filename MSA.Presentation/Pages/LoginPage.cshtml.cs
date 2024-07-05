@@ -39,21 +39,10 @@ namespace MSA.Presentation.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid) 
+            if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-
-            var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Username").Value;
-            var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
-
-            if (AccountLoginDto.Username == adminUsername && AccountLoginDto.Password == adminPassword) {
-                HttpContext.Session.SetString("role", "Admin");
-                return RedirectToPage("/Admin/AccountPages/Index");
-            }
-
-            var account = _accountService.GetAccountByUsernameAndPassword(AccountLoginDto);
 
 
             if (AccountLoginDto.Username == null || AccountLoginDto.Password == null)
@@ -102,7 +91,6 @@ namespace MSA.Presentation.Pages
                     {
                         case "Staff":
                             return RedirectToPage("/index");
-
                         case "Customer":
                             return RedirectToPage("/index");
                         default:
@@ -150,5 +138,44 @@ namespace MSA.Presentation.Pages
             //    }
             //}
         }
+
+        //var adminUsername = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Username").Value;
+        //var adminPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("AdminAccount:Password").Value;
+
+        //if (AccountLoginDto.Username == adminUsername || AccountLoginDto.Password == adminPassword) {
+        //    HttpContext.Session.SetString("role", "Admin");
+        //    return RedirectToPage("/Admin/AccountPages/Index");
+        //}
+
+        //var account = _accountService.GetAccountByUsernameAndPassword(AccountLoginDto);
+
+        //if (AccountLoginDto.Username == null || AccountLoginDto.Password == null)
+        //{
+        //    ErrorMessage = "Không được để trống Username hoặc Password";
+        //    return Page();
+        //}
+        //else
+        //{
+        //    if (account != null)
+        //    {
+        //        HttpContext.Session.SetString("role", account.Role.ToString());
+        //        switch (account.Role.ToString())
+        //        {
+        //            case "Staff":
+        //                return RedirectToPage("/Index");
+        //            case "Customer":
+        //                return RedirectToPage("/Index");
+        //            default:
+        //                ErrorMessage = "Hệ thống xảy ra lỗi, vui lòng thử lại";
+        //                return Page();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ErrorMessage = "Tài khoản không tồn tại hoặc sai mật khẩu";
+        //        return Page();
+        //    }
+        //}
     }
-}
+    }
+
