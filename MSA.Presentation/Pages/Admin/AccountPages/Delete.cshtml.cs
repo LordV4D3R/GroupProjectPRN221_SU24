@@ -52,8 +52,9 @@ namespace MSA.Presentation.Pages.AccountPages
             var account = _accountService.GetById(id);
             if (account != null)
             {
+                account.IsDeleted = true;
                 Account = account;
-                _accountService.Delete(Account);
+                _accountService.Update(Account);
                 _accountService.Save();
             }
 

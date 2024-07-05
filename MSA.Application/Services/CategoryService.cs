@@ -44,12 +44,17 @@ namespace Services
 
         public IEnumerable<Category> SearchByName(string name)
         {
-            return _categoryRepository.GetAll().Where(x => x.CategoryName!.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            return _categoryRepository.GetAll().Where(x => x.CategoryName!.Contains(name, StringComparison.OrdinalIgnoreCase) && x.IsDeleted == false).ToList();
         }
 
         public void Update(Category category)
         {
             _categoryRepository.Update(category);
+        }
+
+        public void Update2(Category category)
+        {
+            _categoryRepository.Update2(category);
         }
     }
 }

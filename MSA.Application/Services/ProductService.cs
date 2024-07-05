@@ -44,7 +44,7 @@ namespace Services
 
         public IEnumerable<Product> SearchByName(string name)
         {
-           return _productRepository.GetAll().Where(x => x.ProductName!.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+           return _productRepository.GetAll().Where(x => x.ProductName!.Contains(name, StringComparison.OrdinalIgnoreCase) && x.IsDeleted == false).ToList();
         }
 
         public void Update(Product product)
