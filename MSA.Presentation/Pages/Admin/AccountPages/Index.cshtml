@@ -5,8 +5,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
+
+<h1>-------------------------------------------------------------------</h1>
+<h1>List Accounts</h1>
+    <form method="get">
+        <div class="form-group">
+            <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search by name...">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
 <table class="table">
     <thead>
         <tr>
@@ -99,7 +107,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsDeleted)
             </td>
-            <td>               |
+            <td>               
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>              
@@ -108,12 +116,8 @@
 }
     </tbody>
 </table>
-<form method="get">
-    <div class="form-group">
-        <input type="text" name="SearchString" value="@Model.SearchString" class="form-control" placeholder="Search by name...">
-        <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-</form>
 <p>
     <a asp-page="Create" class="btn btn-success">Create New</a>
 </p>
+
+

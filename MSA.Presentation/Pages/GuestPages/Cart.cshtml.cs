@@ -52,7 +52,7 @@ namespace MSA.Presentation.Pages.GuestPages
         public ProductViewModel ProductViewModels { get; set; } = default!;
         public IEnumerable<OrderDetailDto> OrderDetailDtos { get; set; } = default!;
 		public IList<OrderDetail> OrderDetail { get; set; } = default!;
-		public IList<OrderDetailViewModel> OrderDetailViewModels { get; set; } = default!;
+        public IList<OrderDetailViewModel> OrderDetailViewModels { get; set; } = default!;
         public OrderViewModel OrderViewModel { get; set; } = default!;
         public List<string> ProductName { get; set; } = new List<string>();
 
@@ -64,7 +64,7 @@ namespace MSA.Presentation.Pages.GuestPages
                 Order = _orderService.GetOrderInCartStatusByAccountId(current.Id);
                 if (Order != null)
                 {
-                    OrderDetail = _orderDetailService.GetAllOrderDetailOrderId(Order.Id).ToList();
+                    OrderDetail = _orderDetailService.GetAll().Where(x => x.OrderId == Order.Id).ToList();
                     foreach (var item in OrderDetail)
                     {
                         var name = _productService.GetById(item.ProductId);

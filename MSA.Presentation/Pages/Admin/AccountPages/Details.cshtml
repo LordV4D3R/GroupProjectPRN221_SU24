@@ -73,6 +73,15 @@
         </dd>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Account.Id" class="btn btn-success">Edit</a> |
-    <a asp-page="./Index" class="btn btn-success">Back to List</a>
+    @if (Model.Account.Role == Domain.Enums.RoleType.Admin)
+    {
+        <a asp-page="./Edit" asp-route-id="@Model.Account.Id" class="btn btn-success">Edit</a>
+        <a asp-page="./Index" class="btn btn-success">Back to List</a>
+    }
+    else
+    {
+        <a asp-page="./SelfUpdate" asp-route-id="@Model.Account.Id" class="btn btn-success">Edit</a>
+        <a asp-page="/Index" asp-route-id="@Model.Account.Id"  class="btn btn-success">Back to Home Page</a>
+    }
+
 </div>

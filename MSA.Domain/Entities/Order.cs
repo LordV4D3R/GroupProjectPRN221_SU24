@@ -1,5 +1,6 @@
 ﻿using MSA.Domain.Common;
 using MSA.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MSA.Domain.Entities
@@ -14,7 +15,8 @@ namespace MSA.Domain.Entities
         public int TotalQuantity { get; set; } = 0;
 
         [Column("order_status")]
-        public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
+        [EnumDataType(typeof(OrderStatus))]
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.InCart;
 
         [Column("OrderRefundStatus")]
         public OrderRefundStatus OrderRefundStatus { get; set; } = OrderRefundStatus.None;

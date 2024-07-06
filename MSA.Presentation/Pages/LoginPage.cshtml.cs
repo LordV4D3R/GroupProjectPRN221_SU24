@@ -87,10 +87,11 @@ namespace MSA.Presentation.Pages
                     _httpContextAccessor.HttpContext!.Session.Clear();
                     _httpContextAccessor.HttpContext!.Session.SetString("CurrentUser", customerJson);
                     string currentUser = _httpContextAccessor.HttpContext!.Session.GetString("CurrentUser");
+                    HttpContext.Session.SetString("role", account.Role.ToString());
                     switch (account.Role.ToString())
                     {
                         case "Staff":
-                            return RedirectToPage("/index");
+                            return RedirectToPage("/StaffPage/Index");
                         case "Customer":
                             return RedirectToPage("/index");
                         default:
