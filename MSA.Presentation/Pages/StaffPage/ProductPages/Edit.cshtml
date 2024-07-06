@@ -5,14 +5,13 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<h1>----------------------------------------------------</h1>
+<h1>Edit Product</h1>
 
-<h1>Edit</h1>
-
-<h4>Product</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Product.ProductName" class="control-label"></label>
@@ -30,9 +29,9 @@
                 <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.ImageUrl" class="control-label"></label>
-                <input asp-for="Product.ImageUrl" class="form-control" />
-                <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+                <label asp-for="ProductImage" class="control-label"></label>
+                <input type="file" asp-for="ProductImage" class="form-control" />
+                <span asp-validation-for="ProductImage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.Status" class="control-label"></label>
@@ -45,31 +44,6 @@
                 <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Product.Id" />
-            <!--<div class="form-group">
-                <label asp-for="Product.CreatedOn" class="control-label"></label>
-                <input asp-for="Product.CreatedOn" class="form-control" />
-                <span asp-validation-for="Product.CreatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Product.UpdatedOn" class="control-label"></label>
-                <input asp-for="Product.UpdatedOn" class="form-control" />
-                <span asp-validation-for="Product.UpdatedOn" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Product.CreatedBy" class="control-label"></label>
-                <input asp-for="Product.CreatedBy" class="form-control" />
-                <span asp-validation-for="Product.CreatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Product.UpdatedBy" class="control-label"></label>
-                <input asp-for="Product.UpdatedBy" class="form-control" />
-                <span asp-validation-for="Product.UpdatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Product.IsDeleted" /> @Html.DisplayNameFor(model => model.Product.IsDeleted)
-                </label>
-            </div>-->
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

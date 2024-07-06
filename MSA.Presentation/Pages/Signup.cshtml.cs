@@ -12,7 +12,7 @@ using MSA.Domain.Entities;
 using MSA.Domain.Enums;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.AccountPages
+namespace MSA.Presentation.Pages
 {
     public class SignupModel : PageModel
     {

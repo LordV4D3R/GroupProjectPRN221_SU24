@@ -5,11 +5,9 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h1>----------------------------------------------------</h1>
+<h1>Manage Order</h1>
 
-<h1>Index</h1>
-
-    <a asp-page="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -65,7 +63,8 @@
             <td>
                     @if (item.OrderStatus == OrderStatus.Pending || item.OrderStatus == OrderStatus.Processing)
                     {
-                        <a asp-page="/StaffPage/OrderPages/ChangStatus" asp-route-id="@item.Id">Change Status</a> 
+                        <a asp-page="/StaffPage/OrderPages/ChangStatus" asp-route-id="@item.Id">Change Status</a>
+                        
                         <a asp-page = "/StaffPage/OrderPages/Cancel"  asp-route-id = "@item.Id" > Cancel Order </a>
                     }
                     <a asp-page="/StaffPage/OrderPages/Delete" asp-route-id="@item.Id"> Delete </a>

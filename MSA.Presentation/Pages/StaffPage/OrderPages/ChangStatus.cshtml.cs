@@ -72,8 +72,11 @@ namespace MSA.Presentation.Pages.OrderPages
                 case OrderStatus.Cancelled:
                     order.OrderStatus = OrderStatus.Cancelled;
                     break;
-                default:
+                case OrderStatus.Completed:
                     order.OrderStatus = OrderStatus.Completed;
+                    break;
+                default:
+                    order.OrderStatus = OrderStatus.InCart;
                     break;
             }
             _orderService.Update(order);

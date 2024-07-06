@@ -16,11 +16,13 @@ namespace MSA.Presentation.Pages.ProductPages
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public CreateModel(IProductService productService, ICategoryService categoryService)
+        public CreateModel(IProductService productService, ICategoryService categoryService, IWebHostEnvironment webHostEnvironment)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult OnGet()
@@ -40,6 +42,7 @@ namespace MSA.Presentation.Pages.ProductPages
 
         [BindProperty]
         public Product Product { get; set; } = default!;
+        public IFormFile ProductImage { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -49,7 +52,21 @@ namespace MSA.Presentation.Pages.ProductPages
             if (existingProduct != null)
             {
                 ModelState.AddModelError("Product.ProductName", "Product name already exists.");
+                ViewData["CategoryId"] = new SelectList(_categoryService.GetAll(), "Id", "CategoryName");
                 return Page();
+            }
+            if (ProductImage != null)
+            {
+                var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img", "Milk");
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + ProductImage.FileName;
+                var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ProductImage.CopyToAsync(fileStream);
+                }
+
+                Product.ImageUrl = "/img/Milk/" + uniqueFileName; // Save the relative path
             }
             _productService.Add(Product);
             _productService.Save();

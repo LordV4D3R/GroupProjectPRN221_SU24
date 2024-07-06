@@ -5,14 +5,13 @@
 @{
     ViewData["Title"] = "Create";
 }
+<h1>----------------------------------------------------</h1>
+<h1>Create Product</h1>
 
-<h1>Create</h1>
-
-<h4>Product</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Product.ProductName" class="control-label"></label>
@@ -30,9 +29,9 @@
                 <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.ImageUrl" class="control-label"></label>
-                <input asp-for="Product.ImageUrl" class="form-control" />
-                <span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+                <label asp-for="ProductImage" class="control-label"></label>
+                <input type="file" asp-for="ProductImage" class="form-control" />
+                <span asp-validation-for="ProductImage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Product.Status" class="control-label"></label>

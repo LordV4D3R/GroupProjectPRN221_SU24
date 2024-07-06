@@ -3,21 +3,23 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+<h1>----------------------------------------------------</h1>
 <div class="text-center">
     @if (HttpContext.Session.GetString("role") == "Staff")
     {
         
-        <h1 class="display-4">Welcome, @HttpContext.Session.GetString("fullname")</h1>
-        <p>Have a nice day!</p>
+        <h2 class="display-4">Welcome, @HttpContext.Session.GetString("fullname")</h2>
+        <p>-----------------------------------------------</p>
         <form method="post" asp-page-handler="login">
             <table align="center">
                 <div>
                     <a asp-page="/StaffPage/ProductPages/Index">Manage Product</a>
                 </div>
+                                                          <p>---------------------</p>
                 <div>
                     <a asp-page="/StaffPage/CategoryPages/Index">Manage Category</a>
                 </div>
+                <p>---------------------</p>
                 <div>
                     <a asp-page="/StaffPage/OrderPages/Index">Manage Order</a>
                 </div>
