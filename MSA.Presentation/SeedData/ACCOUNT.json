@@ -11,16 +11,28 @@
     "Status": "Active",
     "CreatedBy": "admin@chc.com"
   },
-    {
-        "Id": "a3e2cca1-0a56-46ca-95c7-91e60943517d",
-        "Username": "thinhdeptrai",
-        "Password": "1",
-        "FullName": "Thịnh đẹp trai",
-        "Email": "customer1@gmail.com",
-        "PhoneNumber": "000000000",
-        "Address": "ABC, ABD Street, BDG City, VN",
-        "Role": "Customer",
-        "Status": "Active",
-        "CreatedBy": "admin@chc.com"
-    }
+  {
+    "Id": "a3e2cca1-0a56-46ca-95c7-91e60943517d",
+    "Username": "thinhdeptrai",
+    "Password": "1",
+    "FullName": "Thịnh đẹp trai",
+    "Email": "thinhdeptraivl@gmail.com",
+    "PhoneNumber": "000000000",
+    "Address": "ABC, ABD Street, BDG City, VN",
+    "Role": "Customer",
+    "Status": "Active",
+    "CreatedBy": "admin@chc.com"
+  },
+  {
+    "Id": "ff1ed914-5bb8-411c-975a-80fd2efce8d9",
+    "Username": "staff",
+    "Password": "1",
+    "FullName": "Staff đẹp trai",
+    "Email": "staff@gmail.com",
+    "PhoneNumber": "000000000",
+    "Address": "ABC, ABD Street, BDG City, VN",
+    "Role": "Staff",
+    "Status": "Active",
+    "CreatedBy": "admin@chc.com"
+  }
 ]
