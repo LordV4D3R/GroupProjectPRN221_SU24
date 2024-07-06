@@ -51,9 +51,10 @@ namespace MSA.Presentation.Pages.GuestPages
         public Order Order { get; set; } = default!;
         public ProductViewModel ProductViewModels { get; set; } = default!;
         public IEnumerable<OrderDetailDto> OrderDetailDtos { get; set; } = default!;
-		public IEnumerable<OrderDetail> OrderDetails { get; set; } = default!;
-		public IList<OrderDetailViewModel> OrderDetailViewModels { get; set; } = default!;
+		public IList<OrderDetail> OrderDetail { get; set; } = default!;
+        public IList<OrderDetailViewModel> OrderDetailViewModels { get; set; } = default!;
         public OrderViewModel OrderViewModel { get; set; } = default!;
+        public List<string> ProductName { get; set; } = new List<string>();
 
 
         private void LoadCart(AccountSession current)
@@ -63,28 +64,13 @@ namespace MSA.Presentation.Pages.GuestPages
                 Order = _orderService.GetOrderInCartStatusByAccountId(current.Id);
                 if (Order != null)
                 {
-
-                    OrderDetails = _orderDetailService.GetAllOrderDetailOrderId(Order.Id);
-                    if (OrderDetails != null)
+                    OrderDetail = _orderDetailService.GetAll().Where(x => x.OrderId == Order.Id).ToList();
+                    foreach (var item in OrderDetail)
                     {
-                        OrderDetailViewModels = OrderDetails.Select(x => new OrderDetailViewModel
-                        {
-                            Quantity = x.Quantity,
-                            Price = x.Price * x.Quantity,
-                            Product = new ProductViewModel
-                            {
-                                ProductName = x.Product.ProductName,
-                                Description = x.Product.Description,
-                                ImageUrl = x.Product.ImageUrl,
-                            }
-                        }).ToList();
+                        var name = _productService.GetById(item.ProductId);
+                        ProductName.Add(name?.ProductName ?? "Unknown");
                     }
                 }
-                else {
-                
-                }
-            } else 
-            { 
             
             }
         }

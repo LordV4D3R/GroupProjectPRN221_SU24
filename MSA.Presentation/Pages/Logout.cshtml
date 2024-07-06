@@ -1,0 +1,10 @@
+﻿@page
+@model MSA.Presentation.Pages.LogoutModel
+@{
+}
+
+@{
+    HttpContext.Session.Clear();
+    Response.Redirect("/Index");
+}
+
