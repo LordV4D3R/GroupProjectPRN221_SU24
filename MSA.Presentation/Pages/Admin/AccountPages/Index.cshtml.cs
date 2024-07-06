@@ -23,15 +23,24 @@ namespace MSA.Presentation.Pages.AccountPages
 
         public IList<Account> Account { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (!string.IsNullOrEmpty(SearchString))
+            var role = HttpContext.Session.GetString("role");
+            if (role != "Admin" || role == null)
             {
-                Account = _accountService.SearchByName(SearchString).ToList();
+                return RedirectToPage("/AccessDenied");
             }
             else
             {
-                Account = _accountService.GetAll().ToList();
+                if (!string.IsNullOrEmpty(SearchString))
+                {
+                    Account = _accountService.SearchByName(SearchString).ToList();
+                }
+                else
+                {
+                    Account = _accountService.GetAll().ToList();
+                }
+                return Page();
             }
         }
     }

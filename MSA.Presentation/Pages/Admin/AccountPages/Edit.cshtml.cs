@@ -26,24 +26,44 @@ namespace MSA.Presentation.Pages.AccountPages
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null)
+            var role = HttpContext.Session.GetString("role");
+            if (role != "Admin" || role == null)
             {
-                return NotFound();
+                return RedirectToPage("/AccessDenied");
             }
+            else
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var account =  _accountService.GetById(id);
-            if (account == null)
-            {
-                return NotFound();
+                var account = _accountService.GetById(id);
+                if (account == null)
+                {
+                    return NotFound();
+                }
+                Account = account;
+                return Page();
             }
-            Account = account;
-            return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            var existingAccountName = _accountService.GetAll().FirstOrDefault(a => a.Username == Account.Username);
+            var existingAccountEmail = _accountService.GetAll().FirstOrDefault(b => b.Email == Account.Email);
+            if (existingAccountName != null)
+            {
+                ModelState.AddModelError("Account.Username", "Account name exist");
+                return Page();
+            }
+            if (existingAccountEmail != null)
+            {
+                ModelState.AddModelError("Account.Email", "Account Email exist");
+                return Page();
+            }
             _accountService.Update2(Account);
             return RedirectToPage("./Index");
         }

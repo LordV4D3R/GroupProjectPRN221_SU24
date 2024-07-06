@@ -25,7 +25,15 @@ namespace MSA.Presentation.Pages.AccountPages
 
         public IActionResult OnGet()
         {
-            return Page();
+            var role = HttpContext.Session.GetString("role");
+            if (role != "Admin" || role == null)
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+            else
+            {
+                return Page();
+            }
         }
 
         [BindProperty]
@@ -35,6 +43,18 @@ namespace MSA.Presentation.Pages.AccountPages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(CreateAccountRequest request)
         {
+            var existingAccountName = _accountService.GetAll().FirstOrDefault(a => a.Username == Account.Username);
+            var existingAccountEmail = _accountService.GetAll().FirstOrDefault(b => b.Email == Account.Email);
+            if (existingAccountName != null)
+            {
+                ModelState.AddModelError("Account.Username", "Account name exist");
+                return Page();
+            }
+            if (existingAccountEmail != null)
+            {
+                ModelState.AddModelError("Account.Email", "Account Email exist");
+                return Page();
+            }
             Account newAccount = new Account
             {
                 Username = request.Username,              
