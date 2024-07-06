@@ -66,7 +66,7 @@ namespace MSA.Presentation.Pages.ProductPages
                     await ProductImage.CopyToAsync(fileStream);
                 }
 
-                Product.ImageUrl = "/img/Milk/" + uniqueFileName; // Save the relative path
+                Product.ImageUrl = "img/Milk/" + uniqueFileName; // Save the relative path
             }
             _productService.Add(Product);
             _productService.Save();
