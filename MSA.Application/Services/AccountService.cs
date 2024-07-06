@@ -37,7 +37,7 @@ namespace MSA.Application.Services
         }
         public IEnumerable<Account> SearchByName(string name)
         {
-            return _accountRepository.GetAll().Where(x => x.FullName!.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+            return _accountRepository.GetAll().Where(x => x.FullName!.Contains(name, StringComparison.OrdinalIgnoreCase) && x.IsDeleted == false).ToList();
         }
 
         public IEnumerable<Account> GetAll()
