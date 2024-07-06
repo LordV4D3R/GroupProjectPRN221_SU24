@@ -88,6 +88,7 @@ namespace MSA.Presentation.Pages
                     _httpContextAccessor.HttpContext!.Session.SetString("CurrentUser", customerJson);
                     string currentUser = _httpContextAccessor.HttpContext!.Session.GetString("CurrentUser");
                     HttpContext.Session.SetString("role", account.Role.ToString());
+                    HttpContext.Session.SetString("fullname", account.FullName);
                     switch (account.Role.ToString())
                     {
                         case "Staff":
