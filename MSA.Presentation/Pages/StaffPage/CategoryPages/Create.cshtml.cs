@@ -39,7 +39,7 @@ namespace MSA.Presentation.Pages.CategoryPages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            var existingCategory = _categoryService.GetAll().FirstOrDefault(p => p.CategoryName == Category.CategoryName);
+            var existingCategory = _categoryService.GetAll().FirstOrDefault(p => p.CategoryName == Category.CategoryName && p.IsDeleted == false);
 
             if (existingCategory != null)
             {
