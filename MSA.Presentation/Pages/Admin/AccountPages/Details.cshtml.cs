@@ -23,21 +23,29 @@ namespace MSA.Presentation.Pages.AccountPages
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null)
+            var role = HttpContext.Session.GetString("role");
+            if (role != "Admin" || role == null)
             {
-                return NotFound();
-            }
-
-            var account = _accountService.GetById(id);
-            if (account == null)
-            {
-                return NotFound();
+                return RedirectToPage("/AccessDenied");
             }
             else
             {
-                Account = account;
-            }
-            return Page();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var account = _accountService.GetById(id);
+                if (account == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    Account = account;
+                }
+                return Page();
+            }            
         }
     }
 }
