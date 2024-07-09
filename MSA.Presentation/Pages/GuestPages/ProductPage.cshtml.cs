@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.IdentityModel.Tokens;
 using MSA.Application.IRepositories;
 using MSA.Application.IServices;
 using MSA.Application.Services;
@@ -82,17 +83,20 @@ namespace MSA.Presentation.Pages.GuestPages
                         _orderService.Save();
                     } else
                     {
-                        if (order.OrderDetails.Any(x => x.ProductId == product.Id))
+                        var list = _orderDetailService.GetAll().Where(x => x.OrderId == order.Id && x.ProductId == id);
+                        if (!list.IsNullOrEmpty())
                         {
-                            OrderDetail orderDetail = order.OrderDetails.FirstOrDefault(x => x.ProductId == product.Id);
+							OrderDetail orderDetail = list.First();
                             orderDetail.Quantity++;
                             orderDetail.Price = order.TotalQuantity * product.Price;
                             orderDetail.OrderId = order.Id;
                             order.TotalPrice += product.Price;
                             order.TotalQuantity += orderDetail.Quantity;
-                            
+                            _orderDetailService.Update(orderDetail);
+							_orderService.Update(order);
 
-                        } else
+						}
+						else
                         {
                             OrderDetail newOrderDetail = new OrderDetail
                             {
@@ -100,10 +104,11 @@ namespace MSA.Presentation.Pages.GuestPages
                                 Price = product.Price,
                                 ProductId = product.Id,
                             };
-                            order.OrderDetails.Add(newOrderDetail);
                             order.TotalPrice += product.Price;
-
-                        }
+                            order.OrderDetails.Add(newOrderDetail);
+							_orderService.Add(order);
+							_orderService.Save();
+						}
                     }
                 }
                 
