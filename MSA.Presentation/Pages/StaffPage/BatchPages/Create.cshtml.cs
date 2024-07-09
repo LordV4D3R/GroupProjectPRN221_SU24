@@ -44,8 +44,14 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
         public BatchVM request { get; set; } = new BatchVM();
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync(BatchVM request)
+        public async Task<IActionResult> OnPostAsync(BatchVM request, Guid id)
         {
+            if (request.ExpOn <= DateTime.Now)
+            {
+                ModelState.AddModelError("request.ExpOn", "Expiration date must be in the future.");
+                ViewData["ProductName"] = new SelectList(_productService.GetAll().Where(x => x.Id == id), "Id", "ProductName");
+                return Page();
+            }
             Batch newBacth = new Batch
             {
                 Quantity = request.Quantity,
@@ -54,10 +60,11 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
                 Status = BatchStatus.Active,
                 ProductId = request.ProductId
             };
+
             _batchService.Add(newBacth);
             _batchService.Save();
 
-            return RedirectToPage("./Index", new { id = request.ProductId });
+            return RedirectToPage("/StaffPage/ProductPages/Details", new { id = request.ProductId });
         }
     }
 }
