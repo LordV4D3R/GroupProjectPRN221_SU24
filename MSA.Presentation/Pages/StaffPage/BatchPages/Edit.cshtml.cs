@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Azure.Core;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -55,8 +56,14 @@ namespace MSA.Presentation.Pages.Admin.BatchPages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (Batch.ExpOn <= DateTime.Now)
+            {
+                ModelState.AddModelError("Batch.ExpOn", "Expiration date must be in the future.");
+                ViewData["ProductName"] = new SelectList(_productService.GetAll().Where(x => x.Id == Batch.ProductId), "Id", "ProductName");
+                return Page();
+            }
             _batchService.Update2(Batch);
-            return RedirectToPage("./Index", new { id = Batch.ProductId });
+            return RedirectToPage("/StaffPage/ProductPages/Details", new { id = Batch.ProductId });
         }
     }
 }
