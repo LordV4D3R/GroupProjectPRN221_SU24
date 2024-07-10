@@ -34,6 +34,18 @@ namespace MSA.Presentation.Pages
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync(SignUpViewModel request)
         {
+            var existingAccountName = _accountService.GetAll().FirstOrDefault(a => a.Username == Account.Username);
+            var existingAccountEmail = _accountService.GetAll().FirstOrDefault(b => b.Email == Account.Email);
+            if (existingAccountName != null)
+            {
+                ModelState.AddModelError("Account.Username", "Account Name exist");
+                return Page();
+            }
+            if (existingAccountEmail != null)
+            {
+                ModelState.AddModelError("Account.Email", "Account Email exist");
+                return Page();
+            }
             Account newAccount = new Account
             {
                 Username = request.Username,
