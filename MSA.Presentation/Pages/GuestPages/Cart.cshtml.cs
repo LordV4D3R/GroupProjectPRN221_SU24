@@ -70,8 +70,7 @@ namespace MSA.Presentation.Pages.GuestPages
                         var name = _productService.GetById(item.ProductId);
                         ProductName.Add(name?.ProductName ?? "Unknown");
                     }
-                }
-            
+                }            
             }
         }
     }

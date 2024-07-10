@@ -65,6 +65,8 @@ namespace MSA.Presentation.Pages.GuestPages
 
                             OrderStatus = OrderStatus.InCart,
                             CustomerId = current.Id,
+                            TotalPrice = product.Price,
+                            TotalQuantity = 1,
                             OrderDetails = new List<OrderDetail>(),
                             CreatedOn = DateTime.Now,
                         };
@@ -88,7 +90,7 @@ namespace MSA.Presentation.Pages.GuestPages
                         {
 							OrderDetail orderDetail = list.First();
                             orderDetail.Quantity++;
-                            orderDetail.Price = order.TotalQuantity * product.Price;
+                            orderDetail.Price = orderDetail.Quantity * product.Price;
                             orderDetail.OrderId = order.Id;
                             order.TotalPrice += product.Price;
                             order.TotalQuantity += orderDetail.Quantity;
@@ -103,12 +105,16 @@ namespace MSA.Presentation.Pages.GuestPages
                                 Quantity = 1,
                                 Price = product.Price,
                                 ProductId = product.Id,
+                                OrderId = order.Id,
                             };
                             order.TotalPrice += product.Price;
-                            order.OrderDetails.Add(newOrderDetail);
-							_orderService.Add(order);
-							_orderService.Save();
-						}
+                            order.TotalQuantity += 1;
+                            order.TotalPrice += product.Price;
+                            _orderDetailService.Add(newOrderDetail);
+                            _orderDetailService.Save();
+                            _orderService.Update(order);
+
+                        }
                     }
                 }
                 
