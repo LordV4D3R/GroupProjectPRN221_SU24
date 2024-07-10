@@ -63,7 +63,10 @@
                                         }
                                         else
                                         {
-                                            <li><a href="?handler=cart&id=@product.ProductId"><i class="fa fa-shopping-cart"></i></a></li>
+                                            if(product.Status == Domain.Enums.ProductStatus.InStock)
+                                            {
+                                                <li><a href="?handler=cart&id=@product.ProductId"><i class="fa fa-shopping-cart"></i></a></li>
+                                            }                                           
                                         }
                                     </ul>
                                 </div>
@@ -72,6 +75,7 @@
                             <div class="down-content">
                                 <h4>@product.ProductName</h4>
                                 <span>$ @product.Price</span>
+                                <span>$ @product.Quantity</span>
                             </div>
                         </div>
                 </div>

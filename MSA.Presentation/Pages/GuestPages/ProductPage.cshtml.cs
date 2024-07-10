@@ -21,18 +21,21 @@ namespace MSA.Presentation.Pages.GuestPages
         private readonly IOrderService _orderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IOrderDetailService _orderDetailService;
+        private readonly IBatchService _batchService;
 
         public ProductPageModel(ILogger<IndexModel> logger,
             IProductService productService,
             IOrderService orderService,
             IHttpContextAccessor httpContextAccessor,
-            IOrderDetailService orderDetailService)
+            IOrderDetailService orderDetailService,
+            IBatchService batchService)
         {
             _logger = logger;
             _productService = productService;
             _orderService = orderService;
             _httpContextAccessor = httpContextAccessor;
             _orderDetailService = orderDetailService;
+            _batchService = batchService;
         }
 
         [BindProperty]
@@ -49,6 +52,27 @@ namespace MSA.Presentation.Pages.GuestPages
 
         public async Task<IActionResult> OnGetCartAsync(Guid id)
         {
+            var batches = _batchService.GetAllByProductId(id).OrderBy(b => b.ExpOn).ToList();
+            var productTotalQuantity = _batchService.GetAllByProductId(id).Sum(x => x.Quantity);
+            int remainingQuantity = 1;
+            foreach (var batch in batches)
+            {
+                if (batch.Quantity >= remainingQuantity)
+                {
+                    batch.Quantity -= remainingQuantity;
+                    remainingQuantity = 0;
+                    _batchService.Update2(batch);
+                    break;
+                }
+                else
+                {
+                    remainingQuantity -= batch.Quantity;
+                    batch.Quantity = 0;
+                    _batchService.Update2(batch);
+                }
+            }
+
+
             Product product = _productService.GetById(id);
             if (product != null)
             {
@@ -96,7 +120,6 @@ namespace MSA.Presentation.Pages.GuestPages
                             order.TotalQuantity += orderDetail.Quantity;
                             _orderDetailService.Update(orderDetail);
 							_orderService.Update(order);
-
 						}
 						else
                         {
@@ -125,12 +148,13 @@ namespace MSA.Presentation.Pages.GuestPages
 
         private void LoadData()
         {
-            Product = _productService.GetAll().ToList();
+            Product = _productService.GetAll().Where(x => x.IsDeleted == false).ToList();         
             ProductViewModel = Product.Select(product => new ProductViewModel
             {
                 ProductId = product.Id,
                 ProductName = product.ProductName,
                 Price = product.Price,
+                Quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity),
                 Description = product.Description,
                 ImageUrl = product.ImageUrl,
                 Status = product.Status
