@@ -43,6 +43,18 @@ namespace MSA.Presentation.Pages
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            var existingAccountName = _accountService.GetAll().FirstOrDefault(a => a.Username == Account.Username);
+            var existingAccountEmail = _accountService.GetAll().FirstOrDefault(b => b.Email == Account.Email);
+            if (existingAccountName != null)
+            {
+                ModelState.AddModelError("Account.Username", "Account name exist");
+                return Page();
+            }
+            if (existingAccountEmail != null)
+            {
+                ModelState.AddModelError("Account.Email", "Account Email exist");
+                return Page();
+            }
             _accountService.Update2(Account);
             return RedirectToPage("/Index");
         }
