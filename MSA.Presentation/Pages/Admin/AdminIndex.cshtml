@@ -3,12 +3,13 @@
 @{
     ViewData["Title"] = "Admin Index";
 }
+<h1>----------------------------------------------------</h1>
 <div class="text-center">
     @if (HttpContext.Session.GetString("role") == "Admin")
     {
 
-        <h1 class="display-4">Welcome, @HttpContext.Session.GetString("fullname")</h1>
-        <p>Have a nice day!</p>
+        <h2 class="display-4">Welcome, @HttpContext.Session.GetString("fullname")</h2>
+        <p>-----------------------------------------------</p>
         <form method="post" asp-page-handler="login">
             <table align="center">
                 <div>

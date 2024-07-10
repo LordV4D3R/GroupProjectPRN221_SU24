@@ -24,7 +24,12 @@ namespace MSA.Presentation.Pages.AccountPages
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            if (id == null)
+            var role = HttpContext.Session.GetString("role");
+            if (role != "Admin" || role == null)
+            {
+                return RedirectToPage("/AccessDenied");
+            }
+            else if (id == null)
             {
                 return NotFound();
             }
