@@ -54,6 +54,7 @@ namespace MSA.Presentation.Pages.GuestPages
         {
             var batches = _batchService.GetAllByProductId(id).OrderBy(b => b.ExpOn).ToList();
             var productTotalQuantity = _batchService.GetAllByProductId(id).Sum(x => x.Quantity);
+
             int remainingQuantity = 1;
             foreach (var batch in batches)
             {
@@ -71,10 +72,9 @@ namespace MSA.Presentation.Pages.GuestPages
                     _batchService.Update2(batch);
                 }
             }
-
-
             Product product = _productService.GetById(id);
-            if (product != null)
+
+            if (product != null && product.Status == ProductStatus.InStock)
             {
                 //Check Session
                 AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
@@ -149,7 +149,17 @@ namespace MSA.Presentation.Pages.GuestPages
 
         private void LoadData()
         {
-            Product = _productService.GetAll("OrderDetails").Where(x => x.IsDeleted == false).ToList();         
+            Product = _productService.GetAll().Where(x => x.IsDeleted == false).ToList();
+            foreach (var product in Product)
+            {
+                var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
+                if (quantity == 0 && product.Status == ProductStatus.InStock)
+                {
+                    product.Status = ProductStatus.OutOfStock;
+                    _productService.Update2(product);
+                }
+            }
+
             ProductViewModel = Product.Select(product => new ProductViewModel
             {
                 ProductId = product.Id,
