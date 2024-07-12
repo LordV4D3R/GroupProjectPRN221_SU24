@@ -10,7 +10,7 @@ namespace Services
     public interface IProductService
     {
         IEnumerable<Product> SearchByName(string name);
-        IEnumerable<Product> GetAll();
+        IEnumerable<Product> GetAll(string include = "");
         Product GetById(Guid id);
         void Add(Product product);
         void Update(Product product);

@@ -93,6 +93,7 @@ namespace MSA.Presentation.Pages.GuestPages
                             TotalQuantity = 1,
                             OrderDetails = new List<OrderDetail>(),
                             CreatedOn = DateTime.Now,
+                            CreatedBy = current.DisplayName,
                         };
 
                         OrderDetail newOrderDetail = new OrderDetail
@@ -118,6 +119,7 @@ namespace MSA.Presentation.Pages.GuestPages
                             orderDetail.OrderId = order.Id;
                             order.TotalPrice += product.Price;
                             order.TotalQuantity += orderDetail.Quantity;
+                            order.UpdatedOn = DateTime.Now;
                             _orderDetailService.Update(orderDetail);
 							_orderService.Update(order);
 						}
@@ -136,7 +138,6 @@ namespace MSA.Presentation.Pages.GuestPages
                             _orderDetailService.Add(newOrderDetail);
                             _orderDetailService.Save();
                             _orderService.Update(order);
-
                         }
                     }
                 }
@@ -148,7 +149,7 @@ namespace MSA.Presentation.Pages.GuestPages
 
         private void LoadData()
         {
-            Product = _productService.GetAll().Where(x => x.IsDeleted == false).ToList();         
+            Product = _productService.GetAll("OrderDetails").Where(x => x.IsDeleted == false).ToList();         
             ProductViewModel = Product.Select(product => new ProductViewModel
             {
                 ProductId = product.Id,

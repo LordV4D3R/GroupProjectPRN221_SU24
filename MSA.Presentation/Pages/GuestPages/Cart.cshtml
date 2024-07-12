@@ -11,55 +11,71 @@
 
 <body>
 
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-    <!-- ***** Preloader End ***** -->
-    <!-- ***** Products Area Starts ***** -->
-    <section class="section" id="products">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-heading">
-                        <h2>Giỏ hàng</h2>
-                        @* <span>Cửa hàng</span> *@
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                @if (Model.OrderDetail == null || Model.OrderDetail.Count == 0)
-                {
-                    <div class="col-lg-12">
-                        <p>Giỏ hàng trống</p>
-                    </div>
-                }
-                else
-                {
-                    @foreach (var orderDetail in Model.OrderDetail)
-                    {
-                        var index = Model.OrderDetail.IndexOf(orderDetail);
-                        <div class="col-lg-4">
-                            <div class="item">
-                                <div class="down-content">
-                                    <h4>@Model.ProductName[index]</h4>
-                                    <span>Tổng giá: $ @Html.DisplayFor(modelItem => orderDetail.Price)</span>
-                                    <span>Số lượng:  @Html.DisplayFor(modelItem => orderDetail.Quantity)</span>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-            </div>
-        </div>
-    </section>
-    <!-- ***** Products Area Ends ***** -->
+	<!-- ***** Preloader Start ***** -->
+	<div id="preloader">
+		<div class="jumper">
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	<!-- ***** Preloader End ***** -->
+	<!-- ***** Products Area Starts ***** -->
+	<section class="section" id="products">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="section-heading">
+						<h2>Giỏ hàng</h2>
+						@* <span>Cửa hàng</span> *@
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				@if (Model.OrderDetail == null || Model.OrderDetail.Count == 0)
+				{
+					<div class="col-lg-12">
+						<span>Giỏ hàng trống</span>
+						<p></p>
+					</div>
+				}
+				else
+				{
+
+
+						@foreach (var orderDetail in Model.OrderDetail)
+						{
+							var index = Model.OrderDetail.IndexOf(orderDetail);
+							<div class="col-lg-4">
+								<div class="item">
+									<div class="down-content">
+										<h4>@Model.ProductName[index]</h4>
+										<span>Giá: $ @Html.DisplayFor(modelItem => orderDetail.Price)</span>
+										<span>Số lượng:  @Html.DisplayFor(modelItem => orderDetail.Quantity)</span>
+									</div>
+								</div>
+							</div>
+						}
+					<form method="post">
+						<div class="down-content">
+							<span>Tổng giá: $ @Model.Order.TotalPrice</span>
+							<span>Tổng số lượng:  @Model.Order.TotalQuantity</span>
+
+							<input asp-for="OrderViewModel.OrderId" type="hidden" class="form-control" value="@Model.Order.Id" />
+						</div>
+						<button type="submit" data-mdb-button-init data-mdb-ripple-init
+						class="btn btn-primary btn-block mb-4" asp-page-handler="ProcessPayment">
+							Thanh toán
+						</button>
+					</form>
+				}
+			</div>
+		</div>
+
+	</section>
+	<!-- ***** Products Area Ends ***** -->
 
 </body>
 
