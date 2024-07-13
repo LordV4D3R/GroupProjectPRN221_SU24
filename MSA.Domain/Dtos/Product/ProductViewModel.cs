@@ -12,6 +12,7 @@ namespace MSA.Domain.Dtos.Product
     {
         public Guid ProductId { get; set; } = Guid.Empty;
         public string ProductName { get; set; } = string.Empty;
+        public int Quantity { get; set; } = 0;
         public double Price { get; set; } = 0;
         public string Description { get; set; } = string.Empty;
         public string ImageUrl { get; set; } = string.Empty;

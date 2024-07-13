@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using MSA.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,12 @@ namespace MSA.Application.DAO
             _context = new ApplicationDbContext();
             _dbSet = _context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll(string include = "")
         {
+            if (!include.IsNullOrEmpty())
+            {
+                return _dbSet.Include(include);
+            }
             return _dbSet;
         }
         public T? GetById(Guid id)

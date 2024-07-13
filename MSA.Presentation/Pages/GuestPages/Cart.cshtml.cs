@@ -43,7 +43,7 @@ namespace MSA.Presentation.Pages.GuestPages
                 return Redirect("/LoginPage");
             }
             LoadCart(current);
-            ViewData["CustomerId"] = new SelectList(_accountService.GetAll(), "Id", "Address");
+
             return Page();
         }
 
@@ -51,7 +51,7 @@ namespace MSA.Presentation.Pages.GuestPages
         public Order Order { get; set; } = default!;
         public ProductViewModel ProductViewModels { get; set; } = default!;
         public IEnumerable<OrderDetailDto> OrderDetailDtos { get; set; } = default!;
-		public IList<OrderDetail> OrderDetail { get; set; } = default!;
+        public IList<OrderDetail> OrderDetail { get; set; } = default!;
         public IList<OrderDetailViewModel> OrderDetailViewModels { get; set; } = default!;
         public OrderViewModel OrderViewModel { get; set; } = default!;
         public List<string> ProductName { get; set; } = new List<string>();
@@ -70,9 +70,28 @@ namespace MSA.Presentation.Pages.GuestPages
                         var name = _productService.GetById(item.ProductId);
                         ProductName.Add(name?.ProductName ?? "Unknown");
                     }
-                }
-            
+					OrderViewModel = new OrderViewModel
+					{
+						OrderId = Order.Id,
+						TotalPrice = Order.TotalPrice,
+						TotalQuantity = Order.TotalQuantity,
+					};
+				}
             }
         }
+		public async Task<IActionResult> OnPostAsync(string handler)
+		{
+			if (handler == "ProcessPayment")
+			{
+                AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
+
+                Order = _orderService.GetOrderInCartStatusByAccountId(current.Id);
+                Order.OrderStatus = OrderStatus.Pending;
+				 _orderService.Update(Order);
+
+				return RedirectToPage("SuccessOrder");
+			}
+			return Page();
+		}
     }
 }

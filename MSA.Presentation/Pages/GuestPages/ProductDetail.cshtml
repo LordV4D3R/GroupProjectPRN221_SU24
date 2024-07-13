@@ -50,12 +50,23 @@
                         <h4>@Model.ProductViewModel.ProductName</h4>
                         <span class="price">$ @Model.ProductViewModel.Price</span>
                         <span>@Model.ProductViewModel.Description</span>
-                        @* <div class="quote">
-                            <i class="fa fa-quote-left"></i><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiuski smod.</p>
-                        </div> *@
+                        @if (@Model.ProductViewModel.Status == Domain.Enums.ProductStatus.InStock)
+                        {
+                            <div class="quote">
+                                <p>Chỉ còn: @Model.ProductViewModel.TotalQuantity</p>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="quote">
+                                <p>Hết hàng</p>
+                            </div>
+                        }
+
+                        <form>
                         <div class="quantity-content">
                             <div class="left-content">
-                                <h6>Số lượng</h6>
+                                <h6>Số lượng mua</h6>
                             </div>
                             <div class="right-content">
                                 <div class="quantity buttons_added">
@@ -65,8 +76,10 @@
                         </div>
                         <div class="total">
                             <h4>Tổng tiền: $210.00</h4>
+                              
                             <div class="main-border-button"><a href="#">Add To Cart</a></div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
