@@ -118,7 +118,7 @@ namespace MSA.Presentation.Pages.GuestPages
                             orderDetail.Price = orderDetail.Quantity * product.Price;
                             orderDetail.OrderId = order.Id;
                             order.TotalPrice += product.Price;
-                            order.TotalQuantity += orderDetail.Quantity;
+                            order.TotalQuantity++;
                             order.UpdatedOn = DateTime.Now;
                             _orderDetailService.Update(orderDetail);
 							_orderService.Update(order);

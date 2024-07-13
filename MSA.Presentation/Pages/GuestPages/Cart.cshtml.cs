@@ -83,9 +83,10 @@ namespace MSA.Presentation.Pages.GuestPages
 		{
 			if (handler == "ProcessPayment")
 			{
-				Order = _orderService.GetById(OrderViewModel.OrderId);
+                AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
 
-				Order.OrderStatus = OrderStatus.Pending;
+                Order = _orderService.GetOrderInCartStatusByAccountId(current.Id);
+                Order.OrderStatus = OrderStatus.Pending;
 				 _orderService.Update(Order);
 
 				return RedirectToPage("SuccessOrder");
