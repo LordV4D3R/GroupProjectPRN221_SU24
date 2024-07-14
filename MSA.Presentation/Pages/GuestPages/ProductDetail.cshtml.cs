@@ -41,7 +41,6 @@ namespace MSA.Presentation.Pages.GuestPages
         public Product Product { get; set; } = default!;
         [BindProperty]
         public ProductViewModel ProductViewModel { get; set; } = default!;
-
         public List<string> CategoryName { get; set; } = new List<string>();
 
         public async Task<IActionResult> OnGetAsync(Guid id)
@@ -74,10 +73,16 @@ namespace MSA.Presentation.Pages.GuestPages
 
         public async Task<IActionResult> OnPostCartAsync()
         {
+
             var batches = _batchService.GetAllByProductId(ProductViewModel.ProductId).OrderBy(b => b.ExpOn).ToList();
             var productTotalQuantity = _batchService.GetAllByProductId(ProductViewModel.ProductId).Sum(x => x.Quantity);
-
-            int remainingQuantity = 1;
+            if (productTotalQuantity < ProductViewModel.Quantity)
+            {
+                ModelState.AddModelError("ProductViewModel.Quantity", "Invalid Quantity!!!");
+                LoadData(ProductViewModel.ProductId);
+                return Page();
+            }
+            int remainingQuantity = ProductViewModel.Quantity;
             foreach (var batch in batches)
             {
                 if (batch.Quantity >= remainingQuantity)
