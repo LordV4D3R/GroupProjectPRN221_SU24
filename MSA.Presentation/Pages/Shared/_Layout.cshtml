@@ -71,14 +71,9 @@
             <div class="row">
                 <div class="col-12">
                     <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            <img src="/images/logo.png">
-                        </a>
-                        <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="/Index" class="active">Home</a></li>
+                            <li class="scroll-to-section"><a href="/Index" class="active">Trang Chủ</a></li>
                             @* <li class="scroll-to-section"><a href="#men">Men's</a></li>
                             <li class="scroll-to-section"><a href="#women">Women's</a></li>
                             <li class="scroll-to-section"><a href="#kids">Kid's</a></li> *@
@@ -106,6 +101,14 @@
                             else
                             {
                                 <li class="submenu">
+                                    <a href="javascript:;">Đơn hàng</a>
+                                    <ul>
+                                        <li><a href="/Admin/AccountPages/Details?id=@user.Id">Đơn hàng đang duyệt</a></li>
+                                        <li><a href="/Admin/AccountPages/Details?id=@user.Id">Đơn hàng đang giao</a></li>
+                                        <li><a href="~/GuestPages/OrderHistory">Lịch sử</a></li>
+                                    </ul>
+                                </li>
+                                <li class="submenu">
                                     <a href="javascript:;">@user.DisplayName</a>
                                     <ul>
                                         <li><a href="~/GuestPages/Cart">Giỏ hàng</a></li>
@@ -114,11 +117,6 @@
                                     </ul>
                                 </li>
                             }
-
-
-
-                            @* <li><a href="~/LoginPage">Đăng nhập</a></li>
-                            <li><a href="~/GuestPages/ProductPage">Giỏ hàng</a></li> *@
 
                         </ul>
                         <a class='menu-trigger'>
@@ -149,9 +147,6 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="first-item">
-                        <div class="logo">
-                            <img src="/images/white-logo.png" alt="hexashop ecommerce templatemo">
-                        </div>
                         <ul>
                             <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
                             <li><a href="#">hexashop@company.com</a></li>
