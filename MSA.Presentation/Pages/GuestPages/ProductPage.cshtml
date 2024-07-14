@@ -56,18 +56,6 @@
                                 <div class="hover-content">
                                     <ul>
                                         <li><a href="@Url.Page("ProductDetail", new { id = product.ProductId })"><i class="fa fa-eye"></i></a></li>
-                                        @*                                         @if (HttpContext.Session.GetString("CurrentUser") == null)
-                                    {
-                                    <li><a href="/LoginPage"><i class="fa fa-shopping-cart"></i></a></li>
-                                    }
-                                    else
-                                    {
-                                    if (product.Status == Domain.Enums.ProductStatus.InStock)
-                                    {
-
-                                    <li><a href="?handler=cart&id=@product.ProductId"><i class="fa fa-shopping-cart"></i></a></li>
-                                    }
-                                    } *@
                                         @if (product.Status == Domain.Enums.ProductStatus.InStock)
                                         {
                                             if (HttpContext.Session.GetString("CurrentUser") == null)
