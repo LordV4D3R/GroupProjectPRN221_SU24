@@ -62,31 +62,51 @@
                                 <p>Hết hàng</p>
                             </div>
                         }
-
-                        <form>
-                        <div class="quantity-content">
-                            <div class="left-content">
-                                <h6>Số lượng mua</h6>
-                            </div>
-                            <div class="right-content">
-                                <div class="quantity buttons_added">
-                                    <input type="button" value="-" class="minus"><input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="" inputmode=""><input type="button" value="+" class="plus">
+                        <form method="post" id="postForm" asp-page-handler="Cart">
+                            <div class="quantity-content">
+                                <div class="left-content">
+                                    <h6>Số lượng mua</h6>
+                                </div>
+                                <div class="right-content">
+                                    <div class="quantity buttons_added">
+                                        <input asp-for="ProductViewModel.Quantity" type="number" value="1" title="Qty" class="input-text qty text form-control" size="4" pattern="" inputmode="">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="total">
-                            <h4>Tổng tiền: $210.00</h4>
-                              
-                            <div class="main-border-button"><a href="#">Add To Cart</a></div>
-                        </div>
+                            <div class="total">
+                                <h4>Giá sản phẩm: $ @Model.ProductViewModel.Price</h4>
+                                @if (Model.ProductViewModel.Status == Domain.Enums.ProductStatus.InStock)
+                                {
+                                    if (HttpContext.Session.GetString("CurrentUser") == null)
+                                    {
+                                        <div class="main-border-button"><a href="/LoginPage">Thêm vào giỏ</a></div>
+                                    }
+                                    else
+                                    {
+                                        <input type="hidden" asp-for="ProductViewModel.ProductId" />
+
+                                        @* <div class="main-border-button"><button type="submit">Thêm vào giỏ</button></div> *@
+                                        <div class="main-border-button">
+                                            <a onclick="submitPostForm()">Thêm vào giỏ</a>                                            
+                                        </div>
+
+                                    }
+                                }
+                            </div>
                         </form>
+
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- ***** Product Area Ends ***** -->
-
+    <script>
+        function submitPostForm() {
+            document.getElementById('postForm').submit();
+        }
+    </script>
 </body>
 
 </html>
