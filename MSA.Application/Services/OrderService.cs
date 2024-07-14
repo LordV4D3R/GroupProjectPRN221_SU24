@@ -64,7 +64,7 @@ namespace MSA.Application.Services
         public IEnumerable<Order> GetOrderCompletedAndCancelStatusByAccountId(Guid id)
         {
             return _orderRepository.GetAll().Where
-                (x => x.OrderStatus == Domain.Enums.OrderStatus.Completed || x.OrderStatus == Domain.Enums.OrderStatus.Completed);
+                (x => x.OrderStatus == Domain.Enums.OrderStatus.Completed || x.OrderStatus == Domain.Enums.OrderStatus.Cancelled);
         }
         
     }
