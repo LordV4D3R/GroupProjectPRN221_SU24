@@ -31,7 +31,7 @@ namespace MSA.Domain.Entities
             
         [Column("status")]
         [EnumDataType(typeof(ProductStatus))]
-        public ProductStatus Status { get; set; } = ProductStatus.OutOfStock;
+        public ProductStatus Status { get; set; } = ProductStatus.ComingSoon;
 
         [InverseProperty("Product")]
         public ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
