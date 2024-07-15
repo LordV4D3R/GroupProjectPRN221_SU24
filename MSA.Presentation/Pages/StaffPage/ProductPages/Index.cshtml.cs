@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using MSA.Application.IServices;
 using MSA.Application.Services;
 using MSA.Domain.Entities;
+using MSA.Domain.Enums;
 using MSA.Infrastructure;
 using Services;
 
@@ -41,15 +42,16 @@ namespace MSA.Presentation.Pages.ProductPages
             }
             else
             {
+
                 if (!string.IsNullOrEmpty(SearchString))
                 {
                     Product = _productService.SearchByName(SearchString).ToList();
                     foreach (var product in Product)
                     {
-                        var category = _categoryService.GetById(product.CategoryId);
+                        var category = _categoryService.GetById(product.CategoryId);                        
                         CategoryName.Add(category?.CategoryName ?? "Unknown");
-                        var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity).ToString();
-                        Quantity.Add(quantity ?? "Unknown");
+                        var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
+                        Quantity.Add(quantity.ToString() ?? "Unknown");
                     }
                 }
                 else { 
@@ -58,12 +60,11 @@ namespace MSA.Presentation.Pages.ProductPages
                 {
                     var category = _categoryService.GetById(product.CategoryId);
                     CategoryName.Add(category?.CategoryName ?? "Unknown");
-                    var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity).ToString();
-                    Quantity.Add(quantity ?? "Unknown");
+                    var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
+                    Quantity.Add(quantity.ToString() ?? "Unknown");
                 }
                 }
-               return Page();
-                
+                return Page();                
             }   
         }
     }

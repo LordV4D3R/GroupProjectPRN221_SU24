@@ -70,7 +70,7 @@ namespace MSA.Presentation.Pages.ProductPages
             if (ProductImage != null)
             {
                 var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "img", "Milk");
-                var uniqueFileName = Guid.NewGuid().ToString() + "_" + ProductImage.FileName;
+                var uniqueFileName = ProductImage.FileName;
                 var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
