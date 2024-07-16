@@ -143,7 +143,7 @@ namespace MSA.Presentation.Pages.GuestPages
                         orderDetail.Price = orderDetail.Quantity * product.Price;
                         orderDetail.OrderId = order.Id;
                         order.TotalPrice += product.Price * ProductViewModel.Quantity;
-                        order.TotalQuantity += orderDetail.Quantity;
+                        order.TotalQuantity += ProductViewModel.Quantity;
                         order.UpdatedOn = DateTime.Now;
                         _orderDetailService.Update(orderDetail);
                         _orderService.Update(order);
@@ -157,9 +157,8 @@ namespace MSA.Presentation.Pages.GuestPages
                             ProductId = product.Id,
                             OrderId = order.Id,
                         };
-                        order.TotalPrice += product.Price;
-                        order.TotalQuantity += 1;
-                        order.TotalPrice += product.Price;
+                        order.TotalPrice += newOrderDetail.Price;
+                        order.TotalQuantity += newOrderDetail.Quantity;
                         _orderDetailService.Add(newOrderDetail);
                         _orderDetailService.Save();
                         _orderService.Update(order);
