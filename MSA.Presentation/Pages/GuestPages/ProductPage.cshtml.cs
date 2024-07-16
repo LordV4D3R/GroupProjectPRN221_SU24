@@ -56,7 +56,7 @@ namespace MSA.Presentation.Pages.GuestPages
         public async Task<IActionResult> OnGetCartAsync(Guid productId)
         {
             var batches = _batchService.GetAllByProductId(productId).OrderBy(b => b.ExpOn).ToList();
-            var productTotalQuantity = _batchService.GetAllByProductId(productId).Sum(x => x.Quantity);
+            //var productTotalQuantity = _batchService.GetAllByProductId(productId).Sum(x => x.Quantity);
 
             int remainingQuantity = 1;
             foreach (var batch in batches)
