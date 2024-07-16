@@ -27,10 +27,10 @@
                 @Html.DisplayNameFor(model => model.ListOrder[0].Customer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ListOrder[0].CreatedOn)
+                Customer Address
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ListOrder[0].UpdatedOn)
+                @Html.DisplayNameFor(model => model.ListOrder[0].CreatedOn)
             </th>
             <th></th>
         </tr>
@@ -55,11 +55,12 @@
                     @Model.AccountName[index]
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedOn)
+                    @Model.Address[index]
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UpdatedOn)
+                @Html.DisplayFor(modelItem => item.CreatedOn)
             </td>
+
             <td>
                     @if (item.OrderStatus == OrderStatus.Pending || item.OrderStatus == OrderStatus.Processing)
                     {
