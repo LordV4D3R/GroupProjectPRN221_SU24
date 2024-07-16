@@ -38,7 +38,7 @@ namespace MSA.Presentation.Pages
             var existingAccountEmail = _accountService.GetAll().FirstOrDefault(b => b.Email == Account.Email);
             if (existingAccountName != null)
             {
-                ModelState.AddModelError("Account.Username", "Account Name exist");
+                ModelState.AddModelError("Account.Username", "Account Username exist");
                 return Page();
             }
             if (existingAccountEmail != null)
@@ -54,7 +54,7 @@ namespace MSA.Presentation.Pages
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
-                ImageUrl = request.ImageUrl,
+                ImageUrl = " ",
                 Role = RoleType.Customer,
                 Status = AccountStatus.Active,
             };

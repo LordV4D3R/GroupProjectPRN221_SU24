@@ -26,6 +26,8 @@ namespace MSA.Presentation.Pages.OrderPages
 
         public IList<Order> ListOrder { get;set; } = default!;
         public List<string> AccountName { get; set; } = new List<string>();
+        //public List<string> Username { get; set; } = new List<string>();
+        public List<string> Address { get; set; } = new List<string>();
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -40,7 +42,9 @@ namespace MSA.Presentation.Pages.OrderPages
                 foreach (var order in ListOrder)
                 {
                     var customer = _accountService.GetById(order.CustomerId);
-                    AccountName.Add(customer?.Username ?? "Unknown");
+                    AccountName.Add(customer?.FullName ?? "Unknown");
+                    //Username.Add(customer?.Username ?? "Unknown");
+                    Address.Add(customer?.Address ?? "Unknown");
                 }
                 return Page();
             }

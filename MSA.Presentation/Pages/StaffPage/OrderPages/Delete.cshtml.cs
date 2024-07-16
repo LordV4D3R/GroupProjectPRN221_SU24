@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -25,6 +26,7 @@ namespace MSA.Presentation.Pages.OrderPages
         [BindProperty]
         public Order Order { get; set; } = default!;
         public string AccountName { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
@@ -50,7 +52,7 @@ namespace MSA.Presentation.Pages.OrderPages
                 Order = order;
                 var customer = _accountService.GetById(Order.CustomerId);
                 AccountName = customer?.Username ?? "Unknown";
-
+                Address = customer?.Address ?? "Unknown";
             }
             return Page();
         }
