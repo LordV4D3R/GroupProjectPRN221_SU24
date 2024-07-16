@@ -52,18 +52,6 @@ namespace MSA.Presentation.Pages.ProductPages
             }
             else
             {
-                Product = product;
-                var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
-                if (quantity == 0 && product.Status == ProductStatus.InStock)
-                {
-                    product.Status = ProductStatus.OutOfStock;
-                    _productService.Update2(product);
-                }
-                if (quantity != 0)
-                {
-                    product.Status = ProductStatus.InStock;
-                    _productService.Update2(product);
-                }
                 var category = _categoryService.GetById(product.CategoryId);
                 CategoryName = category?.CategoryName ?? "Unknown";
                 Batch = _batchService.GetAll().Where(x => x.ProductId == id && x.IsDeleted == false).ToList();
@@ -81,6 +69,18 @@ namespace MSA.Presentation.Pages.ProductPages
                     _batchService.Update2(batch);
                     var name = _productService.GetById(batch.ProductId);
                     ProductName.Add(name?.ProductName ?? "Unknown");
+                }
+                Product = product;
+                var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
+                if (quantity == 0 && product.Status == ProductStatus.InStock)
+                {
+                    product.Status = ProductStatus.OutOfStock;
+                    _productService.Update2(product);
+                }
+                if (quantity != 0)
+                {
+                    product.Status = ProductStatus.InStock;
+                    _productService.Update2(product);
                 }
             }
             return Page();
