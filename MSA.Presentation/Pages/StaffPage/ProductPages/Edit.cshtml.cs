@@ -29,7 +29,7 @@ namespace MSA.Presentation.Pages.ProductPages
 
         [BindProperty]
         public Product Product { get; set; } = default!;
-        public IFormFile ProductImage { get; set; }
+        public IFormFile? ProductImage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
@@ -48,7 +48,7 @@ namespace MSA.Presentation.Pages.ProductPages
             {
                 return NotFound();
             }
-            Product = product;
+			Product = product;
            ViewData["CategoryId"] = new SelectList(_categoryService.GetAll(), "Id", "CategoryName");
             return Page();
         }

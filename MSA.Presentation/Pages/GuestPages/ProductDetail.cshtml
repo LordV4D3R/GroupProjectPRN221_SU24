@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="right-content">
                                     <div class="quantity buttons_added">
-                                        <input asp-for="ProductViewModel.Quantity" type="number" value="1" title="Qty" class="input-text qty text form-control" size="4" pattern="" inputmode="">
+                                        <input asp-for="ProductViewModel.Quantity" type="number" value="1" min="1" title="Qty" class="input-text qty text form-control" size="4" pattern="" inputmode="">
                                         <span asp-validation-for="ProductViewModel.Quantity" class="text-danger"></span>
                                     </div>
                                 </div>

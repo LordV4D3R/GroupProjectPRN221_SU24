@@ -83,7 +83,7 @@
                                 <ul>
                                     @foreach (var category in categoryService.GetAll())
                                     {
-                                        <li>@category.CategoryName</li>
+                                        <li><a href="~/GuestPages/ProductPage?categoryId=@category.Id">@category.CategoryName</a></li>
                                     }
                                 </ul>
                             </li>
