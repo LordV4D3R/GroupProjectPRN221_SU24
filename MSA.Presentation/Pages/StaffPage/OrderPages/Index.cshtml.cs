@@ -17,7 +17,7 @@ namespace MSA.Presentation.Pages.OrderPages
     {
         private readonly IOrderService _orderService;
         private readonly IAccountService _accountService;
-        private const int PageSize = 3;
+        private const int PageSize = 5;
         public IndexModel(IOrderService orderService, IAccountService accountService)
         {
             _orderService = orderService;
@@ -40,7 +40,7 @@ namespace MSA.Presentation.Pages.OrderPages
             }
             else
             {
-                IEnumerable<Order> query = _orderService.GetAll().Where(o => o.IsDeleted == false);
+                IEnumerable<Order> query = _orderService.GetAll().Where(o => o.IsDeleted == false).OrderBy(o => o.OrderStatus);
 
                 TotalPages = (int)Math.Ceiling(query.Count() / (double)PageSize);
 

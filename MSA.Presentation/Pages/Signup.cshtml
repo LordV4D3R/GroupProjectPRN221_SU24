@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="request.Password" class="control-label"></label>
-                <input asp-for="request.Password" class="form-control" />
+                <input asp-for="request.Password" type="password" class="form-control" />
                 <span asp-validation-for="request.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,12 +29,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="request.Email" class="control-label"></label>
-                <input asp-for="request.Email" class="form-control" />
+                <input asp-for="request.Email" type="email" class="form-control" />
                 <span asp-validation-for="request.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="request.PhoneNumber" class="control-label"></label>
-                <input asp-for="request.PhoneNumber" class="form-control" />
+                <input asp-for="request.PhoneNumber" type="number" class="form-control" />
                 <span asp-validation-for="request.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">

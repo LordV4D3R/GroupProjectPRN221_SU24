@@ -34,7 +34,7 @@ namespace MSA.Presentation.Pages.GuestPages
             _orderDetailService = orderDetailService;
             _productService = productService;
         }
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public async Task<IActionResult> OnGetAsync()
         {
             AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
             if (current == null || current.Role == RoleType.Staff)

@@ -46,18 +46,20 @@ namespace MSA.Presentation.Pages.GuestPages
         public IList<Product> Product { get; set; } = default!;
         public IList<Order> Order { get; set; } = default!;
         public Account Account { get; set; } = default!;
+        [BindProperty]
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
+        public Guid category {  get; set; }
 
-        public async Task<IActionResult> OnGetAsync(Guid categoryId)
+        public async Task<IActionResult> OnGetAsync(Guid categoryId, int currentPage = 1)
         {
-            LoadData(categoryId);
+            LoadData(categoryId, currentPage);
             return Page();
         }
 
-        public async Task<IActionResult> OnGetCartAsync(Guid productId)
+        public async Task<IActionResult> OnGetCartAsync(Guid productId, int currentPage = 1)
         {
             var batches = _batchService.GetAllByProductId(productId).OrderBy(b => b.ExpOn).ToList();
-            //var productTotalQuantity = _batchService.GetAllByProductId(productId).Sum(x => x.Quantity);
-
             int remainingQuantity = 1;
             foreach (var batch in batches)
             {
@@ -136,7 +138,6 @@ namespace MSA.Presentation.Pages.GuestPages
                             };
                             order.TotalPrice += product.Price;
                             order.TotalQuantity += 1;
-                            order.TotalPrice += product.Price;
                             _orderDetailService.Add(newOrderDetail);
                             _orderDetailService.Save();
                             _orderService.Update(order);
@@ -145,34 +146,67 @@ namespace MSA.Presentation.Pages.GuestPages
                 }
                 
             }
-            LoadData(product.CategoryId);
-            return Page();
+            return RedirectToPage("/GuestPages/Cart");
         }
 
-        private void LoadData(Guid id)
+        private void LoadData(Guid id, int currentPage = 1)
         {
-
-            Product = _productService.GetAll().Where(x => x.IsDeleted == false && x.CategoryId == id).ToList();
-            foreach (var product in Product)
+            if (id == Guid.Empty)
             {
-                var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
-                if (quantity == 0 && product.Status == ProductStatus.InStock)
+                CurrentPage = currentPage;
+                const int pageSize = 6;
+                var allProducts = _productService.GetAll().Where(x => !x.IsDeleted).ToList();
+                var totalProducts = allProducts.Count;
+
+                TotalPages = (int)Math.Ceiling(totalProducts / (double)pageSize);
+                Product = allProducts.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+                //Product = _productService.GetAll().Where(x => x.IsDeleted == false).ToList();
+                foreach (var product in Product)
                 {
-                    product.Status = ProductStatus.OutOfStock;
-                    _productService.Update2(product);
+                    var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
+                    if (quantity == 0 && product.Status == ProductStatus.InStock)
+                    {
+                        product.Status = ProductStatus.OutOfStock;
+                        _productService.Update2(product);
+                    }
                 }
-            }
 
-            ProductViewModel = Product.Select(product => new ProductViewModel
+                ProductViewModel = Product.Select(product => new ProductViewModel
+                {
+                    ProductId = product.Id,
+                    ProductName = product.ProductName,
+                    Price = product.Price,
+                    Quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity),
+                    Description = product.Description,
+                    ImageUrl = product.ImageUrl,
+                    Status = product.Status
+                }).ToList();
+            }
+            else
             {
-                ProductId = product.Id,
-                ProductName = product.ProductName,
-                Price = product.Price,
-                Quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity),
-                Description = product.Description,
-                ImageUrl = product.ImageUrl,
-                Status = product.Status
-            }).ToList();
+                Product = _productService.GetAll().Where(x => x.IsDeleted == false && x.CategoryId == id).ToList();
+                foreach (var product in Product)
+                {
+                    var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
+                    if (quantity == 0 && product.Status == ProductStatus.InStock)
+                    {
+                        product.Status = ProductStatus.OutOfStock;
+                        _productService.Update2(product);
+                    }
+                }
+
+                ProductViewModel = Product.Select(product => new ProductViewModel
+                {
+                    ProductId = product.Id,
+                    ProductName = product.ProductName,
+                    Price = product.Price,
+                    Quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity),
+                    Description = product.Description,
+                    ImageUrl = product.ImageUrl,
+                    Status = product.Status
+                }).ToList();
+            }
         }
     }
 }
