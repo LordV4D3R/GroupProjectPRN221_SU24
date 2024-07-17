@@ -43,27 +43,6 @@
     -->
 </head>
 <body>
-    @*     <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-    <div class="container">
-    <a class="navbar-brand" asp-area="" asp-page="/Index">MSA.Presentation</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-    aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-    <ul class="navbar-nav flex-grow-1">
-    <li class="nav-item">
-    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-    </li>
-    <li class="nav-item">
-    <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-    </li>
-    </ul>
-    </div>
-    </div>
-    </nav>
-    </header> *@
 
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
@@ -74,10 +53,6 @@
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="/Index" class="active">Trang Chủ</a></li>
-                            @* <li class="scroll-to-section"><a href="#men">Men's</a></li>
-                            <li class="scroll-to-section"><a href="#women">Women's</a></li>
-                            <li class="scroll-to-section"><a href="#kids">Kid's</a></li> *@
-                            <li><a href="~/GuestPages/ProductPage">Cửa hàng</a></li>
                             <li class="submenu">
                                 <a href="javascript:;">Cửa hàng</a>
                                 <ul>
@@ -88,7 +63,6 @@
                                 </ul>
                             </li>
 
-                            @* <li class="scroll-to-section"><a href="#explore">Explore</a></li> *@
 
                             @{
                                 var userJSON = HttpContextAccessor.HttpContext!.Session.GetString("CurrentUser");
@@ -100,18 +74,28 @@
                             }
                             else
                             {
-                                <li class="submenu">
-                                    <a href="javascript:;">Đơn hàng</a>
-                                    <ul>
-                                        <li><a href="/Admin/AccountPages/Details?id=@user.Id">Đơn hàng đang duyệt</a></li>
-                                        <li><a href="/Admin/AccountPages/Details?id=@user.Id">Đơn hàng đang giao</a></li>
-                                        <li><a href="~/GuestPages/OrderHistory">Lịch sử</a></li>
-                                    </ul>
-                                </li>
+                                @if (user.Role == Domain.Enums.RoleType.Customer)
+                                {
+
+                                    <li class="submenu">
+                                        <a href="javascript:;">Đơn hàng</a>
+                                        <ul>
+                                            <li><a href="~/GuestPages/PendingOrder">Đơn hàng đang duyệt</a></li>
+                                            <li><a href="~/GuestPages/ProcessingOrder">Đơn hàng đang giao</a></li>
+                                            <li><a href="~/GuestPages/OrderHistory">Lịch sử</a></li>
+                                        </ul>
+                                    </li>
+                                } 
+
                                 <li class="submenu">
                                     <a href="javascript:;">@user.DisplayName</a>
                                     <ul>
-                                        <li><a href="~/GuestPages/Cart">Giỏ hàng</a></li>
+                                        @if (user.Role == Domain.Enums.RoleType.Customer)
+                                        {
+
+                                            <li><a href="~/GuestPages/Cart">Giỏ hàng</a></li>
+                                        }
+
                                         <li><a href="/Admin/AccountPages/Details?id=@user.Id">Thông tin tài khoản</a></li>
                                         <li><a href="/Logout">Đăng Xuất</a></li>
                                     </ul>

@@ -3,12 +3,38 @@
 @{
     ViewData["Title"] = "Access Denied";
 }
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="text-center">
+<head>
 
-    <h1 class="display-4">Error!!!</h1>
-    <p>You don't have permission to access.</p>
-    <p>
-        <a asp-page="/Index" class="btn btn-success">Return to HomePage</a>
-    </p>
-</div>
+</head>
+
+<body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-content">
+                        <h2>Lỗi hệ thống</h2>
+                        <span>Bạn không có quyền truy cập vào mục này!!!</span>
+                        <a asp-page="/Index" class="btn btn-success">Bấm vào đây để quay về trang chủ</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
