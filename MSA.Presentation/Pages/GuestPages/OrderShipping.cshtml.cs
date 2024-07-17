@@ -36,7 +36,7 @@ namespace MSA.Presentation.Pages.GuestPages
             }
             else
             {
-                ListOrder = _orderService.GetOrderPendingdAndShippingStatus().Where(x => x.CustomerId == id).ToList();               
+                ListOrder = _orderService.GetOrderProcessingStatusByAccountId(current.Id).ToList();
                 return Page();
             }
         }

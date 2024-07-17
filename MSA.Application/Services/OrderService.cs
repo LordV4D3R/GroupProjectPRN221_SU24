@@ -78,5 +78,11 @@ namespace MSA.Application.Services
             return _orderRepository.GetAll().Where
                 (x => x.OrderStatus == Domain.Enums.OrderStatus.Processing);
         }
+
+        public IEnumerable<Order> GetOrderCompletedAndCancelStatusByAccountId(Guid id)
+        {
+            return _orderRepository.GetAll().Where
+    (x => x.OrderStatus == Domain.Enums.OrderStatus.Completed || x.OrderStatus == Domain.Enums.OrderStatus.Cancelled);
+        }
     }
 }

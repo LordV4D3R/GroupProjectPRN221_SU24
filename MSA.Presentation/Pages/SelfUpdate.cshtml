@@ -1,63 +1,98 @@
 ﻿@page
 @model MSA.Presentation.Pages.SelfUpdateModel
-
 @{
-    ViewData["Title"] = "SelfUpdate";
+    ViewData["Title"] = "Thông tin tài khoản";
 }
-<h1>----------------------------------------------------</h1>
-<h1>cập nhật tài khoản</h1>
+<!DOCTYPE html>
+<html lang="en">
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Account.Username" class="control-label"></label>
-                <input asp-for="Account.Username" class="form-control" />
-                <span asp-validation-for="Account.Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.Password" class="control-label"></label>
-                <input asp-for="Account.Password" class="form-control" />
-                <span asp-validation-for="Account.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.FullName" class="control-label"></label>
-                <input asp-for="Account.FullName" class="form-control" />
-                <span asp-validation-for="Account.FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.Email" class="control-label"></label>
-                <input asp-for="Account.Email" class="form-control" />
-                <span asp-validation-for="Account.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.PhoneNumber" class="control-label"></label>
-                <input asp-for="Account.PhoneNumber" class="form-control" />
-                <span asp-validation-for="Account.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Account.Address" class="control-label"></label>
-                <input asp-for="Account.Address" class="form-control" />
-                <span asp-validation-for="Account.Address" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Account.ImageUrl" />
-            <input type="hidden" asp-for="Account.Status"/>
-            <input type="hidden" asp-for="Account.Role" />
-            <input type="hidden" asp-for="Account.Id" />
-            <input type="hidden" asp-for="Account.IsDeleted" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<head>
+
+</head>
+
+<body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-</div>
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-content">
+                        <h2 class="text-center">Thông tin tài khoản</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
 
-<div>
-    <a asp-page="./Index">Trở về</a>
-</div>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Account.Username" class="control-label"></label>
+                    <input asp-for="Account.Username" class="form-control" />
+                    <span asp-validation-for="Account.Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Account.Password" class="control-label"></label>
+                    <input asp-for="Account.Password" class="form-control" />
+                    <span asp-validation-for="Account.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Account.FullName" class="control-label"></label>
+                    <input asp-for="Account.FullName" class="form-control" />
+                    <span asp-validation-for="Account.FullName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Account.Email" class="control-label"></label>
+                    <input asp-for="Account.Email" class="form-control" />
+                    <span asp-validation-for="Account.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Account.PhoneNumber" class="control-label"></label>
+                    <input asp-for="Account.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Account.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Account.Address" class="control-label"></label>
+                    <input asp-for="Account.Address" class="form-control" />
+                    <span asp-validation-for="Account.Address" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Account.ImageUrl" />
+                <div class="form-group">
+                    <label asp-for="Account.ImageUrl" class="control-label"></label>
+                    <input asp-for="Account.ImageUrl" class="form-control" />
+                    <span asp-validation-for="Account.ImageUrl" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Account.Status" />
+                <input type="hidden" asp-for="Account.Role" />
+                <input type="hidden" asp-for="Account.Id" />
+                <input type="hidden" asp-for="Account.IsDeleted" />
+                <div class="form-group">
+                    <input type="submit" value="Lưu" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    <div>
+        <a asp-page="./Index">Trở về</a>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>
