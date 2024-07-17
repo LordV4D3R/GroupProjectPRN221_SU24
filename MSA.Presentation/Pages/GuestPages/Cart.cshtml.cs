@@ -55,6 +55,7 @@ namespace MSA.Presentation.Pages.GuestPages
         public IList<OrderDetailViewModel> OrderDetailViewModels { get; set; } = default!;
         public OrderViewModel OrderViewModel { get; set; } = default!;
         public List<string> ProductName { get; set; } = new List<string>();
+        public List<string> ProductImg { get; set; } = new List<string>();
 
 
         private void LoadCart(AccountSession current)
@@ -69,6 +70,7 @@ namespace MSA.Presentation.Pages.GuestPages
                     {
                         var name = _productService.GetById(item.ProductId);
                         ProductName.Add(name?.ProductName ?? "Unknown");
+                        ProductImg.Add(name?.ImageUrl ?? "Unknown");
                     }
 					OrderViewModel = new OrderViewModel
 					{

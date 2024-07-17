@@ -3,35 +3,59 @@
 @{
     ViewData["Title"] = "Home page";
 }
-<h1>----------------------------------------------------</h1>
-<div class="text-center">
-    @if (HttpContext.Session.GetString("role") == "Staff")
-    {
-        
-        <h2 class="display-4">Welcome, @HttpContext.Session.GetString("fullname")</h2>
-        <p>-----------------------------------------------</p>
-        <form method="post" asp-page-handler="login">
-            <table align="center">
-                <div>
-                    <a asp-page="/StaffPage/ProductPages/Index">Manage Product</a>
-                </div>
-                                                          <p>---------------------</p>
-                <div>
-                    <a asp-page="/StaffPage/CategoryPages/Index">Manage Category</a>
-                </div>
-                <p>---------------------</p>
-                <div>
-                    <a asp-page="/StaffPage/OrderPages/Index">Manage Order</a>
-                </div>
-                <!--<div>
-                    <a asp-page="/StaffPage/VoucherPage/Index">Manage Voucher</a>
-                </div>-->
-            </table>
-        </form>
-    }
-    else
-    {
-        <h1 class="display-4">Welcome</h1>
-    }
+<!DOCTYPE html>
+<html lang="en">
 
-</div>
+<head>
+
+</head>
+
+<body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+
+    <div class="text-center">
+        @if (HttpContext.Session.GetString("role") == "Staff")
+        {
+
+            <h2 class="display-4">Welcome, @HttpContext.Session.GetString("fullname")</h2>
+            <p>-----------------------------------------------</p>
+            <form method="post" asp-page-handler="login">
+                <table align="center">
+                    <div>
+                        <a asp-page="/StaffPage/ProductPages/Index">Manage Product</a>
+                    </div>
+                    <p>---------------------</p>
+                    <div>
+                        <a asp-page="/StaffPage/CategoryPages/Index">Manage Category</a>
+                    </div>
+                    <p>---------------------</p>
+                    <div>
+                        <a asp-page="/StaffPage/OrderPages/Index">Manage Order</a>
+                    </div>
+                    <!--<div>
+                        <a asp-page="/StaffPage/VoucherPage/Index">Manage Voucher</a>
+                    </div>-->
+                </table>
+            </form>
+        }
+        else
+        {
+            <h1 class="display-4">Welcome</h1>
+        }
+
+    </div>
+</body>
+
+</html>

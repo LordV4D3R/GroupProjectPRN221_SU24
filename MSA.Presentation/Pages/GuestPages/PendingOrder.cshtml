@@ -1,7 +1,7 @@
 ﻿@page
-@model MSA.Presentation.Pages.GuestPages.OrderHistoryModel
+@model MSA.Presentation.Pages.GuestPages.PendingOrderModel
 @{
-    ViewData["Title"] = "Lịch sử đơn hàng";
+    ViewData["Title"] = "Đơn hàng đang duyệt";
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -53,14 +53,7 @@
                     <td>$ @order.TotalPrice</td>
                     <td>@order.CreatedOn</td>
                     <td>@order.UpdatedOn</td>
-                    @if (@order.OrderStatus == Domain.Enums.OrderStatus.Completed)
-                    {
-                        <td>Đã hoàn thành</td>
-                    }
-                    else
-                    {
-                        <td>Đã Hủy</td>
-                    }
+                    <td>Đang đợi duyệt, xin vui lòng chờ</td>
                 </tr>
             }
         </tbody>
