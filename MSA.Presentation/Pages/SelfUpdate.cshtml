@@ -5,9 +5,8 @@
     ViewData["Title"] = "SelfUpdate";
 }
 <h1>----------------------------------------------------</h1>
-<h1>SelfUpdate</h1>
+<h1>cập nhật tài khoản</h1>
 
-<h4>Account</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -43,11 +42,7 @@
                 <input asp-for="Account.Address" class="form-control" />
                 <span asp-validation-for="Account.Address" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Account.ImageUrl" class="control-label"></label>
-                <input asp-for="Account.ImageUrl" class="form-control" />
-                <span asp-validation-for="Account.ImageUrl" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Account.ImageUrl" />
             <input type="hidden" asp-for="Account.Status"/>
             <input type="hidden" asp-for="Account.Role" />
             <input type="hidden" asp-for="Account.Id" />
@@ -60,7 +55,7 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Trở về</a>
 </div>
 
 @section Scripts {

@@ -2,6 +2,7 @@
 using MSA.Domain.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace MSA.Domain.Entities
         public string Username { get; set; } = string.Empty;
 
         [Column("password")]
+        [PasswordPropertyText]
         public string Password { get; set; } = string.Empty;
 
         [Column("fullname")]
