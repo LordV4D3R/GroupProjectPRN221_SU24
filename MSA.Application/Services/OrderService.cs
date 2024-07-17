@@ -61,7 +61,7 @@ namespace MSA.Application.Services
             return _orderRepository.GetAll().FirstOrDefault(x => x.OrderStatus == Domain.Enums.OrderStatus.InCart && x.CustomerId == id);
         }
 
-        public IEnumerable<Order> GetOrderCompletedAndCancelStatusByAccountId(Guid id)
+        public IEnumerable<Order> GetOrderCompletedAndCancelStatus()
         {
             return _orderRepository.GetAll().Where
                 (x => x.OrderStatus == Domain.Enums.OrderStatus.Completed || x.OrderStatus == Domain.Enums.OrderStatus.Cancelled);

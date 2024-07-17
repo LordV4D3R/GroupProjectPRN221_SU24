@@ -114,4 +114,8 @@
     <ProjectReference Include="..\MSA.Infrastructure\MSA.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\Milk\" />
+  </ItemGroup>
+
 </Project>

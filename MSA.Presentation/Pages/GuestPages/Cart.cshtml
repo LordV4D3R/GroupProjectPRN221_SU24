@@ -60,7 +60,7 @@
                                 <div class="down-content">
 
                                     <h4>@Model.ProductName[index]</h4>
-                                    <span>Giá: $ @Html.DisplayFor(modelItem => orderDetail.Price)</span>
+                                    <span>Giá:  @Html.DisplayFor(modelItem => orderDetail.Price.000 VNĐ)</span>
                                     <span>Số lượng:  @Html.DisplayFor(modelItem => orderDetail.Quantity)</span>
                                 </div>
                             </div>
@@ -68,8 +68,8 @@
                     }
                     <form method="post">
                         <div class="down-content">
-                            <span>Tổng số lượng:  @Model.Order.TotalQuantity</span>
-                            <span>Tổng giá: $ @Model.Order.TotalPrice</span>
+                            <span>Tổng số lượng:  @Model.Order.TotalQuantity.000 VNĐ</span>
+                            <span>Tổng giá: @Model.Order.TotalPrice.000 VNĐ</span>
 
                             <input asp-for="OrderViewModel.OrderId" type="hidden" class="form-control" value="@Model.Order.Id" />
                         </div>
