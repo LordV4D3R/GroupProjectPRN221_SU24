@@ -17,6 +17,7 @@ namespace MSA.Presentation.Pages.OrderPages
     {
         private readonly IOrderService _orderService;
         private readonly IAccountService _accountService;
+        private const int PageSize = 1;
         public IndexModel(IOrderService orderService, IAccountService accountService)
         {
             _orderService = orderService;
@@ -28,8 +29,10 @@ namespace MSA.Presentation.Pages.OrderPages
         public List<string> AccountName { get; set; } = new List<string>();
         //public List<string> Username { get; set; } = new List<string>();
         public List<string> Address { get; set; } = new List<string>();
+        public int CurrentPage { get; set; } = 1;
+        public int TotalPages { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int currentPage = 1)
         {
             var role = HttpContext.Session.GetString("role");
             if (role != "Staff" || role == null)
@@ -38,14 +41,33 @@ namespace MSA.Presentation.Pages.OrderPages
             }
             else
             {
-                ListOrder = _orderService.GetAll().Where(o => o.IsDeleted == false).ToList();
+                //ListOrder = _orderService.GetAll().Where(o => o.IsDeleted == false).ToList();
+                //foreach (var order in ListOrder)
+                //{
+                //    var customer = _accountService.GetById(order.CustomerId);
+                //    AccountName.Add(customer?.FullName ?? "Unknown");
+                //    //Username.Add(customer?.Username ?? "Unknown");
+                //    Address.Add(customer?.Address ?? "Unknown");
+                //}
+                //return Page();
+
+                IEnumerable<Order> query = _orderService.GetAll().Where(o => o.IsDeleted == false);
+
+                TotalPages = (int)Math.Ceiling(query.Count() / (double)PageSize);
+
+                ListOrder = query
+                    .Skip((currentPage - 1) * PageSize)
+                    .Take(PageSize)
+                    .ToList();
+
                 foreach (var order in ListOrder)
                 {
                     var customer = _accountService.GetById(order.CustomerId);
                     AccountName.Add(customer?.FullName ?? "Unknown");
-                    //Username.Add(customer?.Username ?? "Unknown");
                     Address.Add(customer?.Address ?? "Unknown");
                 }
+
+                CurrentPage = currentPage;         
                 return Page();
             }
         }

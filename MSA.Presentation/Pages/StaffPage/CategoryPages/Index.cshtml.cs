@@ -20,10 +20,15 @@ namespace MSA.Presentation.Pages.CategoryPages
             _categoryService = categoryService;
         }
 
-        public IList<Category> Category { get;set; } = default!;
+        public IList<Category> Category { get; set; } = default!;
 
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public int CurrentPage { get; set; } = 1;
+        public int TotalPages { get; set; }
+
         public async Task<IActionResult> OnGetAsync()
         {
             var role = HttpContext.Session.GetString("role");
@@ -31,18 +36,24 @@ namespace MSA.Presentation.Pages.CategoryPages
             {
                 return RedirectToPage("/AccessDenied");
             }
-            else 
-            {  
-                if (!string.IsNullOrEmpty(SearchString))
-                {
-                    Category = _categoryService.SearchByName(SearchString).ToList();
-                }
-                else
-                {
-                    Category = _categoryService.GetAll().Where(c => c.IsDeleted == false).ToList();
-                }
-                return Page();
+            const int pageSize = 2;
+
+            IEnumerable<Category> categoriesQuery = _categoryService.GetAll().Where(x => !x.IsDeleted);
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                categoriesQuery = categoriesQuery.Where(c => c.CategoryName.Contains(SearchString));
             }
+
+            int totalCategories = categoriesQuery.Count();
+            TotalPages = (int)Math.Ceiling(totalCategories / (double)pageSize);
+
+            Category = categoriesQuery
+                .Skip((CurrentPage - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            return Page();
         }
     }
 }

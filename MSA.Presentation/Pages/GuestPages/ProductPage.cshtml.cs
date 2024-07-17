@@ -22,15 +22,13 @@ namespace MSA.Presentation.Pages.GuestPages
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IOrderDetailService _orderDetailService;
         private readonly IBatchService _batchService;
-        private readonly ICategoryService _categoryService;
 
         public ProductPageModel(ILogger<IndexModel> logger,
             IProductService productService,
             IOrderService orderService,
             IHttpContextAccessor httpContextAccessor,
             IOrderDetailService orderDetailService,
-            IBatchService batchService,
-            ICategoryService categoryService)
+            IBatchService batchService)
         {
             _logger = logger;
             _productService = productService;
@@ -38,7 +36,6 @@ namespace MSA.Presentation.Pages.GuestPages
             _httpContextAccessor = httpContextAccessor;
             _orderDetailService = orderDetailService;
             _batchService = batchService;
-            _categoryService = categoryService;
         }
 
         [BindProperty]
@@ -46,17 +43,47 @@ namespace MSA.Presentation.Pages.GuestPages
         public IList<Product> Product { get; set; } = default!;
         public IList<Order> Order { get; set; } = default!;
         public Account Account { get; set; } = default!;
+        public int CurrentPage { get; set; }
+        public int TotalPages { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(Guid categoryId)
+        public async Task<IActionResult> OnGetAsync(int currentPage = 1)
         {
-            LoadData(categoryId);
+            CurrentPage = currentPage;
+            const int pageSize = 3;
+
+            var allProducts = _productService.GetAll().Where(x => !x.IsDeleted).ToList();
+            var totalProducts = allProducts.Count;
+
+            TotalPages = (int)Math.Ceiling(totalProducts / (double)pageSize);
+            Product = allProducts.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
+
+            foreach (var product in Product)
+            {
+                var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
+                if (quantity == 0 && product.Status == ProductStatus.InStock)
+                {
+                    product.Status = ProductStatus.OutOfStock;
+                    _productService.Update2(product);
+                }
+            }
+
+            ProductViewModel = Product.Select(product => new ProductViewModel
+            {
+                ProductId = product.Id,
+                ProductName = product.ProductName,
+                Price = product.Price,
+                Quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity),
+                Description = product.Description,
+                ImageUrl = product.ImageUrl,
+                Status = product.Status
+            }).ToList();
             return Page();
         }
 
-        public async Task<IActionResult> OnGetCartAsync(Guid productId)
+        public async Task<IActionResult> OnGetCartAsync(Guid id)
         {
-            var batches = _batchService.GetAllByProductId(productId).OrderBy(b => b.ExpOn).ToList();
-            //var productTotalQuantity = _batchService.GetAllByProductId(productId).Sum(x => x.Quantity);
+            var batches = _batchService.GetAllByProductId(id).OrderBy(b => b.ExpOn).ToList();
+            var productTotalQuantity = _batchService.GetAllByProductId(id).Sum(x => x.Quantity);
 
             int remainingQuantity = 1;
             foreach (var batch in batches)
@@ -75,7 +102,8 @@ namespace MSA.Presentation.Pages.GuestPages
                     _batchService.Update2(batch);
                 }
             }
-            Product product = _productService.GetById(productId);
+            Product product = _productService.GetById(id);
+
             if (product != null && product.Status == ProductStatus.InStock)
             {
                 //Check Session
@@ -110,12 +138,13 @@ namespace MSA.Presentation.Pages.GuestPages
 
                         _orderService.Add(order);
                         _orderService.Save();
-                    } else
+                    }
+                    else
                     {
-                        var list = _orderDetailService.GetAll().Where(x => x.OrderId == order.Id && x.ProductId == productId);
+                        var list = _orderDetailService.GetAll().Where(x => x.OrderId == order.Id && x.ProductId == id);
                         if (!list.IsNullOrEmpty())
                         {
-							OrderDetail orderDetail = list.First();
+                            OrderDetail orderDetail = list.First();
                             orderDetail.Quantity++;
                             orderDetail.Price = orderDetail.Quantity * product.Price;
                             orderDetail.OrderId = order.Id;
@@ -123,9 +152,9 @@ namespace MSA.Presentation.Pages.GuestPages
                             order.TotalQuantity++;
                             order.UpdatedOn = DateTime.Now;
                             _orderDetailService.Update(orderDetail);
-							_orderService.Update(order);
-						}
-						else
+                            _orderService.Update(order);
+                        }
+                        else
                         {
                             OrderDetail newOrderDetail = new OrderDetail
                             {
@@ -143,16 +172,15 @@ namespace MSA.Presentation.Pages.GuestPages
                         }
                     }
                 }
-                
+
             }
-            LoadData(product.CategoryId);
+            LoadData();
             return Page();
         }
 
-        private void LoadData(Guid id)
+        private void LoadData()
         {
-
-            Product = _productService.GetAll().Where(x => x.IsDeleted == false && x.CategoryId == id).ToList();
+            Product = _productService.GetAll().Where(x => x.IsDeleted == false).ToList();
             foreach (var product in Product)
             {
                 var quantity = _batchService.GetAllByProductId(product.Id).Sum(x => x.Quantity);
