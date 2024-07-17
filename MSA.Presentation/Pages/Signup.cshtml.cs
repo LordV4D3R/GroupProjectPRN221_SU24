@@ -29,6 +29,7 @@ namespace MSA.Presentation.Pages
 
         [BindProperty]
         public Account Account { get; set; } = default!;
+        [BindProperty]
         public SignUpViewModel request { get; set; } = default!;
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD

@@ -9,12 +9,12 @@ using MSA.Presentation.Extensions;
 
 namespace MSA.Presentation.Pages.GuestPages
 {
-    public class OrderShippingModel : PageModel
+    public class OrderHistoryModel : PageModel
     {
         private readonly IOrderService _orderService;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAccountService _accountService;
-        public OrderShippingModel(IOrderService orderService,
+        public OrderHistoryModel(IOrderService orderService,
             IAccountService accountService,
             IHttpContextAccessor httpContextAccessor)
         {
@@ -36,7 +36,7 @@ namespace MSA.Presentation.Pages.GuestPages
             }
             else
             {
-                ListOrder = _orderService.GetOrderCompletedAndCancelStatus().Where(x => x.CustomerId == id).ToList();               
+                ListOrder = _orderService.GetOrderPendingdAndShippingStatus().Where(x => x.CustomerId == id).ToList();               
                 return Page();
             }
         }

@@ -73,13 +73,14 @@
                     <nav class="main-nav">
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li class="scroll-to-section"><a href="/Index" class="active">Trang Chủ</a></li>
+                            <li>
+                                <a href="/Index" >Trang Chủ</a></li>
                             @* <li class="scroll-to-section"><a href="#men">Men's</a></li>
                             <li class="scroll-to-section"><a href="#women">Women's</a></li>
                             <li class="scroll-to-section"><a href="#kids">Kid's</a></li> *@
                             <li><a href="~/GuestPages/ProductPage">Cửa hàng</a></li>
                             <li class="submenu">
-                                <a href="javascript:;">Cửa hàng</a>
+                                <a href="javascript:;">Nhãn hàng</a>
                                 <ul>
                                     @foreach (var category in categoryService.GetAll())
                                     {
@@ -103,9 +104,8 @@
                                 <li class="submenu">
                                     <a href="javascript:;">Đơn hàng</a>
                                     <ul>
-                                        <li><a href="/Admin/AccountPages/Details?id=@user.Id">Đơn hàng đang duyệt</a></li>
-                                        <li><a href="/Admin/AccountPages/Details?id=@user.Id">Đơn hàng đang giao</a></li>
-                                        <li><a href="~/GuestPages/OrderHistory">Lịch sử</a></li>
+                                        <li><a href="~/GuestPages/OrderShipping?id=@user.Id">Tình trạng đơn hàng</a></li>
+                                        <li><a href="~/GuestPages/OrderHistory?id=@user.Id">Lịch sử đơn hàng</a></li>
                                     </ul>
                                 </li>
                                 <li class="submenu">
