@@ -14,6 +14,8 @@ namespace MSA.Application.IServices
         Order GetOrderInCartStatus();
         Order? GetOrderInCartStatusByAccountId(Guid id);
         IEnumerable<Order> GetOrderCompletedAndCancelStatusByAccountId(Guid id);
+        IEnumerable<Order> GetOrderPendingStatusByAccountId(Guid id);
+        IEnumerable<Order> GetOrderProcessingStatusByAccountId(Guid id);
 
     }
 }
