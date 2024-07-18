@@ -6,17 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MSA.Application.IServices;
+using MSA.Domain.Dtos.Session;
 using MSA.Domain.Entities;
+using MSA.Domain.Enums;
 using MSA.Infrastructure;
+using MSA.Presentation.Extensions;
 
 namespace MSA.Presentation.Pages.AccountPages
 {
     public class IndexModel : PageModel
     {
         private readonly IAccountService _accountService;
-        public IndexModel(IAccountService accountService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public IndexModel(IAccountService accountService, IHttpContextAccessor httpContextAccessor)
         {
             _accountService = accountService;
+            _httpContextAccessor = httpContextAccessor;
         }
         [BindProperty(SupportsGet = true)]
         public string SearchString { get; set; }
@@ -25,10 +30,11 @@ namespace MSA.Presentation.Pages.AccountPages
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var role = HttpContext.Session.GetString("role");
-            if (role != "Admin" || role == null)
+            AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
+            if (current == null || current.Role != RoleType.Admin)
             {
-                return RedirectToPage("/AccessDenied");
+                _httpContextAccessor.HttpContext.Session.Clear();
+                return Redirect("/LoginPage");
             }
             else
             {

@@ -8,17 +8,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MSA.Application.IServices;
 using MSA.Domain.Account;
+using MSA.Domain.Dtos.Session;
 using MSA.Domain.Entities;
+using MSA.Domain.Enums;
 using MSA.Infrastructure;
+using MSA.Presentation.Extensions;
 
 namespace MSA.Presentation.Pages.AccountPages
 {
     public class EditModel : PageModel
     {
         private readonly IAccountService _accountService;
-        public EditModel(IAccountService accountService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public EditModel(IAccountService accountService, IHttpContextAccessor httpContextAccessor)
         {
             _accountService = accountService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [BindProperty]
@@ -26,10 +31,11 @@ namespace MSA.Presentation.Pages.AccountPages
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            var role = HttpContext.Session.GetString("role");
-            if (role != "Admin" || role == null)
+            AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
+            if (current == null || current.Role != RoleType.Admin)
             {
-                return RedirectToPage("/AccessDenied");
+                _httpContextAccessor.HttpContext.Session.Clear();
+                return Redirect("/LoginPage");
             }
             else if (id == null)
             {

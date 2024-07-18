@@ -99,7 +99,7 @@
                             {
                                 <li><a href="~/LoginPage">Đăng nhập</a></li>
                             }
-                            else
+                            else if (user.Role == Domain.Enums.RoleType.Customer)
                             {
                                 <li class="submenu">
                                     <a href="javascript:;">Đơn hàng</a>
@@ -116,8 +116,16 @@
                                         <li><a href="/Logout">Đăng Xuất</a></li>
                                     </ul>
                                 </li>
+                            } else
+                            {                                                         
+                            <li class="submenu">
+                                    <a href="javascript:;">@user.DisplayName</a>
+                                    <ul>                                       
+                                        <li><a href="/Admin/AccountPages/Details?id=@user.Id">Thông tin tài khoản</a></li>
+                                        <li><a href="/Logout">Đăng Xuất</a></li>
+                                    </ul>
+                                </li>
                             }
-
                         </ul>
                         <a class='menu-trigger'>
                             <span>Menu</span>

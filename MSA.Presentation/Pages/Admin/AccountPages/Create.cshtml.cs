@@ -9,26 +9,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MSA.Application.IServices;
 using MSA.Domain.Account;
 using MSA.Domain.Dtos.Account;
+using MSA.Domain.Dtos.Session;
 using MSA.Domain.Entities;
 using MSA.Domain.Enums;
 using MSA.Infrastructure;
+using MSA.Presentation.Extensions;
 
 namespace MSA.Presentation.Pages.AccountPages
 {
     public class CreateModel : PageModel
     {
         private readonly IAccountService _accountService;
-        public CreateModel(IAccountService accountService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public CreateModel(IAccountService accountService, IHttpContextAccessor httpContextAccessor)
         {
             _accountService = accountService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult OnGet()
         {
-            var role = HttpContext.Session.GetString("role");
-            if (role != "Admin" || role == null)
+            AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
+            if (current == null || current.Role != RoleType.Admin)
             {
-                return RedirectToPage("/AccessDenied");
+                _httpContextAccessor.HttpContext.Session.Clear();
+                return Redirect("/LoginPage");
             }
             return Page();
         }

@@ -14,9 +14,11 @@ namespace MSA.Presentation.Pages.AccountPages
     public class DetailsModel : PageModel
     {
         private readonly IAccountService _accountService;
-        public DetailsModel(IAccountService accountService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public DetailsModel(IAccountService accountService, IHttpContextAccessor httpContextAccessor)
         {
             _accountService = accountService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public Account Account { get; set; } = default!;
