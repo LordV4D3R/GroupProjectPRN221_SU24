@@ -31,12 +31,10 @@ namespace MSA.Presentation.Pages.AccountPages
             {
                 return RedirectToPage("/AccessDenied");
             }
-            else
+            else if (id == null)
             {
-                if (id == null)
-                {
-                    return NotFound();
-                }
+                return NotFound();
+            }
 
                 var account = _accountService.GetById(id);
                 if (account == null)

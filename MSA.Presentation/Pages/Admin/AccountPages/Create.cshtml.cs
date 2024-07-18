@@ -30,10 +30,7 @@ namespace MSA.Presentation.Pages.AccountPages
             {
                 return RedirectToPage("/AccessDenied");
             }
-            else
-            {
-                return Page();
-            }
+            return Page();
         }
 
         [BindProperty]

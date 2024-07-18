@@ -13,5 +13,8 @@ namespace MSA.Application.IServices
         void Save();
         Order GetOrderInCartStatus();
         Order? GetOrderInCartStatusByAccountId(Guid id);
+        IEnumerable<Order> GetOrderCompletedAndCancelStatus();
+        IEnumerable<Order> GetOrderPendingdAndShippingStatus();
+
     }
 }

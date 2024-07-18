@@ -27,9 +27,9 @@ namespace Services
             _productRepository.Delete(product);
         }
 
-        public IEnumerable<Product> GetAll()
+        public IEnumerable<Product> GetAll(string include = "")
         {
-            return _productRepository.GetAll();
+            return _productRepository.GetAll(include);
         }
 
         public Product GetById(Guid id)

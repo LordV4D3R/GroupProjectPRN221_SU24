@@ -10,7 +10,7 @@ using MSA.Application.IServices;
 using MSA.Domain.Entities;
 using MSA.Infrastructure;
 
-namespace MSA.Presentation.Pages.Admin.AccountPages
+namespace MSA.Presentation.Pages
 {
     public class SelfUpdateModel : PageModel
     {

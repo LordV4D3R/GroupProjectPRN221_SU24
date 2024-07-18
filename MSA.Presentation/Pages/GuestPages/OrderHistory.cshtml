@@ -1,0 +1,70 @@
+﻿@page
+@model MSA.Presentation.Pages.GuestPages.OrderShippingModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="inner-content">
+                        <h2>Lịch sử đơn hàng</h2>
+                        <span>Bao gồm những đơn hàng đã hoàn thành và đã bị hủy.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>Tổng số lượng</th>
+                <th>Tổng giá</th>
+                <th>Ngày tạo đơn</th>
+                <th>Ngày hoàn thành đơn hàng</th>
+                <th>Tình trạng đơn hàng</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.ListOrder)
+            {
+                <tr>
+                    <td>@(Model.ListOrder.IndexOf(order) + 1)</td>
+                    <td>@order.TotalQuantity</td>
+                    <td>@order.TotalPrice.000</td>
+                    <td>@order.CreatedOn</td>
+                    <td>@order.UpdatedOn</td>
+                    @if (@order.OrderStatus == Domain.Enums.OrderStatus.Completed)
+                    {
+                        <td>Đã hoàn thành</td>
+                    }
+                    @if (@order.OrderStatus == Domain.Enums.OrderStatus.Cancelled)
+                    {
+                        <td>Đã hủy</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
+</html>

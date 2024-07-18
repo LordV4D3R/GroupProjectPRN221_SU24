@@ -27,7 +27,7 @@ namespace MSA.Presentation.Pages
             _httpContextAccessor = httpContextAccessor;
         }
 
-        [BindProperty]
+        [BindProperty(SupportsGet =true)]
         public AccountLoginDto AccountLoginDto { get; set; } = default!;
         public string ErrorMessage { get; set; } = string.Empty;
 

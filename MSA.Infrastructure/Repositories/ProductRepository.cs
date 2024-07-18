@@ -11,9 +11,10 @@ namespace Repositories
 
         public void Delete(Product product) => ProductDAO.Instance.Delete(product);
 
-        public IEnumerable<Product> GetAll() => ProductDAO.Instance.GetAll();
+        public IEnumerable<Product> GetAll(string include = "") => ProductDAO.Instance.GetAll(include);
 
-        public Product GetById(Guid id) => ProductDAO.Instance.GetById(id);
+
+		public Product GetById(Guid id) => ProductDAO.Instance.GetById(id);
 
         public void Save() => ProductDAO.Instance.Save();
 

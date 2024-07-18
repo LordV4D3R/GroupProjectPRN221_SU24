@@ -38,10 +38,10 @@ namespace MSA.Presentation.Pages.AccountPages
                 }
                 else
                 {
-                    Account = _accountService.GetAll().ToList();
+                    Account = _accountService.GetAll().Where(x => x.IsDeleted == false).ToList();
                 }
                 return Page();
-            }
+            }          
         }
     }
 }

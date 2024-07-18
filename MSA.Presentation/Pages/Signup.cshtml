@@ -4,8 +4,8 @@
 @{
     ViewData["Title"] = "Signup";
 }
-
-<h1>Sign Up</h1>
+<h1>----------------------------------------------------</h1>
+<h1>Đăng ký tài khoản</h1>
 
 <hr />
 <div class="row">
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="request.Password" class="control-label"></label>
-                <input asp-for="request.Password" class="form-control" />
+                <input asp-for="request.Password" type="password" class="form-control" />
                 <span asp-validation-for="request.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -29,23 +29,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="request.Email" class="control-label"></label>
-                <input asp-for="request.Email" class="form-control" />
+                <input asp-for="request.Email" type="email" class="form-control" />
                 <span asp-validation-for="request.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="request.PhoneNumber" class="control-label"></label>
-                <input asp-for="request.PhoneNumber" class="form-control" />
+                <input asp-for="request.PhoneNumber" type="number" class="form-control" />
                 <span asp-validation-for="request.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="request.Address" class="control-label"></label>
                 <input asp-for="request.Address" class="form-control" />
                 <span asp-validation-for="request.Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="request.ImageUrl" class="control-label"></label>
-                <input asp-for="request.ImageUrl" class="form-control" />
-                <span asp-validation-for="request.ImageUrl" class="text-danger"></span>
             </div>
             <!--<div class="form-group">
                 <label asp-for="Account.Status" class="control-label"></label>
@@ -90,7 +85,7 @@
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Trở về trang chủ</a>
 </div>
 
 @section Scripts {

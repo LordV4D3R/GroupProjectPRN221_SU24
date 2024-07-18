@@ -21,6 +21,5 @@ namespace MSA.Domain.Dtos.Batch
         public DateTime ExpOn { get; set; } = DateTime.Now;
 
         public Guid ProductId { get; set; }
-
     }
 }

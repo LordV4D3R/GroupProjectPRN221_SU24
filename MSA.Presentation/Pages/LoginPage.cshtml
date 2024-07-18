@@ -2,71 +2,92 @@
 @model MSA.Presentation.Pages.LoginPageModel
 @{
 }
-<!-- Section: Design Block -->
-<section class="">
-    <!-- Jumbotron -->
-    <div class="px-4 py-5 px-md-5 text-center text-lg-start container" style="background-color: hsl(0, 0%, 96%)">
-        <div class="container">
-            <div class="row  align-items-center">
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <h1 class="my-5 display-3 fw-bold ls-tight">
-                        The best offer <br />
-                        <span class="text-primary">for your business</span>
-                    </h1>
-                    <p style="color: hsl(217, 10%, 50.8%)">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-                        quibusdam tempora at cupiditate quis eum maiores libero
-                        veritatis? Dicta facilis sint aliquid ipsum atque?
-                    </p>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
 
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <div class="card">
-                        <div class="card-body py-5 px-md-5">
-                            <form method="post">
+<head>
 
-                                <!-- USer input -->
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example3">UserName</label>
-                                    <input asp-for="AccountLoginDto.Username" type="text" id="form3Example3" class="form-control" />
+</head>
 
-                                </div>
+<body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+    <!-- ***** Main Banner Area Start ***** -->
+    <div class="main-banner" id="top">
+    </div>
+    <!-- ***** Main Banner Area End ***** -->
+    <!-- Section: Design Block -->
+    <section class="section">
+        <!-- Jumbotron -->
+        <div class="px-4 py-5 px-md-5 text-center text-lg-start container" style="background-color: hsl(0, 0%, 96%)">
+            <div class="container">
+                <div class="row  align-items-center">
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <h1 class="my-5 display-3 fw-bold ls-tight">
+                            Website bán sữa online <br />
+                            <span class="text-primary">Tốt Nhất</span>
+                        </h1>
+                        <p style="color: hsl(217, 10%, 50.8%)">
+                            Website bán sữa online dành cho mẹ bầu mới sinh và trẻ nhỏ tốt nhất.
+                        </p>
+                    </div>
 
-                                <!-- Password input -->
-                                <div data-mdb-input-init class="form-outline mb-4">
-                                    <label class="form-label" for="form3Example4">Password</label>
-                                    <input asp-for="AccountLoginDto.Password" type="password" id="form3Example4" class="form-control" />
-                                </div>
+                    <div class="col-lg-6 mb-5 mb-lg-0">
+                        <div class="card">
+                            <div class="card-body py-5 px-md-5">
+                                <form method="post">
 
-                                @if (!string.IsNullOrEmpty(Model.ErrorMessage))
-                                {
-                                    <div class="alert alert-danger" role="alert">
-                                        @Model.ErrorMessage
+                                    <!-- USer input -->
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example3">Tên tài khoản</label>
+                                        <input asp-for="AccountLoginDto.Username" type="text" id="form3Example3" class="form-control" />
+
                                     </div>
-                                }
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-                                <!-- Submit button -->
-                                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
-                                    Sign in
-                                </button>
-
-                                <!-- Register buttons -->
-                                <div class="text-center">
-                                    <p>or sign up with:</p>
-                                    <div>
-                                        <a asp-page="/SignUp">Sign Up</a>
+                                    <!-- Password input -->
+                                    <div data-mdb-input-init class="form-outline mb-4">
+                                        <label class="form-label" for="form3Example4">Mật khẩu</label>
+                                        <input asp-for="AccountLoginDto.Password" type="password" id="form3Example4" class="form-control" />
                                     </div>
-                                </div>
-                            </form>
+
+                                    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                                    {
+                                        <div class="alert alert-danger" role="alert">
+                                            @Model.ErrorMessage
+                                        </div>
+                                    }
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                                    <!-- Submit button -->
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">
+                                        Đăng nhập
+                                    </button>
+
+                                    <!-- Register buttons -->
+                                    <div class="text-center">
+                                        <p>Hoặc đăng ký tài khoản ở đây:</p>
+                                        <div>
+                                            <a asp-page="/SignUp">Đăng ký</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Jumbotron -->
-</section>
-<!-- Section: Design Block -->
+        <!-- Jumbotron -->
+    </section>
+    <!-- Section: Design Block -->
+</body>
+
+</html>
