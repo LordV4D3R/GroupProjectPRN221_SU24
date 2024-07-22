@@ -83,7 +83,7 @@ namespace MSA.Presentation.Pages.GuestPages
                 return Page();
             }
             int remainingQuantity = ProductViewModel.Quantity;
-            foreach (var batch in batches)
+            /*foreach (var batch in batches)
             {
                 if (batch.Quantity >= remainingQuantity)
                 {
@@ -98,7 +98,7 @@ namespace MSA.Presentation.Pages.GuestPages
                     batch.Quantity = 0;
                     _batchService.Update2(batch);
                 }
-            }
+            }*/
             Product product = _productService.GetById(ProductViewModel.ProductId);
 
             //Check Session

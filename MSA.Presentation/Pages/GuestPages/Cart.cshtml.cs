@@ -21,18 +21,21 @@ namespace MSA.Presentation.Pages.GuestPages
         private readonly IProductService _productService;
         private readonly IAccountService _accountService;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IBatchService _batchService;
 
         public CartModel(IOrderService orderService,
             IOrderDetailService orderDetailService,
             IProductService productService,
             IAccountService accountService,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IBatchService batchService)
         {
             _orderService = orderService;
             _accountService = accountService;
             _httpContextAccessor = httpContextAccessor;
             _orderDetailService = orderDetailService;
             _productService = productService;
+            _batchService = batchService;
         }
         public async Task<IActionResult> OnGetAsync()
         {
@@ -86,6 +89,33 @@ namespace MSA.Presentation.Pages.GuestPages
                 AccountSession current = _httpContextAccessor.HttpContext!.Session.GetObject<AccountSession>("CurrentUser");
 
                 Order = _orderService.GetOrderInCartStatusByAccountId(current.Id);
+                if (Order != null)
+                {
+                    OrderDetail = _orderDetailService.GetAll().Where(x => x.OrderId == Order.Id).ToList();
+                    foreach (var item in OrderDetail)
+                    {
+                        var name = _productService.GetById(item.ProductId);
+                        ProductName.Add(name?.ProductName ?? "Unknown");
+                        var batch = _batchService.GetAllByProductId(item.ProductId).OrderBy(b => b.ExpOn).ToList();
+                        var currentQuantity = Order.TotalQuantity;
+                        foreach (var item2 in batch)
+                        {
+                            if (item2.Quantity >= currentQuantity)
+                            {
+                                item2.Quantity -= currentQuantity;
+                                currentQuantity = 0;
+                                _batchService.Update2(item2);
+                                break;
+                            }
+                            else
+                            {
+                                currentQuantity -= item2.Quantity;
+                                item2.Quantity = 0;
+                                _batchService.Update2(item2);
+                            }
+                        }
+                    }
+                }
                 Order.OrderStatus = OrderStatus.Pending;
 				 _orderService.Update(Order);
 

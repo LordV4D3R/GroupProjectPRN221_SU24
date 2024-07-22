@@ -61,7 +61,7 @@ namespace MSA.Presentation.Pages.GuestPages
         {
             var batches = _batchService.GetAllByProductId(productId).OrderBy(b => b.ExpOn).ToList();
             int remainingQuantity = 1;
-            foreach (var batch in batches)
+            /*foreach (var batch in batches)
             {
                 if (batch.Quantity >= remainingQuantity)
                 {
@@ -76,7 +76,7 @@ namespace MSA.Presentation.Pages.GuestPages
                     batch.Quantity = 0;
                     _batchService.Update2(batch);
                 }
-            }
+            }*/
             Product product = _productService.GetById(productId);
             if (product != null && product.Status == ProductStatus.InStock)
             {
