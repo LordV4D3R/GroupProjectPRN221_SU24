@@ -42,13 +42,14 @@ namespace MSA.Presentation.Pages.AccountPages
                 return NotFound();
             }
 
-            var account =  _accountService.GetById(id);
-            if (account == null)
-            {
-                return NotFound();
+                var account = _accountService.GetById(id);
+                if (account == null)
+                {
+                    return NotFound();
+                }
+                Account = account;
+                return Page();
             }
-            Account = account;
-            return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.

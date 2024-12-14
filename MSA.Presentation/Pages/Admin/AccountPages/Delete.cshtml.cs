@@ -40,17 +40,18 @@ namespace MSA.Presentation.Pages.AccountPages
                 return NotFound();
             }
 
-            var account = _accountService.GetById(id);
+                var account = _accountService.GetById(id);
 
-            if (account == null)
-            {
-                return NotFound();
+                if (account == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    Account = account;
+                }
+                return Page();
             }
-            else
-            {
-                Account = account;
-            }
-            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(Guid id)
